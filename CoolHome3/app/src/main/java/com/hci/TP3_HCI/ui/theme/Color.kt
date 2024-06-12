@@ -2,10 +2,10 @@ package com.hci.TP3_HCI.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple80 = Color(0xFFD0BCFF)
-val PurpleGrey80 = Color(0xFFCCC2DC)
-val Pink80 = Color(0xFFEFB8C8)
-
-val Purple40 = Color(0xFF6650a4)
-val PurpleGrey40 = Color(0xFF625b71)
-val Pink40 = Color(0xFF7D5260)
+val background = Color(0xF2F6FF)
+val device = Color(0x774CC2)
+val automation = Color(0xF99C2C)
+val button = Color(0x00C0CF)
+val navBar = Color(0xFFFFFF)
+val grey = Color(0xB4B3B3)
+val red = Color(0xFF0000)

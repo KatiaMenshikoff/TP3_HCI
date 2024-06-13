@@ -11,9 +11,9 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+//import androidx.compose.ui.unit.spj
 import com.hci.TP3_HCI.ui.theme.CoolHomeTheme
-import com.hci.TP3_HCI.ui.theme.Color
+import com.hci.TP3_HCI.ui.Components.Card
 
 
 class MainActivity : ComponentActivity() {

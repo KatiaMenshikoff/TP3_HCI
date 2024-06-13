@@ -4,11 +4,12 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Computer
-import androidx.compose.material.icons.filled.MusicNote
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -16,6 +17,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -30,31 +32,34 @@ fun Card(
 
     Box(
         modifier = Modifier
-            .background(Color(0xFF6200EA), RoundedCornerShape(16.dp))
             .padding(16.dp)
+            .background(Color(0xFF6A1B9A), RoundedCornerShape(12.dp))
+            .height(90.dp)
             .fillMaxWidth(),
-        contentAlignment = Alignment.CenterStart
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier.fillMaxWidth()
+                .padding(horizontal = 16.dp)
         ) {
             Column(
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.Start,
                 modifier = Modifier.weight(1f)
             ) {
                 Text(
                     text = title,
                     color = Color.White,
-                    fontSize = 18.sp,
+                    fontSize = 16.sp,
                     style = MaterialTheme.typography.bodyLarge
                 )
-                Spacer(modifier = Modifier.height(4.dp))
+                Spacer(modifier = Modifier.height(10.dp))
                 Row(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Icon(
-                        imageVector = Icons.Default.MusicNote,
+                        imageVector = Icons.Default.Phone,
                         contentDescription = null,
                         tint = Color.White,
                         modifier = Modifier.size(16.dp)
@@ -68,16 +73,17 @@ fun Card(
                     )
                 }
             }
-            Row(
-                verticalAlignment = Alignment.CenterVertically
+            Column(
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.End
             ) {
                 Icon(
-                    imageVector = Icons.Default.Computer,
+                    imageVector = Icons.Default.ArrowBack,
                     contentDescription = null,
                     tint = Color.White,
                     modifier = Modifier.size(24.dp)
                 )
-                Spacer(modifier = Modifier.width(16.dp))
+                Spacer(modifier = Modifier.height(8.dp))
                 Switch(
                     checked = isChecked.value,
                     onCheckedChange = {
@@ -85,8 +91,10 @@ fun Card(
                         onTogglePlay(it)
                     },
                     colors = SwitchDefaults.colors(
-                        checkedThumbColor = Color(0xFF4CAF50),
-                        uncheckedThumbColor = Color.White
+                        checkedThumbColor = Color(0xFF00E676),
+                        uncheckedThumbColor = Color.White,
+                        checkedTrackColor = Color.White,
+                        uncheckedTrackColor = Color(0xFF9E9E9E)
                     )
                 )
             }
@@ -94,8 +102,13 @@ fun Card(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
-fun prevCard(
-    card()
-)
+fun prevCard() {
+    Card(
+        title = "My Speaker",
+        nowPlaying = "Rock",
+        isPlaying = true,
+        onTogglePlay = {}
+    )
+}

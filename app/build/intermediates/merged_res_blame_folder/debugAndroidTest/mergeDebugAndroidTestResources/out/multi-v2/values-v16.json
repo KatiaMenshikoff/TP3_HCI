@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.hci.TP3_HCI.test.app-mergeDebugAndroidTestResources-32:/values-v16/values-v16.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\usuario\\.gradle\\caches\\transforms-4\\a4d02b32e27deb58b3a2b661f80fa430\\transformed\\core-1.10.1\\res\\values-v16\\values-v16.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "65",
+                        "endOffsets": "116"
+                    }
+                }
+            ]
+        }
+    ]
+}

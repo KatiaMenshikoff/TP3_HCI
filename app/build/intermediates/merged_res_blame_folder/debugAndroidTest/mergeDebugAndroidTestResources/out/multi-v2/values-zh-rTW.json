@@ -4,7 +4,7 @@
             "outputFile": "com.hci.TP3_HCI.test.app-mergeDebugAndroidTestResources-32:/values-zh-rTW/values-zh-rTW.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\usuario\\.gradle\\caches\\transforms-4\\cc07229c7a8b12e2a39b10e0fd2a94e0\\transformed\\core-1.10.1\\res\\values-zh-rTW\\values-zh-rTW.xml",
+                    "source": "C:\\Users\\usuario\\.gradle\\caches\\transforms-4\\a4d02b32e27deb58b3a2b661f80fa430\\transformed\\core-1.10.1\\res\\values-zh-rTW\\values-zh-rTW.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",
@@ -21,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\usuario\\.gradle\\caches\\transforms-4\\162c8d15275f0744fb16b01232788dc4\\transformed\\ui-release\\res\\values-zh-rTW\\values-zh-rTW.xml",
+                    "source": "C:\\Users\\usuario\\.gradle\\caches\\transforms-4\\a14a1d1bb987ae17e17d004e005608bb\\transformed\\ui-release\\res\\values-zh-rTW\\values-zh-rTW.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",

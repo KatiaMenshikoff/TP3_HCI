@@ -3,9 +3,6 @@ package com.hci.TP3_HCI.ui.Components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
@@ -17,14 +14,17 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.hci.TP3_HCI.R
+import com.hci.TP3_HCI.ui.theme.device  
 
 @Composable
 fun Card(
     title: String,
-    nowPlaying: String,
+    description: String,
     isPlaying: Boolean,
     onTogglePlay: (Boolean) -> Unit
 ) {
@@ -33,54 +33,55 @@ fun Card(
     Box(
         modifier = Modifier
             .padding(16.dp)
-            .background(Color(0xFF6A1B9A), RoundedCornerShape(12.dp))
-            .height(90.dp)
+            .background(device, RoundedCornerShape(12.dp))
+            .height(100.dp)
             .fillMaxWidth(),
     ) {
         Row(
-            verticalAlignment = Alignment.CenterVertically,
+            verticalAlignment = Alignment.Top,
             horizontalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier.fillMaxWidth()
-                .padding(horizontal = 16.dp)
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
         ) {
             Column(
-                verticalArrangement = Arrangement.Center,
+                verticalArrangement = Arrangement.Top,
                 horizontalAlignment = Alignment.Start,
                 modifier = Modifier.weight(1f)
             ) {
                 Text(
                     text = title,
-                    color = Color.White,
+                    color = Color.Black,
                     fontSize = 16.sp,
                     style = MaterialTheme.typography.bodyLarge
                 )
-                Spacer(modifier = Modifier.height(10.dp))
+                Spacer(modifier = Modifier.height(4.dp))
                 Row(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Icon(
-                        imageVector = Icons.Default.Phone,
+                        painter = painterResource(id = R.drawable.icon_play),
                         contentDescription = null,
-                        tint = Color.White,
+                        tint = Color.Black,
                         modifier = Modifier.size(16.dp)
                     )
                     Spacer(modifier = Modifier.width(4.dp))
                     Text(
-                        text = "Now Playing: $nowPlaying",
-                        color = Color.White,
+                        text = description,
+                        color = Color.Black,
                         fontSize = 14.sp,
                         style = MaterialTheme.typography.bodyMedium
                     )
                 }
             }
             Column(
-                verticalArrangement = Arrangement.Center,
+                verticalArrangement = Arrangement.SpaceBetween,
                 horizontalAlignment = Alignment.End
             ) {
                 Icon(
-                    imageVector = Icons.Default.ArrowBack,
+                    painter = painterResource(id = R.drawable.icon_device),
                     contentDescription = null,
-                    tint = Color.White,
+                    tint = Color.Black,
                     modifier = Modifier.size(24.dp)
                 )
                 Spacer(modifier = Modifier.height(8.dp))
@@ -106,8 +107,8 @@ fun Card(
 @Composable
 fun prevCard() {
     Card(
-        title = "My Speaker",
-        nowPlaying = "Rock",
+        title = "Title Cambiable",
+        description = "Esto es la descripcion",
         isPlaying = true,
         onTogglePlay = {}
     )

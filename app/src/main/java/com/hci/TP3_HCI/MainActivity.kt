@@ -11,10 +11,10 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.hci.TP3_HCI.ui.Components.BottomNavigationBar
 //import androidx.compose.ui.unit.spj
-import com.hci.TP3_HCI.ui.theme.CoolHomeTheme
 import com.hci.TP3_HCI.ui.Components.Card
-
+import com.hci.TP3_HCI.ui.theme.*
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,20 +23,9 @@ class MainActivity : ComponentActivity() {
             CoolHomeTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                    color = background
                 ) {
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.Center,
-                        modifier = Modifier.fillMaxSize()
-                    ) {
-                        Card(
-                            title = "My Speaker",
-                            nowPlaying = "Rock",
-                            isPlaying = true,
-                            onTogglePlay = { /* Handle toggle */ }
-                        )
-                    }
+                    BottomNavigationBar()
                 }
             }
         }

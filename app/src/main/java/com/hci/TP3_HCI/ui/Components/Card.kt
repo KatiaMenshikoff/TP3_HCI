@@ -3,6 +3,8 @@ package com.hci.TP3_HCI.ui.Components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
@@ -14,15 +16,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.hci.TP3_HCI.R
-import com.hci.TP3_HCI.ui.theme.device  
-
+import com.hci.TP3_HCI.ui.theme.*
 @Composable
-fun Card(
+fun CustomCard(
     title: String,
     description: String,
     isPlaying: Boolean,
@@ -30,12 +32,13 @@ fun Card(
 ) {
     val isChecked = remember { mutableStateOf(isPlaying) }
 
-    Box(
+    Card(
+        shape = RoundedCornerShape(12.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+        colors = CardDefaults.cardColors(colorResource(R.color.device)),
         modifier = Modifier
             .padding(16.dp)
-            .background(device, RoundedCornerShape(12.dp))
             .height(100.dp)
-            .fillMaxWidth(),
     ) {
         Row(
             verticalAlignment = Alignment.Top,
@@ -51,9 +54,9 @@ fun Card(
             ) {
                 Text(
                     text = title,
-                    color = Color.Black,
+                    color = Color.White,
                     fontSize = 16.sp,
-                    style = MaterialTheme.typography.bodyLarge
+                    style = MaterialTheme.typography.titleMedium
                 )
                 Spacer(modifier = Modifier.height(4.dp))
                 Row(
@@ -62,13 +65,13 @@ fun Card(
                     Icon(
                         painter = painterResource(id = R.drawable.icon_play),
                         contentDescription = null,
-                        tint = Color.Black,
+                        tint = Color.White,
                         modifier = Modifier.size(16.dp)
                     )
                     Spacer(modifier = Modifier.width(4.dp))
                     Text(
                         text = description,
-                        color = Color.Black,
+                        color = Color.White,
                         fontSize = 14.sp,
                         style = MaterialTheme.typography.bodyMedium
                     )
@@ -81,8 +84,8 @@ fun Card(
                 Icon(
                     painter = painterResource(id = R.drawable.icon_device),
                     contentDescription = null,
-                    tint = Color.Black,
-                    modifier = Modifier.size(24.dp)
+                    tint = Color.White,
+                    modifier = Modifier.size(20.dp)
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Switch(
@@ -92,9 +95,9 @@ fun Card(
                         onTogglePlay(it)
                     },
                     colors = SwitchDefaults.colors(
-                        checkedThumbColor = Color(0xFF00E676),
-                        uncheckedThumbColor = Color.White,
-                        checkedTrackColor = Color.White,
+                        checkedThumbColor = colorResource(R.color.white),
+                        uncheckedThumbColor = colorResource(R.color.grey),
+                        checkedTrackColor = colorResource(R.color.grey),
                         uncheckedTrackColor = Color(0xFF9E9E9E)
                     )
                 )
@@ -105,8 +108,8 @@ fun Card(
 
 @Preview(showBackground = true)
 @Composable
-fun prevCard() {
-    Card(
+fun CustomCardPreview() {
+    CustomCard(
         title = "Title Cambiable",
         description = "Esto es la descripcion",
         isPlaying = true,

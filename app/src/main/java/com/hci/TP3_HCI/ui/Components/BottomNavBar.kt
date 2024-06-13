@@ -10,6 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -17,7 +18,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.hci.TP3_HCI.R
-import com.hci.TP3_HCI.ui.theme.pinkMenu
 
 @Composable
 fun BottomNavigationBar() {
@@ -43,7 +43,7 @@ fun BottomNavigationBar() {
                             Icon(
                                 painter = icon,
                                 contentDescription = null,
-                                tint = if (selectedItem == index) Color.Gray else Color.Gray
+                                tint = if (selectedItem == index) colorResource(R.color.grey) else colorResource(R.color.grey)
                             )
                         },
                         label = { Text(item) },
@@ -58,7 +58,7 @@ fun BottomNavigationBar() {
                                 restoreState = true
                             }
                         },
-                        modifier = Modifier.background(if (selectedItem == index) pinkMenu else Color.Transparent)
+                        modifier = Modifier.background(if (selectedItem == index) colorResource(R.color.pinkMenu) else Color.Transparent)
                     )
                 }
             }

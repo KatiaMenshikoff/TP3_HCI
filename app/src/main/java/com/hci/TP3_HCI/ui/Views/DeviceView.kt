@@ -28,7 +28,7 @@ fun DevicesScreen(navController: NavHostController) {
                 .fillMaxSize()
                 .padding(paddingValues)
                 .background(colorResource(R.color.background))
-                .padding(16.dp)
+                .padding(3.dp)
         ) {
             Text("Devices ", style = MaterialTheme.typography.headlineMedium)
             Spacer(modifier = Modifier.height(16.dp))

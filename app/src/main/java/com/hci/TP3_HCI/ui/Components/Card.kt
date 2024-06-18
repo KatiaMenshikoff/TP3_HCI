@@ -55,7 +55,7 @@ fun CustomCard(
                 Text(
                     text = title,
                     color = Color.White,
-                    fontSize = 16.sp,
+                    fontSize = 19.sp,
                     style = MaterialTheme.typography.titleMedium
                 )
                 Spacer(modifier = Modifier.height(4.dp))
@@ -66,13 +66,13 @@ fun CustomCard(
                         painter = painterResource(id = R.drawable.icon_play),
                         contentDescription = null,
                         tint = Color.White,
-                        modifier = Modifier.size(16.dp)
+                        modifier = Modifier.size(20.dp)
                     )
                     Spacer(modifier = Modifier.width(4.dp))
                     Text(
                         text = description,
                         color = Color.White,
-                        fontSize = 14.sp,
+                        fontSize = 16.sp,
                         style = MaterialTheme.typography.bodyMedium
                     )
                 }

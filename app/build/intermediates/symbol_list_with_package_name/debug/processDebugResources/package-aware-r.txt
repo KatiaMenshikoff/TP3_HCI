@@ -1200,6 +1200,7 @@ color mtrl_textinput_focused_box_stroke_color
 color mtrl_textinput_hovered_box_stroke_color
 color notification_action_color_filter
 color notification_icon_bg_color
+color pinkButton
 color pinkMenu
 color primary_dark_material_dark
 color primary_dark_material_light
@@ -1768,11 +1769,19 @@ drawable ic_mtrl_chip_checked_circle
 drawable ic_mtrl_chip_close_circle
 drawable icon_actions
 drawable icon_automation
+drawable icon_delete
 drawable icon_device
+drawable icon_edit
 drawable icon_home
+drawable icon_lamp
+drawable icon_minus
+drawable icon_more
+drawable icon_next
 drawable icon_play
+drawable icon_previous
 drawable icon_settings
 drawable icon_time
+drawable icon_volume
 drawable material_cursor_drawable
 drawable material_ic_calendar_black_24dp
 drawable material_ic_clear_black_24dp

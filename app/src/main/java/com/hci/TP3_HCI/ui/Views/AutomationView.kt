@@ -27,9 +27,9 @@ fun AutomationsScreen(navController: NavHostController) {
                 .fillMaxSize()
                 .padding(paddingValues)
                 .background(colorResource(R.color.background))
-                .padding(16.dp)
+                .padding(3.dp)
         ) {
-            Text("Automations 🔄", style = MaterialTheme.typography.headlineMedium)
+            Text("Automations", style = MaterialTheme.typography.headlineMedium)
             Spacer(modifier = Modifier.height(16.dp))
             LazyColumn {
                 items(listOf("Sprinklers", "Vacuum", "Close Windows")) { automation ->
@@ -42,6 +42,10 @@ fun AutomationsScreen(navController: NavHostController) {
             }
             Button(
                 onClick = { /* Handle add new automation */ },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = colorResource(id = R.color.button), // Color del botón
+                    contentColor = colorResource(id = R.color.white) // Color del texto del botón
+                ),
                 modifier = Modifier.align(Alignment.CenterHorizontally)
             ) {
                 Text("New Automation")

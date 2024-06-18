@@ -52,10 +52,9 @@ fun SprinklersCard(
                 Text(
                     text = title,
                     color = Color.White,
-                    fontSize = 16.sp,
+                    fontSize = 19.sp,
                     style = MaterialTheme.typography.titleMedium
                 )
-                Spacer(modifier = Modifier.height(4.dp))
                 Row(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
@@ -65,15 +64,15 @@ fun SprinklersCard(
                         tint = Color.White,
                         modifier = Modifier.size(16.dp)
                     )
-                    Spacer(modifier = Modifier.width(4.dp))
+                    Spacer(modifier = Modifier.height(4.dp))
+
                     Text(
                         text = time,
                         color = Color.White,
-                        fontSize = 14.sp,
+                        fontSize = 16.sp,
                         style = MaterialTheme.typography.bodyMedium
                     )
                 }
-                Spacer(modifier = Modifier.height(4.dp))
                 Row(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
@@ -87,7 +86,7 @@ fun SprinklersCard(
                     Text(
                         text = actions,
                         color = Color.White,
-                        fontSize = 14.sp,
+                        fontSize = 16.sp,
                         style = MaterialTheme.typography.bodyMedium
                     )
                 }

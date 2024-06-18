@@ -5,6 +5,7 @@ color background
 color button
 color device
 color grey
+color pinkButton
 color pinkMenu
 color red
 color white
@@ -12,11 +13,19 @@ drawable ic_launcher_background
 drawable ic_launcher_foreground
 drawable icon_actions
 drawable icon_automation
+drawable icon_delete
 drawable icon_device
+drawable icon_edit
 drawable icon_home
+drawable icon_lamp
+drawable icon_minus
+drawable icon_more
+drawable icon_next
 drawable icon_play
+drawable icon_previous
 drawable icon_settings
 drawable icon_time
+drawable icon_volume
 mipmap ic_launcher
 mipmap ic_launcher_round
 string app_name

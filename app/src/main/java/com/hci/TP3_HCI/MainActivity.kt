@@ -11,43 +11,33 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.hci.TP3_HCI.ui.Components.BottomNavigationBar
 import com.hci.TP3_HCI.ui.Components.SprinklersCard
 import com.hci.TP3_HCI.ui.theme.CoolHomeTheme
 import com.hci.TP3_HCI.R
+import com.hci.TP3_HCI.ui.Views.*
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            CoolHomeTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = colorResource(R.color.background)
-                ) {
-                    Scaffold(
-                        bottomBar = { BottomNavigationBar() }
-                    ) { innerPadding ->
-                        Column(
-                            modifier = Modifier
-                                .padding(innerPadding)
-                                .fillMaxSize()
-                                .padding(16.dp),
-                            verticalArrangement = Arrangement.Top,
-                            horizontalAlignment = Alignment.CenterHorizontally
-                        ) {
-                            SprinklersCard(
-                                title = "Hola",
-                                time = "Today",
-                                actions = "2 actions",
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .height(150.dp)  // Adjust the height as necessary
-                            )
-                        }
-                    }
-                }
-            }
+            MainScreen()
         }
+    }
+}
+
+@Composable
+fun MainScreen() {
+    val navController = rememberNavController()
+    NavHost(
+        navController = navController,
+        startDestination = "Home"
+    ) {
+        composable("Home") { HomeView(navController) }
+        composable("Devices") { DevicesScreen(navController) }
+        composable("Automations") { AutomationsScreen(navController) }
     }
 }

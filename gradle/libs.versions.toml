@@ -40,7 +40,7 @@ androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation
 androidx-compose-material = { group = "androidx.compose.material", name = "material", version.ref = "composeMaterial" }
 logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "loggingInterceptor" }
 okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
-retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+#retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

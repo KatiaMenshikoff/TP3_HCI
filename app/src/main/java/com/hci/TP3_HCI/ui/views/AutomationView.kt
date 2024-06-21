@@ -1,4 +1,4 @@
-package com.hci.TP3_HCI.ui.Views
+package com.hci.TP3_HCI.ui.views
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -18,10 +18,8 @@ import com.hci.TP3_HCI.ui.Components.SprinklersCard
 import com.hci.TP3_HCI.ui.Components.BottomNavigationBar
 
 @Composable
-fun AutomationsScreen(navController: NavHostController) {
-    Scaffold(
-        bottomBar = { BottomNavigationBar() }
-    ) { paddingValues ->
+fun AutomationsScreen() {
+    Scaffold() { paddingValues ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -57,5 +55,5 @@ fun AutomationsScreen(navController: NavHostController) {
 @Preview(showBackground = true)
 fun AutomationsScreenPreview() {
     val navController = rememberNavController()
-    AutomationsScreen(navController)
+    AutomationsScreen()
 }

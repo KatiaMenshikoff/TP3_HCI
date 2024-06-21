@@ -1,4 +1,4 @@
-package com.hci.TP3_HCI.ui.Views
+package com.hci.TP3_HCI.ui.views
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -8,7 +8,6 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -19,10 +18,8 @@ import com.hci.TP3_HCI.ui.Components.CustomCard
 import com.hci.TP3_HCI.ui.Components.BottomNavigationBar
 
 @Composable
-fun DevicesScreen(navController: NavHostController) {
-    Scaffold(
-        bottomBar = { BottomNavigationBar() }
-    ) { paddingValues ->
+fun DevicesScreen() {
+    Scaffold() { paddingValues ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -59,5 +56,5 @@ fun DevicesScreen(navController: NavHostController) {
 @Preview(showBackground = true)
 fun DevicesScreenPreview() {
     val navController = rememberNavController()
-    DevicesScreen(navController)
+    DevicesScreen()
 }

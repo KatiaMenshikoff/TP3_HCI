@@ -21,6 +21,10 @@ android {
         }
     }
 
+    buildFeatures{
+        buildConfig = true
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -28,6 +32,8 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            // CAMPO CONFIGURADO PARA CORRER EL ANDROID EN EMULADOR Y LA API EN LOCALHOST
+            buildConfigField("String", "API_BASE_URL", "\"http://10.0.2.2:8080/api/\"")
         }
     }
     compileOptions {

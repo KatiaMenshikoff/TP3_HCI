@@ -1,43 +1,42 @@
 package com.hci.TP3_HCI
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.unit.dp
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
+import androidx.compose.runtime.getValue
+import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.hci.TP3_HCI.ui.Components.BottomNavigationBar
-import com.hci.TP3_HCI.ui.Components.SprinklersCard
-import com.hci.TP3_HCI.ui.theme.CoolHomeTheme
-import com.hci.TP3_HCI.R
-import com.hci.TP3_HCI.ui.Views.*
+import com.hci.TP3_HCI.ui.Components.AppBottomBar
+import com.hci.TP3_HCI.ui.navigation.AppNavGraph
 
 class MainActivity : ComponentActivity() {
+    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MainScreen()
+            val navController = rememberNavController()
+            val navBackStackEntry by navController.currentBackStackEntryAsState()
+            val currentRoute = navBackStackEntry?.destination?.route
+            Scaffold(
+                bottomBar = {
+                    AppBottomBar(
+                        currentRoute = currentRoute
+                    ) { route ->
+                        navController.navigate(route) {
+                            popUpTo(navController.graph.findStartDestination().id) {
+                                saveState = true
+                            }
+                            launchSingleTop = true
+                            restoreState = true
+                        }
+                    }
+                }
+            ) {
+                AppNavGraph(navController = navController)
+            }
         }
-    }
-}
-
-@Composable
-fun MainScreen() {
-    val navController = rememberNavController()
-    NavHost(
-        navController = navController,
-        startDestination = "Home"
-    ) {
-        composable("Home") { HomeView(navController) }
-        composable("Devices") { DevicesScreen(navController) }
-        composable("Automations") { AutomationsScreen(navController) }
     }
 }

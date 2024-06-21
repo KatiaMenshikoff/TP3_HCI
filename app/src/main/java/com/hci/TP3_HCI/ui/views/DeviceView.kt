@@ -1,4 +1,4 @@
-package com.hci.TP3_HCI.ui.Views
+package com.hci.TP3_HCI.ui.views
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -14,11 +14,11 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.hci.TP3_HCI.R
-import com.hci.TP3_HCI.ui.Components.SprinklersCard
+import com.hci.TP3_HCI.ui.Components.CustomCard
 import com.hci.TP3_HCI.ui.Components.BottomNavigationBar
 
 @Composable
-fun AutomationsScreen(navController: NavHostController) {
+fun DevicesScreen(navController: NavHostController) {
     Scaffold(
         bottomBar = { BottomNavigationBar() }
     ) { paddingValues ->
@@ -29,33 +29,34 @@ fun AutomationsScreen(navController: NavHostController) {
                 .background(colorResource(R.color.background))
                 .padding(3.dp)
         ) {
-            Text("Automations", style = MaterialTheme.typography.headlineMedium)
+            Text("Devices ", style = MaterialTheme.typography.headlineMedium)
             Spacer(modifier = Modifier.height(16.dp))
             LazyColumn {
-                items(listOf("Sprinklers", "Vacuum", "Close Windows")) { automation ->
-                    SprinklersCard(
-                        title = automation,
-                        time = "Scheduled",
-                        actions = "2 actions"
+                items(listOf("My Speaker", "My Roomba", "My Light")) { device ->
+                    CustomCard(
+                        title = device,
+                        description = "Status",
+                        isPlaying = false,
+                        onTogglePlay = { /* Handle toggle */ }
                     )
                 }
             }
             Button(
-                onClick = { /* Handle add new automation */ },
+                onClick = { /* Handle add new device */ },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = colorResource(id = R.color.button), // Color del botón
                     contentColor = colorResource(id = R.color.white) // Color del texto del botón
                 ),
                 modifier = Modifier.align(Alignment.CenterHorizontally)
             ) {
-                Text("New Automation")
+                Text("New Device")
             }
         }
     }
 }
 @Composable
 @Preview(showBackground = true)
-fun AutomationsScreenPreview() {
+fun DevicesScreenPreview() {
     val navController = rememberNavController()
-    AutomationsScreen(navController)
+    DevicesScreen(navController)
 }

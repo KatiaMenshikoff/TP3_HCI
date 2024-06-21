@@ -1,4 +1,4 @@
-package com.hci.TP3_HCI.ui.Views
+package com.hci.TP3_HCI.ui.views
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -8,15 +8,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
 import com.hci.TP3_HCI.ui.Components.CustomCard
-import com.hci.TP3_HCI.ui.Components.BottomNavigationBar
 import com.hci.TP3_HCI.R
+
 @Composable
-fun HomeView(navController: NavHostController) {
-    Scaffold(
-        bottomBar = { BottomNavigationBar() }
-    ) { paddingValues ->
+fun HomeView() {
+    Scaffold() { paddingValues ->
         Column(
             modifier = Modifier
                 .fillMaxSize()

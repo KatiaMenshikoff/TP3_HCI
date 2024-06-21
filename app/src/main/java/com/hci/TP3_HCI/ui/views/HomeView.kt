@@ -12,7 +12,7 @@ import com.hci.TP3_HCI.ui.Components.CustomCard
 import com.hci.TP3_HCI.R
 
 @Composable
-fun HomeView() {
+fun HomeScreen() {
     Scaffold() { paddingValues ->
         Column(
             modifier = Modifier

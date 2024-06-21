@@ -18,10 +18,8 @@ import com.hci.TP3_HCI.ui.Components.CustomCard
 import com.hci.TP3_HCI.ui.Components.BottomNavigationBar
 
 @Composable
-fun DevicesScreen(navController: NavHostController) {
-    Scaffold(
-        bottomBar = { BottomNavigationBar() }
-    ) { paddingValues ->
+fun DevicesScreen() {
+    Scaffold() { paddingValues ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -58,5 +56,5 @@ fun DevicesScreen(navController: NavHostController) {
 @Preview(showBackground = true)
 fun DevicesScreenPreview() {
     val navController = rememberNavController()
-    DevicesScreen(navController)
+    DevicesScreen()
 }

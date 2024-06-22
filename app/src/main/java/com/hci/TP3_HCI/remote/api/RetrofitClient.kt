@@ -24,16 +24,12 @@ private val gson = GsonBuilder()
 
 //TODO baseURL deberia usar BuildConfig.API_BASE_URL pero no anda
 private val retrofit = Retrofit.Builder()
-    .baseUrl("\"http://10.0.2.2:8080/api/\"")
+    .baseUrl(BuildConfig.API_BASE_URL)
     .addConverterFactory(GsonConverterFactory.create(gson))
     .client(okHttpClient)
     .build()
 
 object RetrofitClient {
-    val roomService: RoomService by lazy {
-        retrofit.create(RoomService::class.java)
-    }
-
     val deviceService : DeviceService by lazy {
         retrofit.create(DeviceService::class.java)
     }

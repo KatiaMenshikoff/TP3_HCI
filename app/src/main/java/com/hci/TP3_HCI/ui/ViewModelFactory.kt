@@ -10,17 +10,14 @@ import androidx.lifecycle.ViewModel
 import androidx.savedstate.SavedStateRegistryOwner
 import com.hci.TP3_HCI.ApiApplication
 import com.hci.TP3_HCI.repository.DeviceRepository
-import com.hci.TP3_HCI.repository.RoomRepository
 import com.hci.TP3_HCI.ui.devices.DevicesViewModel
 import com.hci.TP3_HCI.ui.devices.LampViewModel
 
 @Composable
 fun getViewModelFactory(defaultArgs: Bundle? = null): ViewModelFactory {
     val application = (LocalContext.current.applicationContext as ApiApplication)
-    val roomRepository = application.roomRepository
     val deviceRepository = application.deviceRepository
     return ViewModelFactory(
-        roomRepository,
         deviceRepository,
         LocalSavedStateRegistryOwner.current,
         defaultArgs
@@ -28,7 +25,6 @@ fun getViewModelFactory(defaultArgs: Bundle? = null): ViewModelFactory {
 }
 
 class ViewModelFactory (
-    private val roomRepository: RoomRepository,
     private val deviceRepository: DeviceRepository,
     owner: SavedStateRegistryOwner,
     defaultArgs: Bundle? = null

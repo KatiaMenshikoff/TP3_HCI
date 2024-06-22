@@ -10,6 +10,8 @@ import com.google.gson.JsonElement
 import com.google.gson.JsonParseException
 import com.google.gson.reflect.TypeToken
 import com.hci.TP3_HCI.remote.model.devices.RemoteAC
+import com.hci.TP3_HCI.remote.model.devices.RemoteSpeaker
+import com.hci.TP3_HCI.remote.model.devices.RemoteSprinkler
 import java.lang.reflect.Type
 
 class DeviceTypeAdapter : JsonDeserializer<RemoteDevice<*>?> {
@@ -28,14 +30,11 @@ class DeviceTypeAdapter : JsonDeserializer<RemoteDevice<*>?> {
         } else if (deviceTypeId == RemoteDeviceType.AC_DEVICE_TYPE_ID){
             return gson.fromJson(jsonDeviceObject, object : TypeToken <RemoteAC?>() {}.type)
         } else if (deviceTypeId == RemoteDeviceType.SPEAKER_DEVICE_TYPE_ID){
-            return null
+            return gson.fromJson(jsonDeviceObject, object : TypeToken<RemoteSpeaker?>() {}.type)
         } else if (deviceTypeId == RemoteDeviceType.SPRINKLER_DEVICE_TYPE_ID){
-            return null
+            return gson.fromJson(jsonDeviceObject, object : TypeToken<RemoteSprinkler?>() {}.type)
         } else {
             return null
         }
-//        return if (deviceTypeId == RemoteDeviceType.LAMP_DEVICE_TYPE_ID) {
-//            gson.fromJson(jsonDeviceObject, object : TypeToken<RemoteLamp?>() {}.type)
-//        } else null
     }
 }

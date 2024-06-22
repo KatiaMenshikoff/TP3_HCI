@@ -8,7 +8,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
-import com.hci.TP3_HCI.ui.Components.CustomCard
+import com.hci.TP3_HCI.ui.component.CustomCard
 import com.hci.TP3_HCI.R
 
 @Composable

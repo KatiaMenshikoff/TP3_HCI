@@ -4,7 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -20,7 +19,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.hci.TP3_HCI.R
-import com.hci.TP3_HCI.ui.Components.BottomNavigationBar
+import com.hci.TP3_HCI.ui.component.BottomNavigationBar
 
 @Composable
 fun SpeakerDetailScreen(navController: NavHostController) {

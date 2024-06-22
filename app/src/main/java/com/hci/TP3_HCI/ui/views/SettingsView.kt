@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.hci.TP3_HCI.R
-import com.hci.TP3_HCI.ui.Components.BottomNavigationBar
+import com.hci.TP3_HCI.ui.component.BottomNavigationBar
 
 @Composable
 fun LightDetailScreen(navController: NavHostController) {

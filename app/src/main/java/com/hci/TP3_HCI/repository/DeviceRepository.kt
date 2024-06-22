@@ -1,4 +1,4 @@
-package com.hci.TP3_HCI.api.repository
+package com.hci.TP3_HCI.repository
 
 import com.hci.TP3_HCI.model.Device
 import com.hci.TP3_HCI.model.Lamp

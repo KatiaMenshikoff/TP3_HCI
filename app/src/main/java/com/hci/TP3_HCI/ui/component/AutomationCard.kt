@@ -1,18 +1,15 @@
-package com.hci.TP3_HCI.ui.Components
+package com.hci.TP3_HCI.ui.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Switch
-import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -22,20 +19,18 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.hci.TP3_HCI.R
-import com.hci.TP3_HCI.ui.theme.*
-@Composable
-fun CustomCard(
-    title: String,
-    description: String,
-    isPlaying: Boolean,
-    onTogglePlay: (Boolean) -> Unit
-) {
-    val isChecked = remember { mutableStateOf(isPlaying) }
 
+@Composable
+fun SprinklersCard(
+    title: String,
+    time: String,
+    actions: String,
+    modifier: Modifier = Modifier
+){
     Card(
         shape = RoundedCornerShape(12.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
-        colors = CardDefaults.cardColors(colorResource(R.color.device)),
+        colors = CardDefaults.cardColors(colorResource(R.color.automation)),
         modifier = Modifier
             .padding(16.dp)
             .height(100.dp)
@@ -58,19 +53,36 @@ fun CustomCard(
                     fontSize = 19.sp,
                     style = MaterialTheme.typography.titleMedium
                 )
-                Spacer(modifier = Modifier.height(4.dp))
                 Row(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Icon(
-                        painter = painterResource(id = R.drawable.icon_play),
+                        painter = painterResource(id = R.drawable.icon_time),
                         contentDescription = null,
                         tint = Color.White,
-                        modifier = Modifier.size(20.dp)
+                        modifier = Modifier.size(16.dp)
+                    )
+                    Spacer(modifier = Modifier.height(4.dp))
+
+                    Text(
+                        text = time,
+                        color = Color.White,
+                        fontSize = 16.sp,
+                        style = MaterialTheme.typography.bodyMedium
+                    )
+                }
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.icon_actions),
+                        contentDescription = null,
+                        tint = Color.White,
+                        modifier = Modifier.size(16.dp)
                     )
                     Spacer(modifier = Modifier.width(4.dp))
                     Text(
-                        text = description,
+                        text = actions,
                         color = Color.White,
                         fontSize = 16.sp,
                         style = MaterialTheme.typography.bodyMedium
@@ -82,25 +94,22 @@ fun CustomCard(
                 horizontalAlignment = Alignment.End
             ) {
                 Icon(
-                    painter = painterResource(id = R.drawable.icon_device),
+                    painter = painterResource(id = R.drawable.icon_automation),
                     contentDescription = null,
                     tint = Color.White,
                     modifier = Modifier.size(20.dp)
                 )
                 Spacer(modifier = Modifier.height(8.dp))
-                Switch(
-                    checked = isChecked.value,
-                    onCheckedChange = {
-                        isChecked.value = it
-                        onTogglePlay(it)
-                    },
-                    colors = SwitchDefaults.colors(
-                        checkedThumbColor = colorResource(R.color.white),
-                        uncheckedThumbColor = colorResource(R.color.grey),
-                        checkedTrackColor = colorResource(R.color.grey),
-                        uncheckedTrackColor = Color(0xFF9E9E9E)
-                    )
+                Icon(
+                    painter = painterResource(id = R.drawable.icon_play),
+                    contentDescription = null,
+                    tint = Color.White,
+                    modifier = Modifier
+                        .size(40.dp)
+                        .background(colorResource(id = R.color.grey), CircleShape)
+                        .padding(8.dp)
                 )
+
             }
         }
     }
@@ -108,11 +117,11 @@ fun CustomCard(
 
 @Preview(showBackground = true)
 @Composable
-fun CustomCardPreview() {
-    CustomCard(
-        title = "Title Cambiable",
-        description = "Esto es la descripcion",
-        isPlaying = true,
-        onTogglePlay = {}
+fun SprinklersCardPreview() {
+    SprinklersCard(
+        title = "Sprinklers",
+        time = "Tonight at 21:00 hs",
+        actions = "2 actions",
+        modifier = Modifier.padding(16.dp)
     )
 }

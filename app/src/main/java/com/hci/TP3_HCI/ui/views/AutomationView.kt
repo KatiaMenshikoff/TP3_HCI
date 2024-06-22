@@ -11,11 +11,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.hci.TP3_HCI.R
-import com.hci.TP3_HCI.ui.Components.SprinklersCard
-import com.hci.TP3_HCI.ui.Components.BottomNavigationBar
+import com.hci.TP3_HCI.ui.component.SprinklersCard
 
 @Composable
 fun AutomationsScreen() {

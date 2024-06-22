@@ -9,7 +9,7 @@ import androidx.compose.runtime.getValue
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.hci.TP3_HCI.ui.Components.AppBottomBar
+import com.hci.TP3_HCI.ui.component.AppBottomBar
 import com.hci.TP3_HCI.ui.navigation.AppNavGraph
 
 class MainActivity : ComponentActivity() {

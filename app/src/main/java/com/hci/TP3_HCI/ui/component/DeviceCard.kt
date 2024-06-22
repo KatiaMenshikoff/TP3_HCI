@@ -6,8 +6,6 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Switch
-import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -23,7 +21,7 @@ import androidx.compose.ui.unit.sp
 import com.hci.TP3_HCI.R
 
 @Composable
-fun Card(
+fun DeviceCard(
     title: String,
     description: String,
     isPlaying: Boolean,
@@ -95,7 +93,7 @@ fun Card(
 @Preview(showBackground = true)
 @Composable
 fun CardPreview() {
-    Card(
+    DeviceCard(
         title = "Title Cambiable",
         description = "Esto es la descripcion",
         isPlaying = true,

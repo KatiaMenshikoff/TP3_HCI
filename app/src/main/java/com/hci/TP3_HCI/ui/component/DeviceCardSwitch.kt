@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.sp
 import com.hci.TP3_HCI.R
 
 @Composable
-fun DeviceCard(
+fun DeviceCardSwitch(
     title: String,
     description: String,
     isPlaying: Boolean,
@@ -108,7 +108,7 @@ fun DeviceCard(
 @Preview(showBackground = true)
 @Composable
 fun CustomCardPreview() {
-    Card(
+    DeviceCard(
         title = "Title Cambiable",
         description = "Esto es la descripcion",
         isPlaying = true,

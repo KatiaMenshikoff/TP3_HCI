@@ -1,5 +1,36 @@
-En UI:
-La Screen es la que tiene el codigo que declara como se ve una vista en la aplicacion.
-Los viewmodel son los que guardan las funciones propias de una vista
-Los State almacenan el estado actual de una vista dada. Por ejemplo, deviceState almacena la lista de dispositivos,
-y el estado de las funciones de esa vista, "isFetching" o "error".
+Ahora mi plan es lograr que todos los devices se muestren con su propia card
+A partir de ahi necesito hacer que cada card tenga la capacidad de lanzar una DeviceControlScreen
+Para eso supongo que voy a necesitar DeviceControlView y deviceState para cada tipo de device
+
+>>>COMO FUNCIONA EL FRONTEND Y LA API?
+
+MAS CERCA DEL FRONT
+-model/:        Las clases model modelan un dispositivo y sus datos.
+                Tienen un metodo asRemoteModel() que permite obtener un objeto del tipo remoteModel (mas info. abajo)
+-ui/:
+---Screen:      Contiene el codigo declarativo que especifica como debe renderizarse una vista dada. (tarjetas, botones, etc)
+                Para conseguir informacion y ejecutar acciones, contiene un viewModel y un UIState.
+---viewmodels:  Contienen todas las funciones necesarias para consultar informacion de la api y ejecutar acciones DIRECTAMENTE
+                desde la interfaz de usuario. Estas funciones utilizan un repository para interfasear de manera facil con la api.
+                Manejan estas acciones por medio de llamados al repository, y actualizan el estado de la view con cada accion.
+---UIStates:    Almacenan la informacion sobre el estado actual de cada vista.
+                Por ejemplo, deviceState almacena la lista de dispositivos, y el estado de las funciones de esa vista: "isFetching" o "error".
+
+-repository/:   Las clases repository actuan como interfase entre las funciones de UI y las funciones remote.
+                Para esto, contienen un objeto de la clase remoteDataSource.
+                Los repository se encargan de transformar todos los objetos de ui/model a remote/model antes de enviarlos
+                al dataSource, y de transformar los objetos que devuelve el dataSource de remote/model a ui/model antes de
+                enviarlos para arriba a las funciones de UI.
+
+-remote/:       En este directorio estan todas las clases y funciones para manejar los llamados a la api
+---/model/:     Clases que modelan como LLEGAN los datos desde la DB.
+                Sirven como interfaz para crear objetos a partir de los datos que llegan de la DB.
+                Tienen metodos asModel() que permiten obtener un objeto del tipo model del frontend
+---/DataSource: Manejan de manera segura y con manejo de errores los llamados a la api.
+                Para esto contienen un objeto de la clase remoteService.
+---/api/:       Clases y funciones para hacerle requests a la api.
+                remoteService es la clase que contiene las funciones que realizan requests a la api, y se encarga de transformar
+                los datos de json a objetos de kotlin (convierte json a objetos de remote/model!!)
+                RetrofitClient se encarga de convertir de json a kotlin. Cada adapter es un casos especificos, como por ej. los datetimes.
+MAS CERCA DEL BACK
+

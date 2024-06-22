@@ -8,7 +8,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
-import com.hci.TP3_HCI.ui.component.Card
+import com.hci.TP3_HCI.ui.component.DeviceCard
 import com.hci.TP3_HCI.R
 
 @Composable
@@ -24,13 +24,13 @@ fun HomeScreen() {
         ) {
             Text("Welcome! 😃", style = MaterialTheme.typography.headlineMedium)
             Spacer(modifier = Modifier.height(24.dp))
-            Card(
+            DeviceCard(
                 title = "Home Security",
                 description = "On",
                 isPlaying = false,
                 onTogglePlay = { /* Handle toggle */ }
             )
-            Card(
+            DeviceCard(
                 title = "Air Conditioning",
                 description = "24°C",
                 isPlaying = false,

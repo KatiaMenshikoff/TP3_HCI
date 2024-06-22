@@ -24,18 +24,6 @@ fun HomeScreen() {
         ) {
             Text("Welcome! 😃", style = MaterialTheme.typography.headlineMedium)
             Spacer(modifier = Modifier.height(24.dp))
-            DeviceCard(
-                title = "Home Security",
-                description = "On",
-                isPlaying = false,
-                onTogglePlay = { /* Handle toggle */ }
-            )
-            DeviceCard(
-                title = "Air Conditioning",
-                description = "24°C",
-                isPlaying = false,
-                onTogglePlay = { /* Handle toggle */ }
-            )
             Spacer(modifier = Modifier.height(24.dp))
             Button(onClick = { /* Handle toggle lights */ }) {
                 Text("Toggle Lights")

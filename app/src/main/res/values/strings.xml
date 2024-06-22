@@ -3,6 +3,11 @@
     <string name="views_home_name">Home</string>
     <string name="views_devices_name">Devices</string>
     <string name="views_automations_name">Automations</string>
+    <string name="views_lamp_name">Lamp</string>
+    <string name="views_speaker_name">Speaker</string>
+    <string name="views_sprinkler_name">Sprinkler</string>
+    <string name="views_AC_name">AC</string>
+
 
     <!-- tp ejemplo-->
     <string name="Rooms">Rooms</string>

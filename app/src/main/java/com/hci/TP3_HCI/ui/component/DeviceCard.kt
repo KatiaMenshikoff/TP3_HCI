@@ -1,5 +1,6 @@
 package com.hci.TP3_HCI.ui.component
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
@@ -18,10 +19,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import com.hci.TP3_HCI.ui.navigation.AppDestinations
 import com.hci.TP3_HCI.R
 
 @Composable
 fun DeviceCard(
+    navController: NavController,
     title: String,
     description: String,
     isPlaying: Boolean,
@@ -36,6 +40,7 @@ fun DeviceCard(
         modifier = Modifier
             .padding(16.dp)
             .height(100.dp)
+            .clickable { navController.navigate(AppDestinations.LAMP.route) }
     ) {
         Row(
             verticalAlignment = Alignment.Top,
@@ -93,10 +98,5 @@ fun DeviceCard(
 @Preview(showBackground = true)
 @Composable
 fun CardPreview() {
-    DeviceCard(
-        title = "Title Cambiable",
-        description = "Esto es la descripcion",
-        isPlaying = true,
-        onTogglePlay = {}
-    )
+
 }

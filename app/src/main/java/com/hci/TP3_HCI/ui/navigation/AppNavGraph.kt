@@ -8,6 +8,7 @@ import com.hci.TP3_HCI.ui.views.DevicesScreen
 import com.hci.TP3_HCI.ui.views.AutomationsScreen
 import com.hci.TP3_HCI.ui.views.HomeScreen
 import com.hci.TP3_HCI.ui.devices.NewDevicesScreen
+import com.hci.TP3_HCI.ui.lamp.LampScreen
 
 @Composable
 fun AppNavGraph(navController: NavHostController) {
@@ -16,14 +17,13 @@ fun AppNavGraph(navController: NavHostController) {
         startDestination = AppDestinations.HOME.route
     ) {
         composable(AppDestinations.HOME.route) {
-//            HomeScreen()
-            NewDevicesScreen()
+            HomeScreen()
         }
         composable(AppDestinations.DEVICES.route) {
-            DevicesScreen()
+            NewDevicesScreen()
         }
-        composable(AppDestinations.AUTOMATIONS.route) {
-            AutomationsScreen()
+        composable(AppDestinations.LAMP.route) {
+            LampScreen()
         }
     }
 }

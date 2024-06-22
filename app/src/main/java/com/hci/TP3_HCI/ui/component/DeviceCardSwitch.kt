@@ -108,10 +108,5 @@ fun DeviceCardSwitch(
 @Preview(showBackground = true)
 @Composable
 fun CustomCardPreview() {
-    DeviceCard(
-        title = "Title Cambiable",
-        description = "Esto es la descripcion",
-        isPlaying = true,
-        onTogglePlay = {}
-    )
+
 }

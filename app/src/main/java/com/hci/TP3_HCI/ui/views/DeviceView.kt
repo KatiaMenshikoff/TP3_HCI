@@ -33,6 +33,7 @@ fun DevicesScreen() {
                         title = device,
                         description = "Status",
                         isPlaying = false,
+                        navController = rememberNavController(),
                         onTogglePlay = { /* Handle toggle */ }
                     )
                 }

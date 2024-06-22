@@ -11,7 +11,7 @@ import androidx.savedstate.SavedStateRegistryOwner
 import com.hci.TP3_HCI.ApiApplication
 import com.hci.TP3_HCI.repository.DeviceRepository
 import com.hci.TP3_HCI.ui.devices.DevicesViewModel
-import com.hci.TP3_HCI.ui.devices.LampViewModel
+import com.hci.TP3_HCI.ui.lamp.LampViewModel
 
 @Composable
 fun getViewModelFactory(defaultArgs: Bundle? = null): ViewModelFactory {

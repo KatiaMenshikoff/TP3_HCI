@@ -3,4 +3,23 @@
     <string name="views_home_name">Home</string>
     <string name="views_devices_name">Devices</string>
     <string name="views_automations_name">Automations</string>
+
+    <!-- tp ejemplo-->
+    <string name="Rooms">Rooms</string>
+    <string name="Devices">Devices</string>
+    <string name="get_rooms">GET ROOMS</string>
+    <string name="get_current_room">GET CURRENT ROOM</string>
+    <string name="add_room">ADD ROOM</string>
+    <string name="modify_room">MODIFY ROOM</string>
+    <string name="delete_room">DELETE ROOM</string>
+    <string name="current_room">Current room: %1$s</string>
+    <string name="total_rooms">Total Rooms: %1$s</string>
+    <string name="execute_turn_on">TURN ON</string>
+    <string name="execute_turn_off">TURN OFF</string>
+    <string name="current_device">Current device: %1$s</string>
+    <string name="total_devices">Total Devices: %1$s</string>
+    <string name="device_status">Status: %1$s</string>
+    <string name="unknown">UNKNOWN</string>
+    <string name="status_on">ON</string>
+    <string name="status_off">OFF</string>
 </resources>

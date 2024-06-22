@@ -7,6 +7,7 @@ import androidx.navigation.compose.composable
 import com.hci.TP3_HCI.ui.views.DevicesScreen
 import com.hci.TP3_HCI.ui.views.AutomationsScreen
 import com.hci.TP3_HCI.ui.views.HomeScreen
+import com.hci.TP3_HCI.ui.devices.NewDevicesScreen
 
 @Composable
 fun AppNavGraph(navController: NavHostController) {
@@ -15,7 +16,8 @@ fun AppNavGraph(navController: NavHostController) {
         startDestination = AppDestinations.HOME.route
     ) {
         composable(AppDestinations.HOME.route) {
-            HomeScreen()
+//            HomeScreen()
+            NewDevicesScreen()
         }
         composable(AppDestinations.DEVICES.route) {
             DevicesScreen()

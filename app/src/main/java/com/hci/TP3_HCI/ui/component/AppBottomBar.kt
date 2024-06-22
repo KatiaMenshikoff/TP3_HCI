@@ -1,4 +1,4 @@
-package com.hci.TP3_HCI.ui.Components
+package com.hci.TP3_HCI.ui.component
 
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar

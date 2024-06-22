@@ -1,4 +1,4 @@
-package com.hci.TP3_HCI.ui.Components
+package com.hci.TP3_HCI.ui.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -16,7 +16,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.hci.TP3_HCI.R
-import com.hci.TP3_HCI.ui.theme.*
 
 @Composable
 fun HomeSecurityCard(

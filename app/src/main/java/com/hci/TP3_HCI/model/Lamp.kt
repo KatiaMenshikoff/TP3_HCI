@@ -1,13 +1,12 @@
 package com.hci.TP3_HCI.model
 
-import ar.edu.itba.example.api.remote.model.RemoteDevice
-import ar.edu.itba.example.api.remote.model.RemoteLamp
-import ar.edu.itba.example.api.remote.model.RemoteLampState
+import com.hci.TP3_HCI.remote.model.RemoteDevice
+import com.hci.TP3_HCI.remote.model.RemoteLamp
+import com.hci.TP3_HCI.remote.model.RemoteLampState
 
 class Lamp(
     id: String?,
     name: String,
-    val room: Room?,
     val status: Status,
     val color: String,
     val brightness: Int
@@ -22,7 +21,6 @@ class Lamp(
         val model = RemoteLamp()
         model.id = id
         model.name = name
-        model.room = room?.asRemoteModel()
         model.setState(state)
         return model
     }

@@ -1,6 +1,6 @@
 package com.hci.TP3_HCI.model
 
-import ar.edu.itba.example.api.remote.model.RemoteDevice
+import com.hci.TP3_HCI.remote.model.RemoteDevice
 
 abstract class Device(
     val id: String?,

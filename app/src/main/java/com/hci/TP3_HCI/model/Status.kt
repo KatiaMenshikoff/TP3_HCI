@@ -1,6 +1,6 @@
 package com.hci.TP3_HCI.model
 
-import ar.edu.itba.example.api.remote.model.RemoteStatus
+import com.hci.TP3_HCI.remote.model.RemoteStatus
 
 enum class Status {
     ON, OFF;

@@ -26,11 +26,19 @@ MAS CERCA DEL FRONT
 ---/model/:     Clases que modelan como LLEGAN los datos desde la DB.
                 Sirven como interfaz para crear objetos a partir de los datos que llegan de la DB.
                 Tienen metodos asModel() que permiten obtener un objeto del tipo model del frontend
+                En el caso de los devices, remoteDevice contiene un "state" de tipo generico T.
+                Para cada device debe crearse una clase state, la cual contiene la informacion
+                del estado que es PROPIA de cada tipo unico de device.
+                Luego, se crea una clase RemoteMydevice que extiende de RemoteDevice<RemoteMydeviceState>.
+                Ademas, cada clae RemoteMydevice implementa su propio metodo asModel()
 ---/DataSource: Manejan de manera segura y con manejo de errores los llamados a la api.
                 Para esto contienen un objeto de la clase remoteService.
 ---/api/:       Clases y funciones para hacerle requests a la api.
                 remoteService es la clase que contiene las funciones que realizan requests a la api, y se encarga de transformar
                 los datos de json a objetos de kotlin (convierte json a objetos de remote/model!!)
-                RetrofitClient se encarga de convertir de json a kotlin. Cada adapter es un casos especificos, como por ej. los datetimes.
+                RetrofitClient se encarga de convertir de json a kotlin.
+                Cada adapter es un casos especificos, como por ej. los datetimes.
+                DeviceTypeAdapter se encarga de transformar los datos de los devices a las clases remote/model/devices
+                Para cada device debe agregarse codigo que lo transforme
 MAS CERCA DEL BACK
 

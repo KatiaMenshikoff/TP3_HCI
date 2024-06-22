@@ -2,13 +2,14 @@ package com.hci.TP3_HCI.api.remote.api
 
 import com.hci.TP3_HCI.remote.model.RemoteDevice
 import com.hci.TP3_HCI.remote.model.RemoteDeviceType
-import com.hci.TP3_HCI.remote.model.RemoteLamp
+import com.hci.TP3_HCI.remote.model.devices.RemoteLamp
 import com.google.gson.Gson
 import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer
 import com.google.gson.JsonElement
 import com.google.gson.JsonParseException
 import com.google.gson.reflect.TypeToken
+import com.hci.TP3_HCI.remote.model.devices.RemoteAC
 import java.lang.reflect.Type
 
 class DeviceTypeAdapter : JsonDeserializer<RemoteDevice<*>?> {
@@ -22,8 +23,19 @@ class DeviceTypeAdapter : JsonDeserializer<RemoteDevice<*>?> {
         val jsonDeviceObject = json.asJsonObject
         val jsonDeviceTypeObject = jsonDeviceObject["type"].asJsonObject
         val deviceTypeId = jsonDeviceTypeObject["id"].asString
-        return if (deviceTypeId == RemoteDeviceType.LAMP_DEVICE_TYPE_ID) {
-            gson.fromJson(jsonDeviceObject, object : TypeToken<RemoteLamp?>() {}.type)
-        } else null
+        if (deviceTypeId == RemoteDeviceType.LAMP_DEVICE_TYPE_ID) {
+            return gson.fromJson(jsonDeviceObject, object : TypeToken<RemoteLamp?>() {}.type)
+        } else if (deviceTypeId == RemoteDeviceType.AC_DEVICE_TYPE_ID){
+            return gson.fromJson(jsonDeviceObject, object : TypeToken <RemoteAC?>() {}.type)
+        } else if (deviceTypeId == RemoteDeviceType.SPEAKER_DEVICE_TYPE_ID){
+            return null
+        } else if (deviceTypeId == RemoteDeviceType.SPRINKLER_DEVICE_TYPE_ID){
+            return null
+        } else {
+            return null
+        }
+//        return if (deviceTypeId == RemoteDeviceType.LAMP_DEVICE_TYPE_ID) {
+//            gson.fromJson(jsonDeviceObject, object : TypeToken<RemoteLamp?>() {}.type)
+//        } else null
     }
 }

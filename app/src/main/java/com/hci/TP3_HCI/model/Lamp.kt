@@ -1,8 +1,8 @@
 package com.hci.TP3_HCI.model
 
 import com.hci.TP3_HCI.remote.model.RemoteDevice
-import com.hci.TP3_HCI.remote.model.RemoteLamp
-import com.hci.TP3_HCI.remote.model.RemoteLampState
+import com.hci.TP3_HCI.remote.model.devices.RemoteLamp
+import com.hci.TP3_HCI.remote.model.devices.RemoteLampState
 
 class Lamp(
     id: String?,

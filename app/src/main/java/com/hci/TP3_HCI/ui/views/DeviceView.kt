@@ -13,7 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
 import com.hci.TP3_HCI.R
-import com.hci.TP3_HCI.ui.component.CustomCard
+import com.hci.TP3_HCI.ui.component.Card
 
 @Composable
 fun DevicesScreen() {
@@ -29,7 +29,7 @@ fun DevicesScreen() {
             Spacer(modifier = Modifier.height(16.dp))
             LazyColumn {
                 items(listOf("My Speaker", "My Roomba", "My Light")) { device ->
-                    CustomCard(
+                    Card(
                         title = device,
                         description = "Status",
                         isPlaying = false,

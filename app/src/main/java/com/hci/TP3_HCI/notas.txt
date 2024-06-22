@@ -1,0 +1,5 @@
+En UI:
+La Screen es la que tiene el codigo que declara como se ve una vista en la aplicacion.
+Los viewmodel son los que guardan las funciones propias de una vista
+Los State almacenan el estado actual de una vista dada. Por ejemplo, deviceState almacena la lista de dispositivos,
+y el estado de las funciones de esa vista, "isFetching" o "error".

@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.sp
 import com.hci.TP3_HCI.R
 
 @Composable
-fun CustomCard(
+fun DeviceCard(
     title: String,
     description: String,
     isPlaying: Boolean,
@@ -62,7 +62,7 @@ fun CustomCard(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Icon(
-                        painter = painterResource(id = R.drawable.icon_play),
+                        painter = painterResource(id = R.drawable.icon_minus),
                         contentDescription = null,
                         tint = Color.White,
                         modifier = Modifier.size(20.dp)
@@ -108,7 +108,7 @@ fun CustomCard(
 @Preview(showBackground = true)
 @Composable
 fun CustomCardPreview() {
-    CustomCard(
+    Card(
         title = "Title Cambiable",
         description = "Esto es la descripcion",
         isPlaying = true,

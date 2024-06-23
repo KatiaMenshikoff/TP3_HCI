@@ -23,26 +23,27 @@ class MainActivity : ComponentActivity() {
 
             // Podria envolver t0do el codigo en el Provide y obtener el controlador
             // en los composables por contexto, pero por ahora solo la inicializo
-            ProvideNavHostController(navController){}
+            ProvideNavHostController(navController) {
 
-            val navBackStackEntry by navController.currentBackStackEntryAsState()
-            val currentRoute = navBackStackEntry?.destination?.route
-            Scaffold(
-                bottomBar = {
-                    AppBottomBar(
-                        currentRoute = currentRoute
-                    ) { route ->
-                        navController.navigate(route) {
-                            popUpTo(navController.graph.findStartDestination().id) {
-                                saveState = true
+                val navBackStackEntry by navController.currentBackStackEntryAsState()
+                val currentRoute = navBackStackEntry?.destination?.route
+                Scaffold(
+                    bottomBar = {
+                        AppBottomBar(
+                            currentRoute = currentRoute
+                        ) { route ->
+                            navController.navigate(route) {
+                                popUpTo(navController.graph.findStartDestination().id) {
+                                    saveState = true
+                                }
+                                launchSingleTop = true
+                                restoreState = true
                             }
-                            launchSingleTop = true
-                            restoreState = true
                         }
                     }
+                ) {
+                    AppNavGraph(navController = navController)
                 }
-            ) {
-                AppNavGraph(navController = navController)
             }
         }
     }

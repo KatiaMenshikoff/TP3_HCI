@@ -2,8 +2,10 @@ package com.hci.TP3_HCI.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import com.hci.TP3_HCI.ui.ac.ACScreen
 import com.hci.TP3_HCI.ui.views.HomeScreen
 import com.hci.TP3_HCI.ui.devices.DevicesScreen
@@ -24,7 +26,8 @@ fun AppNavGraph(navController: NavHostController) {
         composable(route = AppDestinations.DEVICES.route) {
             DevicesScreen(
                 onNavigateToLamp = {
-                    navController.navigate(route = AppDestinations.LAMP.route)
+                    deviceId ->
+                    navController.navigate(route = "${AppDestinations.LAMP.route}/$deviceId")
                 },
                 onNavigateToAC = {
                     navController.navigate(route = AppDestinations.AC.route)
@@ -37,8 +40,11 @@ fun AppNavGraph(navController: NavHostController) {
                 }
             )
         }
-        composable(route = AppDestinations.LAMP.route) {
-            LampScreen()
+        composable(route = "${AppDestinations.LAMP.route}/{deviceId}",
+            arguments = listOf(navArgument("deviceId") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val deviceId = backStackEntry.arguments?.getString("deviceId")
+            LampScreen(deviceId = deviceId!!)
         }
         composable(route = AppDestinations.AC.route) {
             ACScreen()

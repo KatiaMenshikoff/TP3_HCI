@@ -23,7 +23,7 @@ import com.hci.TP3_HCI.model.DeviceType
 
 @Composable
 fun DevicesScreen(
-    onNavigateToLamp: () -> Unit,
+    onNavigateToLamp: (deviceId: String) -> Unit,
     onNavigateToAC: () -> Unit,
     onNavigateToSpeaker: () -> Unit,
     onNavigateToSprinkler: () -> Unit,
@@ -33,9 +33,9 @@ fun DevicesScreen(
 
     val deviceScreens = mapOf(
         DeviceType.LAMP to onNavigateToLamp,
-        DeviceType.AC to onNavigateToAC,
-        DeviceType.SPEAKER to onNavigateToSpeaker,
-        DeviceType.SPRINKLER to onNavigateToSprinkler
+        DeviceType.AC to { onNavigateToAC() },
+        DeviceType.SPEAKER to { onNavigateToSpeaker() },
+        DeviceType.SPRINKLER to { onNavigateToSprinkler() }
     )
 
     LazyVerticalGrid(
@@ -48,10 +48,10 @@ fun DevicesScreen(
                 uiState.devices[index].id!!
             }
         ) { index ->
+            val device = uiState.devices[index]
             DeviceCard(
                 device = uiState.devices[index],
-                onSelectDevice = { viewModel.setCurrentDeviceId(uiState.devices[index].id) },
-                onNavigateToDevice = deviceScreens[uiState.devices[index].type]!!
+                onClick = { deviceScreens[device.type]?.invoke(device.id!!) }
             )
         }
     }

@@ -19,14 +19,24 @@ import com.hci.TP3_HCI.R
 import com.hci.TP3_HCI.ui.component.DeviceCard
 import com.hci.TP3_HCI.ui.getViewModelFactory
 import com.hci.TP3_HCI.ui.lamp.LampViewModel
+import com.hci.TP3_HCI.model.DeviceType
 
 @Composable
 fun DevicesScreen(
     onNavigateToLamp: () -> Unit,
+    onNavigateToAC: () -> Unit,
+    onNavigateToSpeaker: () -> Unit,
+    onNavigateToSprinkler: () -> Unit,
     viewModel: DevicesViewModel = viewModel(factory = getViewModelFactory()),
-    lampViewModel: LampViewModel = viewModel(factory = getViewModelFactory())
 ) {
     val uiState by viewModel.uiState.collectAsState()
+
+    val deviceScreens = mapOf(
+        DeviceType.LAMP to onNavigateToLamp,
+        DeviceType.AC to onNavigateToAC,
+        DeviceType.SPEAKER to onNavigateToSpeaker,
+        DeviceType.SPRINKLER to onNavigateToSprinkler
+    )
 
     LazyVerticalGrid(
         columns = GridCells.Adaptive(minSize = 196.dp),
@@ -38,7 +48,7 @@ fun DevicesScreen(
                 uiState.devices[index].id!!
             }
         ) { index ->
-            DeviceCard(uiState.devices[index], onNavigateToLamp)
+            DeviceCard(uiState.devices[index], deviceScreens[uiState.devices[index].type]!!)
         }
     }
 }

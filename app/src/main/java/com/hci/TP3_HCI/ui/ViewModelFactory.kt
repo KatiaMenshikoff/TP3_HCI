@@ -10,8 +10,12 @@ import androidx.lifecycle.ViewModel
 import androidx.savedstate.SavedStateRegistryOwner
 import com.hci.TP3_HCI.ApiApplication
 import com.hci.TP3_HCI.repository.DeviceRepository
+
 import com.hci.TP3_HCI.ui.devices.DevicesViewModel
 import com.hci.TP3_HCI.ui.lamp.LampViewModel
+import com.hci.TP3_HCI.ui.ac.ACViewModel
+import com.hci.TP3_HCI.ui.sprinkler.SprinklerViewModel
+import com.hci.TP3_HCI.ui.speaker.SpeakerViewModel
 
 @Composable
 fun getViewModelFactory(defaultArgs: Bundle? = null): ViewModelFactory {
@@ -41,6 +45,15 @@ class ViewModelFactory (
 
             isAssignableFrom(LampViewModel::class.java) ->
                 LampViewModel(deviceRepository)
+
+            isAssignableFrom(ACViewModel::class.java) ->
+                ACViewModel(deviceRepository)
+
+            isAssignableFrom(SpeakerViewModel::class.java) ->
+                SpeakerViewModel(deviceRepository)
+
+            isAssignableFrom(SprinklerViewModel::class.java) ->
+                SprinklerViewModel(deviceRepository)
 
             else ->
                 throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")

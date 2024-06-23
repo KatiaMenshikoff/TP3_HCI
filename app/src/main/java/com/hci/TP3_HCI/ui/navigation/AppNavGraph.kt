@@ -11,7 +11,6 @@ import com.hci.TP3_HCI.ui.ac.ACScreen
 import com.hci.TP3_HCI.ui.views.HomeScreen
 import com.hci.TP3_HCI.ui.devices.DevicesScreen
 import com.hci.TP3_HCI.ui.lamp.LampScreen
-import com.hci.TP3_HCI.ui.settings.*
 import com.hci.TP3_HCI.ui.speaker.SpeakerScreen
 import com.hci.TP3_HCI.ui.sprinkler.SprinklerScreen
 

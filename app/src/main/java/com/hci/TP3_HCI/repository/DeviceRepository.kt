@@ -19,8 +19,12 @@ class DeviceRepository(
 
     //    val currentDevice = devices.map { it.firstOrNull { jt -> jt is Lamp } }
 
+    // StateFlow mutable que se utiliza para mantener el estado del ID del dispositivo actual.
+    // Este flujo emite un nuevo valor cada vez que se actualiza su valor
     val currentDeviceId = MutableStateFlow<String?>(null)
 
+    // combine toma dos flujos (devices y currentDeviceId) y emite un nuevo valor cada vez que cualquiera de
+    // los dos flujos emite un nuevo valor. La combinación se realiza utilizando la función lambda proporcionada.
     val currentDevice: Flow<Device?> = combine(devices, currentDeviceId) { devices, id ->
         id?.let { deviceId ->
             devices.firstOrNull { it.id == deviceId }

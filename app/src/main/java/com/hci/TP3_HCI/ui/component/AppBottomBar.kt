@@ -22,12 +22,14 @@ fun AppBottomBar(
     val icons = mapOf(
         AppDestinations.HOME to ImageVector.vectorResource(id = R.drawable.icon_home),
         AppDestinations.DEVICES to ImageVector.vectorResource(id = R.drawable.icon_device),
+        AppDestinations.SETTINGS to ImageVector.vectorResource(id = R.drawable.icon_settings),
         AppDestinations.LAMP to ImageVector.vectorResource(id = R.drawable.icon_lamp)
     )
 
     val items = listOf(
         AppDestinations.HOME,
         AppDestinations.DEVICES,
+        AppDestinations.SETTINGS,
         AppDestinations.LAMP
     )
 

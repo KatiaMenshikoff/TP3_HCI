@@ -50,10 +50,10 @@ fun DevicesScreen(
         ) { index ->
             DeviceCard(
                 device = uiState.devices[index],
-                onClick = deviceScreens[uiState.devices[index].type]!!
+                onSelectDevice = { viewModel.setCurrentDeviceId(uiState.devices[index].id) },
+                onNavigateToDevice = deviceScreens[uiState.devices[index].type]!!
             )
         }
     }
 }
-//                    viewModel.setCurrentDeviceId(uiState.devices[index].id);
 

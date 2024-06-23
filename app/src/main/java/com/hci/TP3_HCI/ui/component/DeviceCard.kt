@@ -26,7 +26,8 @@ import com.hci.TP3_HCI.ui.navigation.AppDestinations
 @Composable
 fun DeviceCard(
     device: Device,
-    onClick: () -> Unit,
+    onSelectDevice: () -> Unit,
+    onNavigateToDevice: () -> Unit,
 ) {
     Card(
         shape = RoundedCornerShape(12.dp),
@@ -35,7 +36,10 @@ fun DeviceCard(
         modifier = Modifier
             .padding(16.dp)
             .height(100.dp)
-            .clickable { onClick() }
+            .clickable {
+                onSelectDevice()
+                onNavigateToDevice()
+            }
     ) {
         Row(
             verticalAlignment = Alignment.Top,

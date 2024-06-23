@@ -14,14 +14,19 @@ fun AppNavGraph(navController: NavHostController) {
         navController = navController,
         startDestination = AppDestinations.HOME.route
     ) {
-        composable(AppDestinations.HOME.route) {
+        composable(route = AppDestinations.HOME.route) {
             HomeScreen()
         }
-        composable(AppDestinations.DEVICES.route) {
-            DevicesScreen()
+        composable(route = AppDestinations.DEVICES.route) {
+            DevicesScreen(
+                onNavigateToLamp = {
+                    navController.navigate(route = AppDestinations.LAMP.route)
+                }
+            )
         }
-        composable(AppDestinations.LAMP.route) {
+        composable(route = AppDestinations.LAMP.route) {
             LampScreen()
         }
     }
 }
+

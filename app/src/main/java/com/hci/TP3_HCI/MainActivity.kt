@@ -11,8 +11,6 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.hci.TP3_HCI.ui.component.AppBottomBar
 import com.hci.TP3_HCI.ui.navigation.AppNavGraph
-import com.hci.TP3_HCI.ui.navigation.ProvideNavHostController
-
 
 class MainActivity : ComponentActivity() {
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -20,30 +18,25 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             val navController = rememberNavController()
-
-            // Podria envolver t0do el codigo en el Provide y obtener el controlador
-            // en los composables por contexto, pero por ahora solo la inicializo
-            ProvideNavHostController(navController) {
-
-                val navBackStackEntry by navController.currentBackStackEntryAsState()
-                val currentRoute = navBackStackEntry?.destination?.route
-                Scaffold(
-                    bottomBar = {
-                        AppBottomBar(
-                            currentRoute = currentRoute
-                        ) { route ->
-                            navController.navigate(route) {
-                                popUpTo(navController.graph.findStartDestination().id) {
-                                    saveState = true
-                                }
-                                launchSingleTop = true
-                                restoreState = true
+            val navBackStackEntry by navController.currentBackStackEntryAsState()
+            val currentRoute = navBackStackEntry?.destination?.route
+            Scaffold(
+                bottomBar = {
+                    AppBottomBar(
+                        currentRoute = currentRoute
+                    ) { route ->
+                        navController.navigate(route) {
+                            popUpTo(navController.graph.findStartDestination().id) {
+                                inclusive = true
+//                                saveState = true
                             }
+                            launchSingleTop = true
+//                            restoreState = true
                         }
                     }
-                ) {
-                    AppNavGraph(navController = navController)
                 }
+            ) {
+                AppNavGraph(navController = navController)
             }
         }
     }

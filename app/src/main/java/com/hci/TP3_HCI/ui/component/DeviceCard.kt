@@ -22,13 +22,12 @@ import androidx.compose.ui.unit.sp
 import com.hci.TP3_HCI.R
 import com.hci.TP3_HCI.model.Device
 import com.hci.TP3_HCI.ui.navigation.AppDestinations
-import com.hci.TP3_HCI.ui.navigation.LocalNavHostController
 
 @Composable
 fun DeviceCard(
     device: Device,
+    onNavigateToDevice: () -> Unit,
 ) {
-    val navController = LocalNavHostController.current
     Card(
         shape = RoundedCornerShape(12.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
@@ -36,7 +35,7 @@ fun DeviceCard(
         modifier = Modifier
             .padding(16.dp)
             .height(100.dp)
-            .clickable { navController.navigate(AppDestinations.LAMP.route) }
+            .clickable { onNavigateToDevice() }
     ) {
         Row(
             verticalAlignment = Alignment.Top,

@@ -22,6 +22,7 @@ import com.hci.TP3_HCI.ui.lamp.LampViewModel
 
 @Composable
 fun DevicesScreen(
+    onNavigateToLamp: () -> Unit,
     viewModel: DevicesViewModel = viewModel(factory = getViewModelFactory()),
     lampViewModel: LampViewModel = viewModel(factory = getViewModelFactory())
 ) {
@@ -37,7 +38,7 @@ fun DevicesScreen(
                 uiState.devices[index].id!!
             }
         ) { index ->
-            DeviceCard(uiState.devices[index])
+            DeviceCard(uiState.devices[index], onNavigateToLamp)
         }
     }
 }

@@ -36,4 +36,13 @@
         <string name="decrease">Disminuir</string>
         <string name="increase">Aumentar</string>
         <string name="more_options">Más Opciones</string>
+        <!-- New strings for Sprinkler screen -->
+        <string name="sprinkler_title">Aspersor</string>
+        <string name="current_status">Estado actual: %1$s</string>
+        <string name="pump_water">Bombear agua</string>
+        <string name="quantity">Cantidad</string>
+        <string name="unit">Unidad</string>
+        <string name="dispense_water">DISPENSAR AGUA</string>
+
+
 </resources>

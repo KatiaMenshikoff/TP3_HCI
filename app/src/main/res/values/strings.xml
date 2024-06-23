@@ -37,4 +37,14 @@
     <string name="decrease">Decrease</string>
     <string name="increase">Increase</string>
     <string name="more_options">More Options</string>
+
+    <!-- New strings for Sprinkler screen -->
+    <string name="sprinkler_title">Sprinkler</string>
+    <string name="current_status">Current status: %1$s</string>
+    <string name="pump_water">Pump water</string>
+    <string name="quantity">Quantity</string>
+    <string name="unit">Unit</string>
+    <string name="dispense_water">DISPENSE WATER</string>
+
+
 </resources>

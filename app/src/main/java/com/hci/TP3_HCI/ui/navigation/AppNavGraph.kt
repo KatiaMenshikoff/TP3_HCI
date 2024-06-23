@@ -6,11 +6,12 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.example.mobileapp.ui.views.SettingsScreen
 import com.hci.TP3_HCI.ui.ac.ACScreen
 import com.hci.TP3_HCI.ui.views.HomeScreen
 import com.hci.TP3_HCI.ui.devices.DevicesScreen
 import com.hci.TP3_HCI.ui.lamp.LampScreen
-import com.hci.TP3_HCI.ui.settings.SettingsScreen
+import com.hci.TP3_HCI.ui.settings.*
 import com.hci.TP3_HCI.ui.speaker.SpeakerScreen
 import com.hci.TP3_HCI.ui.sprinkler.SprinklerScreen
 
@@ -68,7 +69,10 @@ fun AppNavGraph(navController: NavHostController) {
             SprinklerScreen(deviceId = deviceId!!)
         }
         composable(route = AppDestinations.SETTINGS.route){
-            SettingsScreen()
+            SettingsScreen(
+                onBack = { navController.popBackStack() },
+                onLanguageChange = { /* Aquí puedes manejar el cambio de idioma si es necesario */ }
+            )
         }
     }
 }

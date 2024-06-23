@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-        <string name="app_name">CoolHome</string>
+        <string name="select_language">Seleccionar idioma</string>
+        <string name="language_english">Inglés</string>
+        <string name="language_spanish">Español</string>        <string name="app_name">CoolHome</string>
         <string name="views_home_name">Inicio</string>
         <string name="views_devices_name">Dispositivos</string>
         <string name="views_settings_name">Configuración</string>

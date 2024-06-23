@@ -22,17 +22,12 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.hci.TP3_HCI.ui.navigation.AppDestinations
 import com.hci.TP3_HCI.R
+import com.hci.TP3_HCI.model.Device
 
 @Composable
 fun DeviceCard(
-    navController: NavController,
-    title: String,
-    description: String,
-    isPlaying: Boolean,
-    onTogglePlay: (Boolean) -> Unit
+    device: Device,
 ) {
-    val isChecked = remember { mutableStateOf(isPlaying) }
-
     Card(
         shape = RoundedCornerShape(12.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
@@ -40,7 +35,7 @@ fun DeviceCard(
         modifier = Modifier
             .padding(16.dp)
             .height(100.dp)
-            .clickable { navController.navigate(AppDestinations.LAMP.route) }
+            .clickable {  }
     ) {
         Row(
             verticalAlignment = Alignment.Top,
@@ -55,7 +50,7 @@ fun DeviceCard(
                 modifier = Modifier.weight(1f)
             ) {
                 Text(
-                    text = title,
+                    text = device.name,
                     color = Color.White,
                     fontSize = 19.sp,
                     style = MaterialTheme.typography.titleMedium
@@ -72,7 +67,7 @@ fun DeviceCard(
                     )
                     Spacer(modifier = Modifier.width(4.dp))
                     Text(
-                        text = description,
+                        text = device.id!!,
                         color = Color.White,
                         fontSize = 16.sp,
                         style = MaterialTheme.typography.bodyMedium

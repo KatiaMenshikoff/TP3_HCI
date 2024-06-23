@@ -21,4 +21,20 @@
     <string name="unknown">UNKNOWN</string>
     <string name="status_on">ON</string>
     <string name="status_off">OFF</string>
+
+    <!-- New strings for AC screen -->
+    <string name="ac_title">AC</string>
+    <string name="temperature">Temperature</string>
+    <string name="more">More</string>
+    <string name="cool_mode">Cool</string>
+    <string name="fan_mode">Fan</string>
+    <string name="heat_mode">Heat</string>
+    <string name="fan_speed">Fan Speed</string>
+    <string name="h_swing">H-Swing</string>
+    <string name="v_swing">V-Swing</string>
+    <string name="show_in_home">Show in home</string>
+    <string name="delete">Delete</string>
+    <string name="decrease">Decrease</string>
+    <string name="increase">Increase</string>
+    <string name="more_options">More Options</string>
 </resources>

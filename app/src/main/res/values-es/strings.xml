@@ -21,4 +21,19 @@
         <string name="status_on">ENCENDIDO</string>
         <string name="status_off">APAGADO</string>
 
+        <!-- New strings for AC screen -->
+        <string name="ac_title">AC</string>
+        <string name="temperature">Temperatura</string>
+        <string name="more">Más</string>
+        <string name="cool_mode">Frío</string>
+        <string name="fan_mode">Ventilador</string>
+        <string name="heat_mode">Calor</string>
+        <string name="fan_speed">Velocidad del Ventilador</string>
+        <string name="h_swing">Oscilación H</string>
+        <string name="v_swing">Oscilación V</string>
+        <string name="show_in_home">Mostrar en inicio</string>
+        <string name="delete">Eliminar</string>
+        <string name="decrease">Disminuir</string>
+        <string name="increase">Aumentar</string>
+        <string name="more_options">Más Opciones</string>
 </resources>

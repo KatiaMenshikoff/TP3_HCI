@@ -14,9 +14,8 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class DevicesViewModel(
-    repository: DeviceRepository
+    private val repository: DeviceRepository
 ) : ViewModel() {
-
     private val _uiState = MutableStateFlow(DevicesUiState())
     val uiState = _uiState.asStateFlow()
 
@@ -24,6 +23,10 @@ class DevicesViewModel(
         collectOnViewModelScope(
             repository.devices
         ) { state, response -> state.copy(devices = response) }
+    }
+
+    fun setCurrentDeviceId(deviceId: String?) {
+        repository.setCurrentDeviceId(deviceId)
     }
 
     private fun <T> collectOnViewModelScope(

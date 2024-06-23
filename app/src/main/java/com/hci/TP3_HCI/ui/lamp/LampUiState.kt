@@ -1,4 +1,4 @@
-package com.hci.TP3_HCI.ui.devices
+package com.hci.TP3_HCI.ui.lamp
 
 import com.hci.TP3_HCI.model.Error
 import com.hci.TP3_HCI.model.Lamp

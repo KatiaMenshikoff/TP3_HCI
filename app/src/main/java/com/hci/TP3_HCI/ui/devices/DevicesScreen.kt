@@ -48,7 +48,12 @@ fun DevicesScreen(
                 uiState.devices[index].id!!
             }
         ) { index ->
-            DeviceCard(uiState.devices[index], deviceScreens[uiState.devices[index].type]!!)
+            DeviceCard(
+                device = uiState.devices[index],
+                onClick = deviceScreens[uiState.devices[index].type]!!
+            )
         }
     }
 }
+//                    viewModel.setCurrentDeviceId(uiState.devices[index].id);
+

@@ -36,7 +36,8 @@ fun LampScreen(
                 .background(colorResource(R.color.background))
                 .padding(3.dp)
         ) {
-            Text("LAMP", style = MaterialTheme.typography.headlineMedium)
+            Text(uiState.currentDevice?.name.toString(), style = MaterialTheme.typography.headlineMedium)
+            Text("id" + uiState.currentDevice?.id.toString(), style = MaterialTheme.typography.headlineSmall)
             Spacer(modifier = Modifier.height(16.dp))
         }
     }

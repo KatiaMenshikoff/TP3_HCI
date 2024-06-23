@@ -6,7 +6,7 @@ import com.hci.TP3_HCI.DataSourceException
 import com.hci.TP3_HCI.model.Error
 import com.hci.TP3_HCI.model.Lamp
 import com.hci.TP3_HCI.repository.DeviceRepository
-import com.hci.TP3_HCI.ui.devices.LampUiState
+import com.hci.TP3_HCI.ui.lamp.LampUiState
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow

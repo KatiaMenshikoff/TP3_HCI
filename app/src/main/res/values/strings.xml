@@ -7,6 +7,9 @@
     <string name="views_speaker_name">Speaker</string>
     <string name="views_sprinkler_name">Sprinkler</string>
     <string name="views_ac_name">AC</string>
+    <string name="select_language">Select Language</string>
+    <string name="language_english">English</string>
+    <string name="language_spanish">Español</string>
 
     <!-- tp ejemplo-->
     <string name="Devices">Devices</string>

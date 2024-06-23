@@ -24,18 +24,18 @@ import com.hci.TP3_HCI.model.DeviceType
 @Composable
 fun DevicesScreen(
     onNavigateToLamp: (deviceId: String) -> Unit,
-    onNavigateToAC: () -> Unit,
-    onNavigateToSpeaker: () -> Unit,
-    onNavigateToSprinkler: () -> Unit,
+    onNavigateToAC: (deviceId: String) -> Unit,
+    onNavigateToSpeaker: (deviceId: String) -> Unit,
+    onNavigateToSprinkler: (deviceId: String) -> Unit,
     viewModel: DevicesViewModel = viewModel(factory = getViewModelFactory()),
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
     val deviceScreens = mapOf(
         DeviceType.LAMP to onNavigateToLamp,
-        DeviceType.AC to { onNavigateToAC() },
-        DeviceType.SPEAKER to { onNavigateToSpeaker() },
-        DeviceType.SPRINKLER to { onNavigateToSprinkler() }
+        DeviceType.AC to onNavigateToAC,
+        DeviceType.SPEAKER to onNavigateToSpeaker,
+        DeviceType.SPRINKLER to onNavigateToSprinkler
     )
 
     LazyVerticalGrid(

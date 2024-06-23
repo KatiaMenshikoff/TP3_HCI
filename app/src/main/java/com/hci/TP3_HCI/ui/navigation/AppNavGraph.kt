@@ -30,13 +30,16 @@ fun AppNavGraph(navController: NavHostController) {
                     navController.navigate(route = "${AppDestinations.LAMP.route}/$deviceId")
                 },
                 onNavigateToAC = {
-                    navController.navigate(route = AppDestinations.AC.route)
+                    deviceId ->
+                    navController.navigate(route = "${AppDestinations.AC.route}/$deviceId")
                 },
                 onNavigateToSpeaker = {
-                    navController.navigate(route = AppDestinations.SPEAKER.route)
+                    deviceId ->
+                    navController.navigate(route = "${AppDestinations.SPEAKER.route}/$deviceId")
                 },
                 onNavigateToSprinkler = {
-                    navController.navigate(route = AppDestinations.SPRINKLER.route)
+                    deviceId ->
+                    navController.navigate(route = "${AppDestinations.SPRINKLER.route}/$deviceId")
                 }
             )
         }
@@ -46,14 +49,23 @@ fun AppNavGraph(navController: NavHostController) {
             val deviceId = backStackEntry.arguments?.getString("deviceId")
             LampScreen(deviceId = deviceId!!)
         }
-        composable(route = AppDestinations.AC.route) {
-            ACScreen()
+        composable(route = "${AppDestinations.AC.route}/{deviceId}",
+            arguments = listOf(navArgument("deviceId") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val deviceId = backStackEntry.arguments?.getString("deviceId")
+            ACScreen(deviceId = deviceId!!)
         }
-        composable(route = AppDestinations.SPEAKER.route) {
-           SpeakerScreen()
+        composable(route = "${AppDestinations.SPEAKER.route}/{deviceId}",
+            arguments = listOf(navArgument("deviceId") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val deviceId = backStackEntry.arguments?.getString("deviceId")
+            SpeakerScreen(deviceId = deviceId!!)
         }
-        composable(route = AppDestinations.SPRINKLER.route){
-            SprinklerScreen()
+        composable(route = "${AppDestinations.SPRINKLER.route}/{deviceId}",
+            arguments = listOf(navArgument("deviceId") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val deviceId = backStackEntry.arguments?.getString("deviceId")
+            SprinklerScreen(deviceId = deviceId!!)
         }
         composable(route = AppDestinations.SETTINGS.route){
             SettingsScreen()

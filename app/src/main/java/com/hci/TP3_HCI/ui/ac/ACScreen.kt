@@ -22,8 +22,10 @@ import com.hci.TP3_HCI.ui.lamp.LampViewModel
 
 @Composable
 fun ACScreen(
+    deviceId: String,
     viewModel: ACViewModel = viewModel(factory = getViewModelFactory()),
 ) {
+    viewModel.setCurrentDevice(deviceId)
     val uiState by viewModel.uiState.collectAsState()
     Scaffold() { paddingValues ->
         Column(

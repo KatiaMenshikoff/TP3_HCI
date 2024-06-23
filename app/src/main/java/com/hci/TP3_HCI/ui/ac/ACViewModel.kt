@@ -3,10 +3,10 @@ package com.hci.TP3_HCI.ui.ac
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hci.TP3_HCI.DataSourceException
+import com.hci.TP3_HCI.model.AC
 import com.hci.TP3_HCI.model.Error
 import com.hci.TP3_HCI.model.Lamp
 import com.hci.TP3_HCI.repository.DeviceRepository
-import com.hci.TP3_HCI.ui.lamp.LampUiState
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -20,13 +20,14 @@ class ACViewModel(
     private val repository: DeviceRepository
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow(LampUiState())
+    private val _uiState = MutableStateFlow(ACUiState())
     val uiState = _uiState.asStateFlow()
 
-    init {
-        collectOnViewModelScope(
-            repository.currentDevice
-        ) { state, response -> state.copy(currentDevice = response as Lamp?) }
+    fun setCurrentDevice(deviceId: String){
+        runOnViewModelScope(
+            { repository.getDevice(deviceId) },
+            { state, response -> state.copy(currentDevice = response as AC?) }
+        )
     }
 
     fun turnOn() = runOnViewModelScope(
@@ -41,7 +42,7 @@ class ACViewModel(
 
     private fun <T> collectOnViewModelScope(
         flow: Flow<T>,
-        updateState: (LampUiState, T) -> LampUiState
+        updateState: (ACUiState, T) -> ACUiState
     ) = viewModelScope.launch {
         flow
             .distinctUntilChanged()
@@ -51,7 +52,7 @@ class ACViewModel(
 
     private fun <R> runOnViewModelScope(
         block: suspend () -> R,
-        updateState: (LampUiState, R) -> LampUiState
+        updateState: (ACUiState, R) -> ACUiState
     ): Job = viewModelScope.launch {
         _uiState.update { it.copy(loading = true, error = null) }
         runCatching {

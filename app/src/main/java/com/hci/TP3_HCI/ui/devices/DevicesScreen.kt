@@ -23,10 +23,10 @@ import com.hci.TP3_HCI.model.DeviceType
 
 @Composable
 fun DevicesScreen(
-    onNavigateToLamp: () -> Unit,
-    onNavigateToAC: () -> Unit,
-    onNavigateToSpeaker: () -> Unit,
-    onNavigateToSprinkler: () -> Unit,
+    onNavigateToLamp: (deviceId: String) -> Unit,
+    onNavigateToAC: (deviceId: String) -> Unit,
+    onNavigateToSpeaker: (deviceId: String) -> Unit,
+    onNavigateToSprinkler: (deviceId: String) -> Unit,
     viewModel: DevicesViewModel = viewModel(factory = getViewModelFactory()),
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -48,10 +48,10 @@ fun DevicesScreen(
                 uiState.devices[index].id!!
             }
         ) { index ->
+            val device = uiState.devices[index]
             DeviceCard(
                 device = uiState.devices[index],
-                onSelectDevice = { viewModel.setCurrentDeviceId(uiState.devices[index].id) },
-                onNavigateToDevice = deviceScreens[uiState.devices[index].type]!!
+                onClick = { deviceScreens[device.type]?.invoke(device.id!!) }
             )
         }
     }

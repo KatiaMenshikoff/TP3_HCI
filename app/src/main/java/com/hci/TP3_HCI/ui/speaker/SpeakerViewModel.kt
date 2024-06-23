@@ -5,8 +5,8 @@ import androidx.lifecycle.viewModelScope
 import com.hci.TP3_HCI.DataSourceException
 import com.hci.TP3_HCI.model.Error
 import com.hci.TP3_HCI.model.Lamp
+import com.hci.TP3_HCI.model.Speaker
 import com.hci.TP3_HCI.repository.DeviceRepository
-import com.hci.TP3_HCI.ui.lamp.LampUiState
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -20,13 +20,14 @@ class SpeakerViewModel(
     private val repository: DeviceRepository
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow(LampUiState())
+    private val _uiState = MutableStateFlow(SpeakerUiState())
     val uiState = _uiState.asStateFlow()
 
-    init {
-        collectOnViewModelScope(
-            repository.currentDevice
-        ) { state, response -> state.copy(currentDevice = response as Lamp?) }
+    fun setCurrentDevice(deviceId: String){
+        runOnViewModelScope(
+            { repository.getDevice(deviceId) },
+            { state, response -> state.copy(currentDevice = response as Speaker?) }
+        )
     }
 
     fun turnOn() = runOnViewModelScope(
@@ -41,7 +42,7 @@ class SpeakerViewModel(
 
     private fun <T> collectOnViewModelScope(
         flow: Flow<T>,
-        updateState: (LampUiState, T) -> LampUiState
+        updateState: (SpeakerUiState, T) -> SpeakerUiState
     ) = viewModelScope.launch {
         flow
             .distinctUntilChanged()
@@ -51,7 +52,7 @@ class SpeakerViewModel(
 
     private fun <R> runOnViewModelScope(
         block: suspend () -> R,
-        updateState: (LampUiState, R) -> LampUiState
+        updateState: (SpeakerUiState, R) -> SpeakerUiState
     ): Job = viewModelScope.launch {
         _uiState.update { it.copy(loading = true, error = null) }
         runCatching {

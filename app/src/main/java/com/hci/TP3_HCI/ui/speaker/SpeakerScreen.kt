@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.Button
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -38,17 +39,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.hci.TP3_HCI.R
 import com.hci.TP3_HCI.model.Status
-import com.hci.TP3_HCI.ui.component.BottomNavigationBar
 import com.hci.TP3_HCI.ui.getViewModelFactory
-import com.hci.TP3_HCI.ui.lamp.LampViewModel
-import com.hci.TP3_HCI.ui.screens.GenreButton
 import com.hci.TP3_HCI.ui.screens.SongItem
 
 @Composable
@@ -78,9 +75,17 @@ fun SpeakerScreen(
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Icon(painter = painterResource(id = R.drawable.icon_device), contentDescription = "Speaker", tint = Color.Black)
+                Icon(
+                    painter = painterResource(id = R.drawable.icon_device),
+                    contentDescription = "Speaker",
+                    tint = Color.Black
+                )
                 Spacer(modifier = Modifier.width(8.dp))
-                Text(uiState.currentDevice?.name ?: "NO DATA", fontSize = 24.sp, fontWeight = FontWeight.Bold)
+                Text(
+                    uiState.currentDevice?.name ?: "NO DATA",
+                    fontSize = 24.sp,
+                    fontWeight = FontWeight.Bold
+                )
             }
             IconButton(onClick = { /* Handle delete device */ }) {
                 Row(
@@ -88,14 +93,24 @@ fun SpeakerScreen(
                     horizontalArrangement = Arrangement.spacedBy(4.dp)
                 ) {
                     Text("Delete device", color = Color.Red, fontSize = 12.sp)
-                    Icon(painter = painterResource(id = R.drawable.icon_delete), contentDescription = "Delete device", tint = Color.Red, modifier = Modifier.size(30.dp))
+                    Icon(
+                        painter = painterResource(id = R.drawable.icon_delete),
+                        contentDescription = "Delete device",
+                        tint = Color.Red,
+                        modifier = Modifier.size(30.dp)
+                    )
                 }
             }
         }
 
         Divider()
 
-        Text("Options", fontSize = 20.sp, fontWeight = FontWeight.Bold, modifier = Modifier.padding(vertical = 8.dp))
+        Text(
+            "Options",
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(vertical = 8.dp)
+        )
 
         Row(
             modifier = Modifier
@@ -123,7 +138,7 @@ fun SpeakerScreen(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Text("Show as shortcut in Home", fontSize                = 18.sp)
+            Text("Show as shortcut in Home", fontSize = 18.sp)
             Switch(
                 //TODO implementar valor
                 checked = false,
@@ -142,24 +157,51 @@ fun SpeakerScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(150.dp)
-                .background(color = colorResource(id = R.color.button), shape = RoundedCornerShape(12.dp)),
+                .background(
+                    color = colorResource(id = R.color.button),
+                    shape = RoundedCornerShape(12.dp)
+                ),
             contentAlignment = Alignment.Center
         ) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(uiState.currentDevice?.song?.title ?: "NO DATA", color = Color.White, fontSize = 20.sp, fontWeight = FontWeight.Bold)
-                Text(uiState.currentDevice?.song?.artist ?: "NO DATA", color = Color.White, fontSize = 18.sp)
+                Text(
+                    uiState.currentDevice?.song?.title ?: "NO DATA",
+                    color = Color.White,
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold
+                )
+                Text(
+                    uiState.currentDevice?.song?.artist ?: "NO DATA",
+                    color = Color.White,
+                    fontSize = 18.sp
+                )
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Center,
                     modifier = Modifier.padding(top = 8.dp)
                 ) {
-                    Icon(painter = painterResource(id = R.drawable.icon_previous), contentDescription = "Previous", tint = Color.White, modifier = Modifier.size(30.dp))
+                    Icon(
+                        painter = painterResource(id = R.drawable.icon_previous),
+                        contentDescription = "Previous",
+                        tint = Color.White,
+                        modifier = Modifier.size(30.dp)
+                    )
                     Spacer(modifier = Modifier.width(24.dp))
-                    Icon(painter = painterResource(id = R.drawable.icon_play), contentDescription = "Play", tint = Color.White, modifier = Modifier.size(30.dp))
+                    Icon(
+                        painter = painterResource(id = R.drawable.icon_play),
+                        contentDescription = "Play",
+                        tint = Color.White,
+                        modifier = Modifier.size(30.dp)
+                    )
                     Spacer(modifier = Modifier.width(24.dp))
-                    Icon(painter = painterResource(id = R.drawable.icon_next), contentDescription = "Next", tint = Color.White, modifier = Modifier.size(30.dp))
+                    Icon(
+                        painter = painterResource(id = R.drawable.icon_next),
+                        contentDescription = "Next",
+                        tint = Color.White,
+                        modifier = Modifier.size(30.dp)
+                    )
                 }
                 Spacer(modifier = Modifier.height(4.dp))
                 Row(
@@ -168,12 +210,14 @@ fun SpeakerScreen(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = "Progress:   " + (uiState.currentDevice?.song?.progress?: "NO DATA"),
+                        text = "Progress:   " + (uiState.currentDevice?.song?.progress
+                            ?: "NO DATA"),
                         color = Color.White,
                         fontSize = 14.sp
                     )
                     Text(
-                        text = "Duration:   " + (uiState.currentDevice?.song?.duration ?: "NO DATA"),
+                        text = "Duration:   " + (uiState.currentDevice?.song?.duration
+                            ?: "NO DATA"),
                         color = Color.White,
                         fontSize = 14.sp
                     )
@@ -189,10 +233,18 @@ fun SpeakerScreen(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Icon(painter = painterResource(id = R.drawable.icon_volume), contentDescription = "Volume down", tint = Color.Gray)
-            Icon(painter = painterResource(id = R.drawable.icon_minus), contentDescription = "Volume down", tint = Color.Gray)
+            Icon(
+                painter = painterResource(id = R.drawable.icon_volume),
+                contentDescription = "Volume down",
+                tint = Color.Gray
+            )
+            Icon(
+                painter = painterResource(id = R.drawable.icon_minus),
+                contentDescription = "Volume down",
+                tint = Color.Gray
+            )
             Slider(
-                value = ( uiState.currentDevice?.volume ?: 0f ) / 10f,
+                value = (uiState.currentDevice?.volume ?: 0f) / 10f,
                 onValueChange = { /* Handle volume change */ },
                 colors = SliderDefaults.colors(
                     thumbColor = colorResource(id = R.color.grey),
@@ -201,41 +253,57 @@ fun SpeakerScreen(
                 ),
                 modifier = Modifier.weight(1f)
             )
-            Icon(painter = painterResource(id = R.drawable.icon_more), contentDescription = "Volume up", tint = Color.Gray)
+            Icon(
+                painter = painterResource(id = R.drawable.icon_more),
+                contentDescription = "Volume up",
+                tint = Color.Gray
+            )
         }
 
         Spacer(modifier = Modifier.height(16.dp))
         Text("Genres", fontSize = 18.sp, fontWeight = FontWeight.Bold)
         Spacer(modifier = Modifier.height(6.dp))
-//            Column {
-//                var genre = uiState.currentDevice?.genre
-//                Row(
-//                    modifier = Modifier.fillMaxWidth(),
-//                    horizontalArrangement = Arrangement.SpaceAround
-//                ) {
-//                    GenreButton("Rock", genre!!) { genre = it }
-//                    GenreButton("Jazz", genre!!) { genre = it }
-//                    GenreButton("Pop", genre!!) { genre = it }
-//                }
-//                Spacer(modifier = Modifier.height(8.dp))
-//                Row(
-//                    modifier = Modifier.fillMaxWidth(),
-//                    horizontalArrangement = Arrangement.SpaceAround
-//                ) {
-//                    GenreButton("Latina", genre!!) { genre = it }
-//                    GenreButton("Classic", genre!!) { genre = it }
-//                    GenreButton("Country", genre!!) { genre = it }
-//                }
-//            }
-
-        Spacer(modifier = Modifier.height(14.dp))
-
-        Text("Songs", fontSize = 20.sp, fontWeight = FontWeight.Bold)
-        Spacer(modifier = Modifier.height(8.dp))
         Column {
-            SongItem("La Bestia Pop")
-            SongItem("De Música Ligera")
-            SongItem("Campanas en la noche")
+            val genre = uiState.currentDevice?.genre
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceAround
+            ) {
+                Button(onClick = { }) {
+                    Text("Rock")
+                }
+                Button(onClick = { }) {
+                    Text("Jazz")
+                }
+                Button(onClick = { }) {
+                    Text("Pop")
+                }
+            }
+            Spacer(modifier = Modifier.height(8.dp))
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceAround
+            ) {
+                Button(onClick = { }) {
+                    Text("Latina")
+                }
+                Button(onClick = { }) {
+                    Text("Classic")
+                }
+                Button(onClick = { }) {
+                    Text("Country")
+                }
+            }
+
+            Spacer(modifier = Modifier.height(14.dp))
+
+            Text("Songs", fontSize = 20.sp, fontWeight = FontWeight.Bold)
+            Spacer(modifier = Modifier.height(8.dp))
+            Column {
+                SongItem("La Bestia Pop")
+                SongItem("De Música Ligera")
+                SongItem("Campanas en la noche")
+            }
         }
     }
 }

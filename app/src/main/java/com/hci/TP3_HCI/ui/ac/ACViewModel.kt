@@ -25,6 +25,10 @@ class ACViewModel(
     private val _uiState = MutableStateFlow(ACUiState())
     val uiState = _uiState.asStateFlow()
 
+    val funSpeeds = arrayOf("auto", "25", "50", "75", "100")
+    val verticalSwing = arrayOf("auto", "22", "45", "67", "90")
+    val horizontalSwing = arrayOf("auto", "-90", "-45", "0", "45", "90")
+
     fun setCurrentDevice(deviceId: String){
         runOnViewModelScope(
             { repository.getDevice(deviceId) },
@@ -36,7 +40,7 @@ class ACViewModel(
         viewModelScope.launch {
             while (true) {
                 updateDevice(deviceId)
-                delay(5000) // Espera 5 segundos antes de la próxima actualización
+                delay(500)
             }
         }
     }
@@ -48,14 +52,95 @@ class ACViewModel(
 
 
     fun turnOn() = runOnViewModelScope(
-        { repository.executeDeviceAction(uiState.value.currentDevice?.id!!, Lamp.TURN_ON_ACTION) },
+        { repository.executeDeviceAction(uiState.value.currentDevice?.id!!, AC.TURN_ON_ACTION) },
         { state, _ -> state }
     )
 
     fun turnOff() = runOnViewModelScope(
-        { repository.executeDeviceAction(uiState.value.currentDevice?.id!!, Lamp.TURN_OFF_ACTION) },
+        { repository.executeDeviceAction(uiState.value.currentDevice?.id!!, AC.TURN_OFF_ACTION) },
         { state, _ -> state }
     )
+
+    fun setTemperature(temp: Int) = runOnViewModelScope(
+        { repository.executeDeviceAction(uiState.value.currentDevice?.id!!, AC.SET_TEMPERATURE_ACTION, arrayOf(temp)) },
+        { state, _ -> state }
+    )
+
+    fun setMode(mode: String) = runOnViewModelScope(
+        { repository.executeDeviceAction(uiState.value.currentDevice?.id!!, AC.SET_MODE_ACTION, arrayOf(mode))},
+        { state, _ -> state }
+    )
+
+    fun setVerticalSwing(swing: String) = runOnViewModelScope(
+        { repository.executeDeviceAction(uiState.value.currentDevice?.id!!, AC.SET_VERTICAL_SWING_ACTION, arrayOf(swing))},
+        { state, _ -> state }
+    )
+
+    fun setHorizontalSwing(swing: String) = runOnViewModelScope(
+        { repository.executeDeviceAction(uiState.value.currentDevice?.id!!, AC.SET_HORIZONTAL_SWING_ACTION, arrayOf(swing))},
+        { state, _ -> state }
+    )
+
+      fun setFanSpeed(speed: String) = runOnViewModelScope(
+        { repository.executeDeviceAction(uiState.value.currentDevice?.id!!, AC.SET_FAN_SPEED_ACTION, arrayOf(speed))},
+        { state, _ -> state }
+    )
+
+    fun getNextSpeed(currentSpeed: String): String {
+    val index = funSpeeds.indexOf(currentSpeed)
+    return if (index == -1 || index == funSpeeds.size - 1) {
+        currentSpeed
+    } else {
+        funSpeeds[index + 1]
+    }
+    }
+
+    fun getPreviousSpeed(currentSpeed: String): String {
+    val index = funSpeeds.indexOf(currentSpeed)
+    return if (index <= 0) {
+        currentSpeed
+    } else {
+        funSpeeds[index - 1]
+    }
+    }
+
+
+    fun getVerticalNext(currentSwing: String): String {
+        val index = verticalSwing.indexOf(currentSwing)
+        return if (index == -1 || index == verticalSwing.size - 1) {
+            currentSwing
+        } else {
+            verticalSwing[index + 1]
+        }
+    }
+
+    fun getVerticalPrevious(currentSwing: String): String {
+    val index = verticalSwing.indexOf(currentSwing)
+    return if (index <= 0) {
+        currentSwing
+    } else {
+        verticalSwing[index - 1]
+    }
+    }
+
+    fun getHorizontalNext(currentSwing: String): String {
+    val index = horizontalSwing.indexOf(currentSwing)
+    return if (index == -1 || index == horizontalSwing.size - 1) {
+        currentSwing
+    } else {
+        horizontalSwing[index + 1]
+    }
+    }
+
+    fun getHorizontalPrevious(currentSwing: String): String {
+        val index = horizontalSwing.indexOf(currentSwing)
+        return if (index <= 0) {
+            currentSwing
+        } else {
+            horizontalSwing[index - 1]
+        }
+    }
+
 
     private fun <T> collectOnViewModelScope(
         flow: Flow<T>,

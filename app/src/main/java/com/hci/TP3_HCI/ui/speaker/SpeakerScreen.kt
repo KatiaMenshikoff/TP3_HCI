@@ -44,6 +44,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -94,17 +95,17 @@ fun SpeakerScreen(
                     )
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(
-                        uiState.currentDevice?.name ?: "NO DATA",
+                        uiState.currentDevice?.name ?: stringResource(R.string.no_data),
                         fontSize = 24.sp,
                         fontWeight = FontWeight.Bold
                     )
                 }
             }
 
-            var genre = uiState.currentDevice?.genre ?: "NO DATA"
-            var status = uiState.currentDevice?.status ?: "NO DATA"
+            var genre = uiState.currentDevice?.genre ?: stringResource(R.string.no_data)
+            var status = uiState.currentDevice?.status ?: stringResource(R.string.no_data)
             var playback =
-                if (genre == null || status == SpeakerStatus.STOPPED) "Not playing" else ("Now playing " + genre)
+                if (genre == null || status == SpeakerStatus.STOPPED) stringResource(R.string.not_playing) else ( stringResource(R.string.now_playing)  + genre)
 
             // Playback
             Row(
@@ -121,11 +122,11 @@ fun SpeakerScreen(
                 )
                 if (status == SpeakerStatus.STOPPED) {
                     Button(onClick = { viewModel.play() }) {
-                        Text(text = "PLAY")
+                        Text(text =  stringResource(R.string.play) )
                     }
                 } else {
                     Button(onClick = { viewModel.stop() }) {
-                        Text(text = "STOP")
+                        Text(text =  stringResource(R.string.stop) )
                     }
                 }
             }
@@ -147,7 +148,7 @@ fun SpeakerScreen(
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         Text(
-                            uiState.currentDevice?.song?.title ?: "Not playing",
+                            uiState.currentDevice?.song?.title ?:stringResource(R.string.not_playing),
                             color = Color.White,
                             fontSize = 20.sp,
                             fontWeight = FontWeight.Bold,
@@ -156,7 +157,7 @@ fun SpeakerScreen(
                             modifier = Modifier.widthIn(max = 250.dp) // Adjust max width as needed
                         )
                         Text(
-                            uiState.currentDevice?.song?.artist ?: "Not playing",
+                            uiState.currentDevice?.song?.artist ?: stringResource(R.string.not_playing),
                             color = Color.White,
                             fontSize = 18.sp,
                             maxLines = 1,
@@ -214,14 +215,14 @@ fun SpeakerScreen(
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Text(
-                                text = "Progress:   " + (uiState.currentDevice?.song?.progress
-                                    ?: "Not playing"),
+                                text = stringResource(R.string.progress) + (uiState.currentDevice?.song?.progress
+                                    ?: stringResource(R.string.not_playing)),
                                 color = Color.White,
                                 fontSize = 14.sp
                             )
                             Text(
-                                text = "Duration:   " + (uiState.currentDevice?.song?.duration
-                                    ?: "Not playing"),
+                                text =stringResource(R.string.duration) + (uiState.currentDevice?.song?.duration
+                                    ?: stringResource(R.string.not_playing)),
                                 color = Color.White,
                                 fontSize = 14.sp
                             )
@@ -231,7 +232,7 @@ fun SpeakerScreen(
             }
             Spacer(modifier = Modifier.height(14.dp))
 
-            Text("Volume", fontSize = 20.sp, fontWeight = FontWeight.Bold)
+            Text(stringResource(R.string.volume), fontSize = 20.sp, fontWeight = FontWeight.Bold)
             Spacer(modifier = Modifier.height(6.dp))
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -271,7 +272,7 @@ fun SpeakerScreen(
 
             // Genre picker
             if (status != SpeakerStatus.STOPPED) {
-                Text("Genres", fontSize = 20.sp, fontWeight = FontWeight.Bold)
+                Text(stringResource(R.string.genre), fontSize = 20.sp, fontWeight = FontWeight.Bold)
                 Spacer(modifier = Modifier.height(6.dp))
                 Column {
                     val genre = uiState.currentDevice?.genre
@@ -280,13 +281,13 @@ fun SpeakerScreen(
                         horizontalArrangement = Arrangement.SpaceAround
                     ) {
                         Button(onClick = { viewModel.setGenre("rock") }) {
-                            Text("Rock")
+                            Text(stringResource(R.string.rock))
                         }
                         Button(onClick = { viewModel.setGenre("dance") }) {
-                            Text("Dance")
+                            Text(stringResource(R.string.dance))
                         }
                         Button(onClick = { viewModel.setGenre("pop") }) {
-                            Text("Pop")
+                            Text(stringResource(R.string.pop))
                         }
                     }
                     Spacer(modifier = Modifier.height(8.dp))
@@ -295,13 +296,13 @@ fun SpeakerScreen(
                         horizontalArrangement = Arrangement.SpaceAround
                     ) {
                         Button(onClick = { viewModel.setGenre("latina") }) {
-                            Text("Latina")
+                            Text(stringResource(R.string.latina))
                         }
                         Button(onClick = { viewModel.setGenre("classical") }) {
-                            Text("Classical")
+                            Text(stringResource(R.string.classical))
                         }
                         Button(onClick = { viewModel.setGenre("country") }) {
-                            Text("Country")
+                            Text(stringResource(R.string.country))
                         }
                     }
                 }
@@ -309,7 +310,7 @@ fun SpeakerScreen(
 
             //Playlist
             if (status != SpeakerStatus.STOPPED){
-                Text("Playlist", fontSize = 20.sp, fontWeight = FontWeight.Bold)
+                Text(stringResource(R.string.playlist), fontSize = 20.sp, fontWeight = FontWeight.Bold)
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -324,7 +325,7 @@ fun SpeakerScreen(
                         horizontalAlignment = Alignment.CenterHorizontally
                     ){
                         Text(
-                            text = "Songs in playlist",
+                            text = stringResource(R.string.songs_play),
                             color = colorResource(id = R.color.white),
                             fontSize = 20.sp,
                             fontWeight = FontWeight.Bold
@@ -343,7 +344,7 @@ fun SpeakerScreen(
                                 )
                             }
                         } ?: run {
-                            Text("No songs in playlist.")
+                            Text(stringResource(R.string.no_songs))
                         }
                     }
                 }

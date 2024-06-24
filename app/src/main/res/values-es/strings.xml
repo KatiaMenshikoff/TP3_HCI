@@ -42,6 +42,27 @@
         <string name="quantity">Cantidad</string>
         <string name="unit">Unidad</string>
         <string name="dispense_water">DISPENSAR AGUA</string>
-
+        <!--Speaker-->
+        <string name="play">PLAY</string>
+        <string name="stop">STOP</string>
+        <string name="not_playing">No se está reproduciendo</string>
+        <string name="now_playing">Se está reproduciendo</string>
+        <string name="progress">Progreso:    </string>
+        <string name="duration">Duracion:    </string>
+        <string name="volume">Volumen</string>
+        <string name="genre">Generos</string>
+        <string name="rock">Rock</string>
+        <string name="dance">Dance</string>
+        <string name="pop">Pop</string>
+        <string name="latina">Latina</string>
+        <string name="classical">Clasica</string>
+        <string name="country">Country</string>
+        <string name="song">Canción</string>
+        <string name="artist">Artista</string>
+        <string name="album">Album</string>
+        <string name="playlist">Lista de reproduccion</string>
+        <string name="no_songs">Sin canciones en la lista</string>
+        <string name="songs_play">Canciones en la lista</string>
+        <string name="no_data">SIN DATOS</string>
 
 </resources>

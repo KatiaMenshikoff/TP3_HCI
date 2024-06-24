@@ -45,5 +45,27 @@
     <string name="unit">Unit</string>
     <string name="dispense_water">DISPENSE WATER</string>
 
+    <!--Speaker-->
+    <string name="play">PLAY</string>
+    <string name="stop">STOP</string>
+    <string name="not_playing">Not Playing</string>
+    <string name="now_playing">Now Playing</string>
 
+    <string name="progress">Progress:    </string>
+    <string name="duration">Duration:    </string>
+    <string name="volume">Volume</string>
+    <string name="genre">Genres</string>
+    <string name="rock">Rock</string>
+    <string name="dance">Dance</string>
+    <string name="pop">Pop</string>
+    <string name="latina">Latina</string>
+    <string name="classical">Classical</string>
+    <string name="country">Country</string>
+    <string name="song">Song</string>
+    <string name="artist">Artist</string>
+    <string name="album">Album</string>
+    <string name="playlist">Playlist</string>
+    <string name="no_songs">No songs in playlist</string>
+    <string name="songs_play">Songs in playlist</string>
+    <string name="no_data">NO DATA</string>
 </resources>

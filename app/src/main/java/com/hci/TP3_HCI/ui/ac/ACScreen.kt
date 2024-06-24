@@ -46,7 +46,7 @@ fun ACScreen(
                 .background(colorResource(R.color.background))
                 .padding(16.dp)
         ) {
-            // Device Name and Controls
+            // Device Name and Status
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -54,11 +54,23 @@ fun ACScreen(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
+                // Title
                 Text(
-                    text = uiState.currentDevice?.name ?: stringResource(R.string.no_data),
-                    fontSize = 24.sp,
-                    fontWeight = FontWeight.Bold
+                    text = uiState.currentDevice?.name ?: stringResource(id = R.string.no_data),
+                    style = MaterialTheme.typography.headlineLarge,
+                    fontWeight = FontWeight.Bold,
                 )
+                Icon(painter = painterResource(id = R.drawable.icon_ac), contentDescription = "AC Icon",
+                    tint = Color.Gray, modifier = Modifier.size(40.dp))
+            }
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(stringResource(R.string.status), fontSize = 18.sp)
                 Switch(
                     checked = ACStatus,
                     onCheckedChange = {

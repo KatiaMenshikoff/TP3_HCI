@@ -64,14 +64,13 @@ fun SpeakerScreen(
 
     val uiState by viewModel.uiState.collectAsState()
 
-    var userVolume by remember{mutableStateOf(0f)}
+    var userVolume by remember { mutableStateOf(0f) }
 
     LaunchedEffect(deviceId) {
         viewModel.setCurrentDevice(deviceId)
         viewModel.startPeriodicUpdates(deviceId) // Iniciar actualizaciones periódicas
         viewModel.getPlaylist()
     }
-
 
     LazyColumn(
         modifier = Modifier
@@ -80,32 +79,33 @@ fun SpeakerScreen(
             .padding(16.dp, 16.dp, 16.dp, bottom = 80.dp)
     ) {
         item {
+
+            // Device Name and Status
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(bottom = 16.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
+                    .padding(vertical = 8.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.icon_device),
-                        contentDescription = "Speaker",
-                        tint = Color.Black
-                    )
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Text(
-                        uiState.currentDevice?.name ?: stringResource(R.string.no_data),
-                        fontSize = 24.sp,
-                        fontWeight = FontWeight.Bold
-                    )
-                }
+                // Title
+                Text(
+                    text = uiState.currentDevice?.name ?: stringResource(id = R.string.no_data),
+                    style = MaterialTheme.typography.headlineLarge,
+                    fontWeight = FontWeight.Bold,
+                )
+                Icon(
+                    painter = painterResource(id = R.drawable.icon_speaker),
+                    contentDescription = "Speaker Icon",
+                    tint = Color.Gray,
+                    modifier = Modifier.size(40.dp)
+                )
             }
 
-            var genre = uiState.currentDevice?.genre ?: stringResource(R.string.no_data)
-            var status = uiState.currentDevice?.status ?: stringResource(R.string.no_data)
-            var playback =
-                if (genre == null || status == SpeakerStatus.STOPPED) stringResource(R.string.not_playing) else ( stringResource(R.string.now_playing) +" " + genre)
+            val genre = uiState.currentDevice?.genre ?: stringResource(R.string.no_data)
+            val status = uiState.currentDevice?.status ?: stringResource(R.string.no_data)
+            val playback =
+                if (genre == null || status == SpeakerStatus.STOPPED) stringResource(R.string.not_playing) else (stringResource(R.string.now_playing) + " " + genre)
 
             // Playback
             Row(
@@ -116,17 +116,17 @@ fun SpeakerScreen(
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text = "$playback",
+                    text = playback,
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold
                 )
                 if (status == SpeakerStatus.STOPPED) {
                     Button(onClick = { viewModel.play() }) {
-                        Text(text =  stringResource(R.string.play) )
+                        Text(text = stringResource(R.string.play))
                     }
                 } else {
                     Button(onClick = { viewModel.stop() }) {
-                        Text(text =  stringResource(R.string.stop) )
+                        Text(text = stringResource(R.string.stop))
                     }
                 }
             }
@@ -143,12 +143,12 @@ fun SpeakerScreen(
                             shape = RoundedCornerShape(12.dp)
                         ),
                     contentAlignment = Alignment.Center
-                    ) {
-                        Column(
+                ) {
+                    Column(
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         Text(
-                            uiState.currentDevice?.song?.title ?:stringResource(R.string.not_playing),
+                            uiState.currentDevice?.song?.title ?: stringResource(R.string.not_playing),
                             color = Color.White,
                             fontSize = 20.sp,
                             fontWeight = FontWeight.Bold,
@@ -221,7 +221,7 @@ fun SpeakerScreen(
                                 fontSize = 14.sp
                             )
                             Text(
-                                text =stringResource(R.string.duration) + (uiState.currentDevice?.song?.duration
+                                text = stringResource(R.string.duration) + (uiState.currentDevice?.song?.duration
                                     ?: stringResource(R.string.not_playing)),
                                 color = Color.White,
                                 fontSize = 14.sp
@@ -275,7 +275,6 @@ fun SpeakerScreen(
                 Text(stringResource(R.string.genre), fontSize = 20.sp, fontWeight = FontWeight.Bold)
                 Spacer(modifier = Modifier.height(6.dp))
                 Column {
-                    val genre = uiState.currentDevice?.genre
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceAround
@@ -306,10 +305,10 @@ fun SpeakerScreen(
                         }
                     }
                 }
-                }
+            }
 
-            //Playlist
-            if (status != SpeakerStatus.STOPPED){
+            // Playlist
+            if (status != SpeakerStatus.STOPPED) {
                 Text(stringResource(R.string.playlist), fontSize = 20.sp, fontWeight = FontWeight.Bold)
                 Box(
                     modifier = Modifier
@@ -323,7 +322,7 @@ fun SpeakerScreen(
                 ) {
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally
-                    ){
+                    ) {
                         Text(
                             text = stringResource(R.string.songs_play),
                             color = colorResource(id = R.color.white),
@@ -333,9 +332,9 @@ fun SpeakerScreen(
                         uiState.playlist?.let { playlist ->
                             playlist.forEach { song ->
                                 val songInfo = song as Map<String, String>
-                                //TODO traduccion a espaniol de la palabra "by"
+                                // TODO traduccion a espaniol de la palabra "by"
                                 Text(
-                                    text = "${songInfo["title"]}" + " by " + "${songInfo["artist"]}",
+                                    text = "${songInfo["title"]} by ${songInfo["artist"]}",
                                     color = colorResource(id = R.color.white),
                                     fontSize = 14.sp,
                                     maxLines = 1,
@@ -349,9 +348,6 @@ fun SpeakerScreen(
                     }
                 }
             }
-
-
         }
     }
 }
-

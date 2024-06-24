@@ -51,21 +51,23 @@ fun LampScreen(
                 .background(colorResource(R.color.background))
                 .padding(16.dp)
         ) {
+            // Device Name and Status
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(bottom = 16.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
+                    .padding(vertical = 8.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Icon(painter = painterResource(id = R.drawable.icon_lamp), contentDescription = "Light", tint = Color.Black)
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Text(uiState.currentDevice?.name ?: stringResource(R.string.my_light), fontSize = 24.sp, fontWeight = FontWeight.Bold)
-                }
+                // Title
+                Text(
+                    text = uiState.currentDevice?.name ?: stringResource(id = R.string.no_data),
+                    style = MaterialTheme.typography.headlineLarge,
+                    fontWeight = FontWeight.Bold,
+                )
+                Icon(painter = painterResource(id = R.drawable.icon_lamp), contentDescription = "Lamp Icon",
+                    tint = Color.Gray, modifier = Modifier.size(40.dp))
             }
-
-            Divider()
 
             Text(stringResource(R.string.options), fontSize = 20.sp, fontWeight = FontWeight.Bold, modifier = Modifier.padding(vertical = 8.dp))
 
@@ -76,7 +78,7 @@ fun LampScreen(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Text(stringResource(R.string.light_status), fontSize = 18.sp)
+                Text(stringResource(R.string.status), fontSize = 18.sp)
                 Switch(
                     checked = lightStatus,
                     onCheckedChange = {

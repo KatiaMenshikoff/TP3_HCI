@@ -36,7 +36,7 @@ class SprinklerViewModel(
         viewModelScope.launch {
             while (true) {
                 updateDevice(deviceId)
-                delay(100)
+                delay(500)
             }
         }
     }

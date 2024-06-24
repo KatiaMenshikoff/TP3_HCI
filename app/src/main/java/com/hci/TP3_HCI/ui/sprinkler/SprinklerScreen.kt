@@ -54,12 +54,12 @@ fun SprinklerScreen(
             ) {
                 // Title
                 Text(
-                    text = stringResource(id = R.string.sprinkler_title),
+                    text = uiState.currentDevice?.name ?: stringResource(id = R.string.no_data),
                     style = MaterialTheme.typography.headlineLarge,
                     fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(bottom = 16.dp)
                 )
-                Icon(painter = painterResource(id = R.drawable.icon_sprinkler), contentDescription = "Sprinkler Icon", tint = Color.Gray)
+                Icon(painter = painterResource(id = R.drawable.icon_sprinkler), contentDescription = "Sprinkler Icon",
+                    tint = Color.Gray, modifier = Modifier.size(40.dp))
             }
 
             // Current status

@@ -50,7 +50,6 @@
     <string name="closed">Closed</string>
     <string name="dispensed">Dispensed: %1$s out of a total of %2$s</string>
 
-
     <!--Speaker-->
     <string name="play">PLAY</string>
     <string name="stop">STOP</string>
@@ -79,6 +78,6 @@
     <string name="options">Options</string>
     <string name="brightness">Brightness</string>
     <string name="my_light">My Light</string>
-    <string name="light_status">Light Status (on/off)</string>
 
+    <string name="status">Status (on/off)</string>
 </resources>

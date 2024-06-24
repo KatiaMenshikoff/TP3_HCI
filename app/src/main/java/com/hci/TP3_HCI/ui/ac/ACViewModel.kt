@@ -81,27 +81,27 @@ class ACViewModel(
         { state, _ -> state }
     )
 
-      fun setFanSpeed(speed: String) = runOnViewModelScope(
+    fun setFanSpeed(speed: String) = runOnViewModelScope(
         { repository.executeDeviceAction(uiState.value.currentDevice?.id!!, AC.SET_FAN_SPEED_ACTION, arrayOf(speed))},
         { state, _ -> state }
     )
 
     fun getNextSpeed(currentSpeed: String): String {
-    val index = funSpeeds.indexOf(currentSpeed)
-    return if (index == -1 || index == funSpeeds.size - 1) {
-        currentSpeed
-    } else {
-        funSpeeds[index + 1]
-    }
+        val index = funSpeeds.indexOf(currentSpeed)
+        return if (index == -1 || index == funSpeeds.size - 1) {
+            currentSpeed
+        } else {
+            funSpeeds[index + 1]
+        }
     }
 
     fun getPreviousSpeed(currentSpeed: String): String {
-    val index = funSpeeds.indexOf(currentSpeed)
-    return if (index <= 0) {
-        currentSpeed
-    } else {
-        funSpeeds[index - 1]
-    }
+        val index = funSpeeds.indexOf(currentSpeed)
+        return if (index <= 0) {
+            currentSpeed
+        } else {
+            funSpeeds[index - 1]
+        }
     }
 
 
@@ -115,21 +115,21 @@ class ACViewModel(
     }
 
     fun getVerticalPrevious(currentSwing: String): String {
-    val index = verticalSwing.indexOf(currentSwing)
-    return if (index <= 0) {
-        currentSwing
-    } else {
-        verticalSwing[index - 1]
-    }
+        val index = verticalSwing.indexOf(currentSwing)
+        return if (index <= 0) {
+            currentSwing
+        } else {
+            verticalSwing[index - 1]
+        }
     }
 
     fun getHorizontalNext(currentSwing: String): String {
-    val index = horizontalSwing.indexOf(currentSwing)
-    return if (index == -1 || index == horizontalSwing.size - 1) {
-        currentSwing
-    } else {
-        horizontalSwing[index + 1]
-    }
+        val index = horizontalSwing.indexOf(currentSwing)
+        return if (index == -1 || index == horizontalSwing.size - 1) {
+            currentSwing
+        } else {
+            horizontalSwing[index + 1]
+        }
     }
 
     fun getHorizontalPrevious(currentSwing: String): String {

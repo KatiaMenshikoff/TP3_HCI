@@ -35,7 +35,7 @@ class SpeakerViewModel(
             while (true) {
                 updateDevice(deviceId)
                 getPlaylist()
-                delay(100)
+                delay(500)
             }
         }
     }

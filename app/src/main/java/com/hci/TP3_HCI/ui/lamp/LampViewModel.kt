@@ -35,7 +35,7 @@ class LampViewModel(
         viewModelScope.launch {
             while (true) {
                 updateDevice(deviceId)
-                delay(100) // Espera 5 segundos antes de la próxima actualización
+                delay(500) // Espera 5 segundos antes de la próxima actualización
             }
         }
     }

@@ -34,10 +34,8 @@ fun LampScreen(
 
     val uiState by viewModel.uiState.collectAsState()
 
-    // Predefined list of colors
-    val predefinedColors = listOf(Color.Red, Color.Green, Color.Blue, Color.Yellow, Color.Cyan, Color.Magenta)
+    val predefinedColors = listOf(Color.Red, Color.Green, Color.White, Color.Yellow, Color.Cyan, Color.Magenta)
 
-    // Initialize lightColor based on current device color
     var lightColor by remember {
         mutableStateOf(predefinedColors.find { it.toHex() == uiState.currentDevice?.color } ?: Color.Red)
     }
@@ -52,7 +50,6 @@ fun LampScreen(
                 .background(colorResource(R.color.background))
                 .padding(16.dp)
         ) {
-            // Top bar with navigation and actions
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -71,7 +68,6 @@ fun LampScreen(
 
             Text("Options", fontSize = 20.sp, fontWeight = FontWeight.Bold, modifier = Modifier.padding(vertical = 8.dp))
 
-            // Light status switch
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -98,7 +94,6 @@ fun LampScreen(
             }
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Light image with changing background color
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -142,9 +137,9 @@ fun LampScreen(
                     value = lightIntensity,
                     onValueChange = {
                         lightIntensity = it
-                        viewModel.setBrightness(it) // Call setBrightness with the new value
+                        viewModel.setBrightness(it)
                     },
-                    valueRange = 0f..100f, // Set the range for the slider
+                    valueRange = 0f..100f,
                     colors = SliderDefaults.colors(
                         thumbColor = colorResource(id = R.color.pinkMenu),
                         activeTrackColor = colorResource(id = R.color.button),

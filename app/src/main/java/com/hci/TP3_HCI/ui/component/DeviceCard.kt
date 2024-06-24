@@ -24,7 +24,8 @@ import com.hci.TP3_HCI.model.DeviceType
 @Composable
 fun DeviceCard(
     device: Device,
-    onClick: () -> Unit
+    onSelectDevice: () -> Unit,
+    onNavigateToDevice: () -> Unit,
 ) {
     val deviceTypeNames = mapOf(
         DeviceType.LAMP to R.string.views_lamp_name,
@@ -41,7 +42,8 @@ fun DeviceCard(
             .padding(16.dp)
             .height(100.dp)
             .clickable {
-                onClick()
+                onSelectDevice()
+                onNavigateToDevice()
             }
     ) {
         Row(
@@ -74,4 +76,3 @@ fun DeviceCard(
         }
     }
 }
-

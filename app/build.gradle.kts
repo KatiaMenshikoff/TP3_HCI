@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.mobileapp"
+    namespace = "com.hci.TP3_HCI"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.mobileapp"
+        applicationId ="com.hci.TP3_HCI"
         minSdk = 24
         targetSdk = 34
         versionCode = 1

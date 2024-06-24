@@ -68,4 +68,10 @@
     <string name="no_songs">No songs in playlist</string>
     <string name="songs_play">Songs in playlist</string>
     <string name="no_data">NO DATA</string>
+
+    <!--LAMP-->
+    <string name="options">Options</string>
+    <string name="brightness">Brightness</string>
+    <string name="my_light">My Light</string>
+    <string name="light_status">Light Status (on/off)</string>
 </resources>

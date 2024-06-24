@@ -65,4 +65,9 @@
         <string name="songs_play">Canciones en la lista</string>
         <string name="no_data">SIN DATOS</string>
 
+        <!--LAMP -->
+        <string name="options">Opciones</string>
+        <string name="brightness">Intensidad</string>
+        <string name="my_light">Mi Lámpara</string>
+        <string name="light_status">Estado (encendido/apagado)</string>
 </resources>

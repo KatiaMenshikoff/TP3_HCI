@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -60,13 +61,13 @@ fun LampScreen(
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Icon(painter = painterResource(id = R.drawable.icon_lamp), contentDescription = "Light", tint = Color.Black)
                     Spacer(modifier = Modifier.width(8.dp))
-                    Text(uiState.currentDevice?.name ?: "My Light", fontSize = 24.sp, fontWeight = FontWeight.Bold)
+                    Text(uiState.currentDevice?.name ?: stringResource(R.string.my_light), fontSize = 24.sp, fontWeight = FontWeight.Bold)
                 }
             }
 
             Divider()
 
-            Text("Options", fontSize = 20.sp, fontWeight = FontWeight.Bold, modifier = Modifier.padding(vertical = 8.dp))
+            Text(stringResource(R.string.options), fontSize = 20.sp, fontWeight = FontWeight.Bold, modifier = Modifier.padding(vertical = 8.dp))
 
             Row(
                 modifier = Modifier
@@ -75,7 +76,7 @@ fun LampScreen(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Text("Light Status (on/off)", fontSize = 18.sp)
+                Text("", fontSize = 18.sp)
                 Switch(
                     checked = lightStatus,
                     onCheckedChange = {
@@ -126,7 +127,7 @@ fun LampScreen(
             Spacer(modifier = Modifier.height(16.dp))
 
             // Light intensity slider
-            Text("Brightness", fontSize = 20.sp, fontWeight = FontWeight.Bold)
+            Text(stringResource(R.string.brightness), fontSize = 20.sp, fontWeight = FontWeight.Bold)
             Spacer(modifier = Modifier.height(8.dp))
             Row(
                 modifier = Modifier.fillMaxWidth(),

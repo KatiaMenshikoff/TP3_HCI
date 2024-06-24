@@ -55,7 +55,7 @@ fun ACScreen(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = uiState.currentDevice?.name ?: "NO DATA",
+                    text = uiState.currentDevice?.name ?: stringResource(R.string.no_data),
                     fontSize = 24.sp,
                     fontWeight = FontWeight.Bold
                 )

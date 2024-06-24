@@ -76,7 +76,7 @@ fun LampScreen(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Text("", fontSize = 18.sp)
+                Text(stringResource(R.string.light_status), fontSize = 18.sp)
                 Switch(
                     checked = lightStatus,
                     onCheckedChange = {

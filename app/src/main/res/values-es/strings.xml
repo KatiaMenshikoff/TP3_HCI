@@ -35,18 +35,21 @@
         <string name="decrease">Disminuir</string>
         <string name="increase">Aumentar</string>
         <string name="more_options">Más Opciones</string>
+
         <!-- New strings for Sprinkler screen -->
         <string name="sprinkler_title">Aspersor</string>
-        <string name="current_status">Estado actual: %1$s</string>
+        <string name="current_status">Estado actual:  %1$s</string>
         <string name="pump_water">Bombear agua</string>
         <string name="quantity">Cantidad</string>
         <string name="unit">Unidad</string>
         <string name="dispense_water">DISPENSAR AGUA</string>
+        <string name="open">Abierto</string>
+        <string name="closed">Cerrado</string>
         <!--Speaker-->
         <string name="play">PLAY</string>
         <string name="stop">STOP</string>
         <string name="not_playing">No se está reproduciendo</string>
-        <string name="now_playing">Se está reproduciendo</string>
+        <string name="now_playing">Se está reproduciendo </string>
         <string name="progress">Progreso:    </string>
         <string name="duration">Duracion:    </string>
         <string name="volume">Volumen</string>

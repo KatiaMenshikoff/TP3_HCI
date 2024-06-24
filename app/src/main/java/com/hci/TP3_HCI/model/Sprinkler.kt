@@ -1,8 +1,8 @@
 package com.hci.TP3_HCI.model
 
 import com.hci.TP3_HCI.remote.model.RemoteDevice
-import com.hci.TP3_HCI.remote.model.devices.RemoteSprinkler
-import com.hci.TP3_HCI.remote.model.devices.RemoteSprinklerState
+import com.hci.TP3_HCI.remote.model.devices.sprinkler.RemoteSprinkler
+import com.hci.TP3_HCI.remote.model.devices.sprinkler.RemoteSprinklerState
 
 class Sprinkler(
     id: String?,

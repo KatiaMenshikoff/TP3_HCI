@@ -25,10 +25,6 @@ class DevicesViewModel(
         ) { state, response -> state.copy(devices = response) }
     }
 
-    fun setCurrentDeviceId(deviceId: String?) {
-        repository.setCurrentDeviceId(deviceId)
-    }
-
     private fun <T> collectOnViewModelScope(
         flow: Flow<T>,
         updateState: (DevicesUiState, T) -> DevicesUiState

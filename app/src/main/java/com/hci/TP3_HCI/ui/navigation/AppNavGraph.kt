@@ -2,13 +2,15 @@ package com.hci.TP3_HCI.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
+import com.example.mobileapp.ui.views.SettingsScreen
 import com.hci.TP3_HCI.ui.ac.ACScreen
 import com.hci.TP3_HCI.ui.views.HomeScreen
 import com.hci.TP3_HCI.ui.devices.DevicesScreen
 import com.hci.TP3_HCI.ui.lamp.LampScreen
-import com.hci.TP3_HCI.ui.settings.SettingsScreen
 import com.hci.TP3_HCI.ui.speaker.SpeakerScreen
 import com.hci.TP3_HCI.ui.sprinkler.SprinklerScreen
 
@@ -24,33 +26,52 @@ fun AppNavGraph(navController: NavHostController) {
         composable(route = AppDestinations.DEVICES.route) {
             DevicesScreen(
                 onNavigateToLamp = {
-                    navController.navigate(route = AppDestinations.LAMP.route)
+                    deviceId ->
+                    navController.navigate(route = "${AppDestinations.LAMP.route}/$deviceId")
                 },
                 onNavigateToAC = {
-                    navController.navigate(route = AppDestinations.AC.route)
+                    deviceId ->
+                    navController.navigate(route = "${AppDestinations.AC.route}/$deviceId")
                 },
                 onNavigateToSpeaker = {
-                    navController.navigate(route = AppDestinations.SPEAKER.route)
+                    deviceId ->
+                    navController.navigate(route = "${AppDestinations.SPEAKER.route}/$deviceId")
                 },
                 onNavigateToSprinkler = {
-                    navController.navigate(route = AppDestinations.SPRINKLER.route)
+                    deviceId ->
+                    navController.navigate(route = "${AppDestinations.SPRINKLER.route}/$deviceId")
                 }
             )
         }
-        composable(route = AppDestinations.LAMP.route) {
-            LampScreen()
+        composable(route = "${AppDestinations.LAMP.route}/{deviceId}",
+            arguments = listOf(navArgument("deviceId") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val deviceId = backStackEntry.arguments?.getString("deviceId")
+            LampScreen(deviceId = deviceId!!)
         }
-        composable(route = AppDestinations.AC.route) {
-            ACScreen()
+        composable(route = "${AppDestinations.AC.route}/{deviceId}",
+            arguments = listOf(navArgument("deviceId") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val deviceId = backStackEntry.arguments?.getString("deviceId")
+            ACScreen(deviceId = deviceId!!)
         }
-        composable(route = AppDestinations.SPEAKER.route) {
-           SpeakerScreen()
+        composable(route = "${AppDestinations.SPEAKER.route}/{deviceId}",
+            arguments = listOf(navArgument("deviceId") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val deviceId = backStackEntry.arguments?.getString("deviceId")
+            SpeakerScreen(deviceId = deviceId!!)
         }
-        composable(route = AppDestinations.SPRINKLER.route){
-            SprinklerScreen()
+        composable(route = "${AppDestinations.SPRINKLER.route}/{deviceId}",
+            arguments = listOf(navArgument("deviceId") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val deviceId = backStackEntry.arguments?.getString("deviceId")
+            SprinklerScreen(deviceId = deviceId!!)
         }
         composable(route = AppDestinations.SETTINGS.route){
-            SettingsScreen()
+            SettingsScreen(
+                onBack = { navController.popBackStack() },
+                onLanguageChange = { /* Aquí puedes manejar el cambio de idioma si es necesario */ }
+            )
         }
     }
 }

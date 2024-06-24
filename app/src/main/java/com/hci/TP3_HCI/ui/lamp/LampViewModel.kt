@@ -5,8 +5,10 @@ import androidx.lifecycle.viewModelScope
 import com.hci.TP3_HCI.DataSourceException
 import com.hci.TP3_HCI.model.Error
 import com.hci.TP3_HCI.model.Lamp
+import com.hci.TP3_HCI.model.Speaker
 import com.hci.TP3_HCI.repository.DeviceRepository
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -22,10 +24,25 @@ class LampViewModel(
     private val _uiState = MutableStateFlow(LampUiState())
     val uiState = _uiState.asStateFlow()
 
-    init {
-        collectOnViewModelScope(
-            repository.currentDevice
-        ) { state, response -> state.copy(currentDevice = response as Lamp?) }
+    fun setCurrentDevice(deviceId: String){
+        runOnViewModelScope(
+            { repository.getDevice(deviceId) },
+            { state, response -> state.copy(currentDevice = response as Lamp?) }
+        )
+    }
+
+    fun startPeriodicUpdates(deviceId: String) {
+        viewModelScope.launch {
+            while (true) {
+                updateDevice(deviceId)
+                delay(5000) // Espera 5 segundos antes de la próxima actualización
+            }
+        }
+    }
+
+    private suspend fun updateDevice(deviceId: String) {
+        val device = repository.getDevice(deviceId)
+        _uiState.update { it.copy(currentDevice = device as Lamp?) }
     }
 
     fun getDevice(deviceId: String) = runOnViewModelScope(

@@ -5,8 +5,8 @@ import androidx.lifecycle.viewModelScope
 import com.hci.TP3_HCI.DataSourceException
 import com.hci.TP3_HCI.model.Error
 import com.hci.TP3_HCI.model.Lamp
+import com.hci.TP3_HCI.model.Speaker
 import com.hci.TP3_HCI.repository.DeviceRepository
-import com.hci.TP3_HCI.ui.lamp.LampUiState
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,19 +15,59 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.delay
 
 class SpeakerViewModel(
     private val repository: DeviceRepository
 ) : ViewModel() {
-
-    private val _uiState = MutableStateFlow(LampUiState())
+    private val _uiState = MutableStateFlow(SpeakerUiState())
     val uiState = _uiState.asStateFlow()
 
-    init {
-        collectOnViewModelScope(
-            repository.currentDevice
-        ) { state, response -> state.copy(currentDevice = response as Lamp?) }
+    fun setCurrentDevice(deviceId: String){
+        runOnViewModelScope(
+            { repository.getDevice(deviceId) },
+            { state, response -> state.copy(currentDevice = response as Speaker?) }
+        )
     }
+
+    fun startPeriodicUpdates(deviceId: String) {
+        viewModelScope.launch {
+            while (true) {
+                updateDevice(deviceId)
+                delay(1000) // Espera 5 segundos antes de la próxima actualización
+            }
+        }
+    }
+
+    private suspend fun updateDevice(deviceId: String) {
+        val device = repository.getDevice(deviceId)
+        _uiState.update { it.copy(currentDevice = device as Speaker?) }
+    }
+
+    fun setGenre(newGenre: String) = runOnViewModelScope(
+        { repository.executeDeviceAction(uiState.value.currentDevice?.id!!, "setGenre", arrayOf(newGenre)) },
+        { state, _ -> state }
+    )
+
+    fun setVolume(volume: Float) = runOnViewModelScope(
+        { repository.executeDeviceAction(uiState.value.currentDevice?.id!!, "setVolume", arrayOf(volume)) },
+        { state, _ -> state }
+    )
+
+    fun play() = runOnViewModelScope(
+        { repository.executeDeviceAction(uiState.value.currentDevice?.id!!, "play") },
+        { state, _ -> state }
+    )
+
+    fun pause() = runOnViewModelScope(
+        { repository.executeDeviceAction(uiState.value.currentDevice?.id!!, "pause") },
+        { state, _ -> state }
+    )
+
+    fun getPlaylist() = runOnViewModelScope(
+        { repository.executeDeviceAction(uiState.value.currentDevice?.id!!, "getPlaylist") },
+        { state, response -> state.copy(playlist = response) }
+    )
 
     fun turnOn() = runOnViewModelScope(
         { repository.executeDeviceAction(uiState.value.currentDevice?.id!!, Lamp.TURN_ON_ACTION) },
@@ -41,7 +81,7 @@ class SpeakerViewModel(
 
     private fun <T> collectOnViewModelScope(
         flow: Flow<T>,
-        updateState: (LampUiState, T) -> LampUiState
+        updateState: (SpeakerUiState, T) -> SpeakerUiState
     ) = viewModelScope.launch {
         flow
             .distinctUntilChanged()
@@ -51,7 +91,7 @@ class SpeakerViewModel(
 
     private fun <R> runOnViewModelScope(
         block: suspend () -> R,
-        updateState: (LampUiState, R) -> LampUiState
+        updateState: (SpeakerUiState, R) -> SpeakerUiState
     ): Job = viewModelScope.launch {
         _uiState.update { it.copy(loading = true, error = null) }
         runCatching {

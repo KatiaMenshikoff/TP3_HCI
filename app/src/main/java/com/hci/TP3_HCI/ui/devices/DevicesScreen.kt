@@ -23,10 +23,10 @@ import com.hci.TP3_HCI.model.DeviceType
 
 @Composable
 fun DevicesScreen(
-    onNavigateToLamp: () -> Unit,
-    onNavigateToAC: () -> Unit,
-    onNavigateToSpeaker: () -> Unit,
-    onNavigateToSprinkler: () -> Unit,
+    onNavigateToLamp: (deviceId: String) -> Unit,
+    onNavigateToAC: (deviceId: String) -> Unit,
+    onNavigateToSpeaker: (deviceId: String) -> Unit,
+    onNavigateToSprinkler: (deviceId: String) -> Unit,
     viewModel: DevicesViewModel = viewModel(factory = getViewModelFactory()),
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -40,7 +40,7 @@ fun DevicesScreen(
 
     LazyVerticalGrid(
         columns = GridCells.Adaptive(minSize = 196.dp),
-        modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp)
+        modifier = Modifier.padding(top = 16.dp, start = 16.dp, bottom = 70.dp, end = 16.dp)
     ) {
         items(
             count = uiState.devices.size,
@@ -48,10 +48,10 @@ fun DevicesScreen(
                 uiState.devices[index].id!!
             }
         ) { index ->
+            val device = uiState.devices[index]
             DeviceCard(
                 device = uiState.devices[index],
-                onSelectDevice = { viewModel.setCurrentDeviceId(uiState.devices[index].id) },
-                onNavigateToDevice = deviceScreens[uiState.devices[index].type]!!
+                onClick = { deviceScreens[device.type]?.invoke(device.id!!) }
             )
         }
     }

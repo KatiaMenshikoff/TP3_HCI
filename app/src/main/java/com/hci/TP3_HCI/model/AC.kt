@@ -1,8 +1,8 @@
 package com.hci.TP3_HCI.model
 
 import com.hci.TP3_HCI.remote.model.RemoteDevice
-import com.hci.TP3_HCI.remote.model.devices.RemoteAC
-import com.hci.TP3_HCI.remote.model.devices.RemoteACState
+import com.hci.TP3_HCI.remote.model.devices.ac.RemoteAC
+import com.hci.TP3_HCI.remote.model.devices.ac.RemoteACState
 
 class AC(
     id: String?,

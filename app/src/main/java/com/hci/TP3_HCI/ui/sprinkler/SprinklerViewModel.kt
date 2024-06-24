@@ -5,9 +5,11 @@ import androidx.lifecycle.viewModelScope
 import com.hci.TP3_HCI.DataSourceException
 import com.hci.TP3_HCI.model.Error
 import com.hci.TP3_HCI.model.Lamp
+import com.hci.TP3_HCI.model.Speaker
+import com.hci.TP3_HCI.model.Sprinkler
 import com.hci.TP3_HCI.repository.DeviceRepository
-import com.hci.TP3_HCI.ui.lamp.LampUiState
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -20,13 +22,28 @@ class SprinklerViewModel(
     private val repository: DeviceRepository
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow(LampUiState())
+    private val _uiState = MutableStateFlow(SprinklerUiState())
     val uiState = _uiState.asStateFlow()
 
-    init {
-        collectOnViewModelScope(
-            repository.currentDevice
-        ) { state, response -> state.copy(currentDevice = response as Lamp?) }
+    fun setCurrentDevice(deviceId: String){
+        runOnViewModelScope(
+            { repository.getDevice(deviceId) },
+            { state, response -> state.copy(currentDevice = response as Sprinkler?) }
+        )
+    }
+
+    fun startPeriodicUpdates(deviceId: String) {
+        viewModelScope.launch {
+            while (true) {
+                updateDevice(deviceId)
+                delay(5000) // Espera 5 segundos antes de la próxima actualización
+            }
+        }
+    }
+
+    private suspend fun updateDevice(deviceId: String) {
+        val device = repository.getDevice(deviceId)
+        _uiState.update { it.copy(currentDevice = device as Sprinkler?) }
     }
 
     fun turnOn() = runOnViewModelScope(
@@ -41,7 +58,7 @@ class SprinklerViewModel(
 
     private fun <T> collectOnViewModelScope(
         flow: Flow<T>,
-        updateState: (LampUiState, T) -> LampUiState
+        updateState: (SprinklerUiState, T) -> SprinklerUiState
     ) = viewModelScope.launch {
         flow
             .distinctUntilChanged()
@@ -51,7 +68,7 @@ class SprinklerViewModel(
 
     private fun <R> runOnViewModelScope(
         block: suspend () -> R,
-        updateState: (LampUiState, R) -> LampUiState
+        updateState: (SprinklerUiState, R) -> SprinklerUiState
     ): Job = viewModelScope.launch {
         _uiState.update { it.copy(loading = true, error = null) }
         runCatching {

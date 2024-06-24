@@ -1,12 +1,8 @@
 package com.hci.TP3_HCI.ui.sprinkler
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -26,13 +22,12 @@ import com.hci.TP3_HCI.R
 @Composable
 fun SprinklerScreen(
     deviceId: String,
-    viewModel: SprinklerViewModel = viewModel(factory = getViewModelFactory()),
+//    viewModel: SprinklerViewModel = viewModel(factory = getViewModelFactory()),
 ) {
-    viewModel.setCurrentDevice(deviceId)
-    val uiState by viewModel.uiState.collectAsState()
+//    viewModel.setCurrentDevice(deviceId)
+//    val uiState by viewModel.uiState.collectAsState()
     var quantity by remember { mutableStateOf(0) }
     var unit by remember { mutableStateOf("ml") }
-    var expanded by remember { mutableStateOf(false) }
     var showInHome by remember { mutableStateOf(false) }
 
     Scaffold { paddingValues ->
@@ -43,14 +38,6 @@ fun SprinklerScreen(
                 .background(colorResource(R.color.background))
                 .padding(16.dp)
         ) {
-            // Title
-            Text(
-                text = stringResource(id = R.string.sprinkler_title),
-                style = MaterialTheme.typography.headlineLarge,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(bottom = 16.dp)
-            )
-
             // Device Name and Status
             Row(
                 modifier = Modifier
@@ -59,9 +46,18 @@ fun SprinklerScreen(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(text = "sprinkler", fontSize = 24.sp, fontWeight = FontWeight.Bold)
+                // Title
+                Text(
+                    text = stringResource(id = R.string.sprinkler_title),
+                    style = MaterialTheme.typography.headlineLarge,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(bottom = 16.dp)
+                )
                 Icon(painter = painterResource(id = R.drawable.icon_sprinkler), contentDescription = "Sprinkler Icon", tint = Color.Gray)
+
             }
+
+
             Text(
                 text = stringResource(id = R.string.current_status, "closed"),
                 fontSize = 16.sp,
@@ -72,14 +68,7 @@ fun SprinklerScreen(
 
             // Pump Water Controls
             Spacer(modifier = Modifier.height(16.dp))
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(text = stringResource(id = R.string.pump_water), fontSize = 20.sp, fontWeight = FontWeight.Bold)
-                Icon(painter = painterResource(id = R.drawable.icon_water), contentDescription = "Water Icon", tint = Color.Gray)
-            }
+
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
@@ -91,39 +80,59 @@ fun SprinklerScreen(
                     label = { Text(text = stringResource(id = R.string.quantity)) },
                     modifier = Modifier.weight(1f)
                 )
-                Spacer(modifier = Modifier.width(8.dp))
-                Box(modifier = Modifier.weight(1f)) {
-                    TextField(
-                        value = unit,
-                        onValueChange = { unit = it },
-                        label = { Text(text = stringResource(id = R.string.unit)) },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clickable { expanded = true }
-                    )
-                    DropdownMenu(
-                        expanded = expanded,
-                        onDismissRequest = { expanded = false }
-                    ) {
-                        DropdownMenuItem(onClick = {
-                            unit = "ml"
-                            expanded = false
-                        }) {
-                            Text(text = "ml")
-                        }
-                        DropdownMenuItem(onClick = {
-                            unit = "l"
-                            expanded = false
-                        }) {
-                            Text(text = "l")
-                        }
-                    }
-                }
+
             }
+            Spacer(modifier = Modifier.width(15.dp))
+            Spacer(modifier = Modifier.height(16.dp))
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Button(
+                    onClick = { unit = "ml" },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = if (unit == "ml") colorResource(id = R.color.pinkButton) else Color.LightGray
+                    )
+                ) {
+                    Text(text = "ml", fontSize = 20.sp, color = Color.Black)
+                }
+                Spacer(modifier = Modifier.width(8.dp))
+                Button(
+                    onClick = { unit = "l" },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = if (unit == "l") colorResource(id = R.color.pinkButton) else Color.LightGray
+                    )
+                ) {
+                    Text(text = "l", fontSize = 20.sp, color = Color.Black)
+                }
+                Spacer(modifier = Modifier.width(8.dp))
+                Button(
+                    onClick = { unit = "cl" },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = if (unit == "cl") colorResource(id = R.color.pinkButton) else Color.LightGray
+                    )
+                ) {
+                    Text(text = "cl", fontSize = 20.sp, color = Color.Black)
+                }
+                Spacer(modifier = Modifier.width(8.dp))
+                Button(
+                    onClick = { unit = "dcl" },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = if (unit == "dcl") colorResource(id = R.color.pinkButton) else Color.LightGray
+                    )
+                ) {
+                    Text(text = "dcl", fontSize = 20.sp, color = Color.Black)
+                }
+
+        }
             Spacer(modifier = Modifier.height(16.dp))
             Button(
                 onClick = { /* handle dispense water */ },
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth() ,
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = colorResource(R.color.button)
+                ),
             ) {
                 Text(text = stringResource(id = R.string.dispense_water), fontSize = 20.sp, fontWeight = FontWeight.Bold)
             }
@@ -147,7 +156,7 @@ fun SprinklerScreen(
             Button(
                 onClick = { /* handle delete */ },
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = Color.Red
+                    containerColor = colorResource(R.color.button)
                 ),
                 modifier = Modifier.fillMaxWidth()
             ) {

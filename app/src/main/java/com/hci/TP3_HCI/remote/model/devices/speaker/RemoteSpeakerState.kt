@@ -7,7 +7,7 @@ class RemoteSpeakerState {
     lateinit var status: String
 
     @SerializedName("volume")
-    var volume: Int = 0
+    var volume: Float = 0f
 
     @SerializedName("genre")
     lateinit var genre: String

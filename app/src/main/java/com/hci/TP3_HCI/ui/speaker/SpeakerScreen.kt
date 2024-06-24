@@ -81,15 +81,13 @@ fun SpeakerScreen(
                 Icon(painter = painterResource(id = R.drawable.icon_device), contentDescription = "Speaker", tint = Color.Black)
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(uiState.currentDevice?.name ?: "NO DATA", fontSize = 24.sp, fontWeight = FontWeight.Bold)
-                Spacer(modifier = Modifier.width(8.dp))
-                Icon(painter = painterResource(id = R.drawable.icon_edit), contentDescription = "Edit", tint = Color.Gray, modifier = Modifier.size(20.dp))
             }
             IconButton(onClick = { /* Handle delete device */ }) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.spacedBy(4.dp)
                 ) {
-//                        Text("Delete device", color = Color.Red, fontSize = 12.sp)
+                    Text("Delete device", color = Color.Red, fontSize = 12.sp)
                     Icon(painter = painterResource(id = R.drawable.icon_delete), contentDescription = "Delete device", tint = Color.Red, modifier = Modifier.size(30.dp))
                 }
             }
@@ -150,8 +148,8 @@ fun SpeakerScreen(
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text("La Bestia Pop", color = Color.White, fontSize = 20.sp, fontWeight = FontWeight.Bold)
-                Text("Patricio Rey y sus Redonditos de ricota", color = Color.White, fontSize = 18.sp)
+                Text(uiState.currentDevice?.song?.title ?: "NO DATA", color = Color.White, fontSize = 20.sp, fontWeight = FontWeight.Bold)
+                Text(uiState.currentDevice?.song?.artist ?: "NO DATA", color = Color.White, fontSize = 18.sp)
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Center,
@@ -170,27 +168,12 @@ fun SpeakerScreen(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = uiState.currentDevice?.song?.progress ?: "NO DATA",
+                        text = "Progress:   " + (uiState.currentDevice?.song?.progress?: "NO DATA"),
                         color = Color.White,
                         fontSize = 14.sp
                     )
-                    Slider(
-                        //TODO funcion que convierta el formato del a api a un float (supongo que voy a necesitar una division para q quede una proporcion)
-//                            value = uiState.currentDevice?.song?.progress?.toFloat() ?: 0f,
-//                            onValueChange = { currentTime = it },
-//                            valueRange = 0f..(uiState.currentDevice?.song?.duration?.toFloat() ?: 0f),
-                        value = 0f,
-                        onValueChange = { /* Handle song progress change */ },
-                        valueRange = 0f..100f,
-                        colors = SliderDefaults.colors(
-                            thumbColor = colorResource(id = R.color.grey),
-                            activeTrackColor = colorResource(id = R.color.pinkMenu),
-                            inactiveTrackColor = Color.White
-                        ),
-                        modifier = Modifier.weight(1f)
-                    )
                     Text(
-                        text = uiState.currentDevice?.song?.duration ?: "NO DATA",
+                        text = "Duration:   " + (uiState.currentDevice?.song?.duration ?: "NO DATA"),
                         color = Color.White,
                         fontSize = 14.sp
                     )
@@ -209,7 +192,7 @@ fun SpeakerScreen(
             Icon(painter = painterResource(id = R.drawable.icon_volume), contentDescription = "Volume down", tint = Color.Gray)
             Icon(painter = painterResource(id = R.drawable.icon_minus), contentDescription = "Volume down", tint = Color.Gray)
             Slider(
-                value = 0.5f,
+                value = ( uiState.currentDevice?.volume ?: 0f ) / 10f,
                 onValueChange = { /* Handle volume change */ },
                 colors = SliderDefaults.colors(
                     thumbColor = colorResource(id = R.color.grey),

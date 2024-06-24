@@ -8,7 +8,7 @@ class Speaker(
     id: String?,
     name: String,
     val status: Status,
-    val volume: Int,
+    val volume: Float,
     val genre: String,
     val song: SpeakerSong,
 ) : Device(id, name, DeviceType.SPEAKER) {

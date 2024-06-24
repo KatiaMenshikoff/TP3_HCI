@@ -59,7 +59,7 @@
     <string name="progress">Progress:    </string>
     <string name="duration">Duration:    </string>
     <string name="volume">Volume</string>
-    <string name="genre">Genres</string>
+    <string name="genres">Genres</string>
     <string name="rock">Rock</string>
     <string name="dance">Dance</string>
     <string name="pop">Pop</string>
@@ -80,4 +80,5 @@
     <string name="my_light">My Light</string>
 
     <string name="status">Status (on/off)</string>
+    <string name="song_info">%1$s by %2$s</string>
 </resources>

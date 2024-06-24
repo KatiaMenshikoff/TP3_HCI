@@ -53,11 +53,11 @@
         <string name="play">PLAY</string>
         <string name="stop">STOP</string>
         <string name="not_playing">No se está reproduciendo</string>
-        <string name="now_playing">Se está reproduciendo </string>
+        <string name="now_playing">Reproduciendo</string>
         <string name="progress">Progreso:    </string>
         <string name="duration">Duracion:    </string>
         <string name="volume">Volumen</string>
-        <string name="genre">Generos</string>
+        <string name="genres">Generos</string>
         <string name="rock">Rock</string>
         <string name="dance">Dance</string>
         <string name="pop">Pop</string>
@@ -77,5 +77,6 @@
         <string name="brightness">Intensidad</string>
         <string name="my_light">Mi Lámpara</string>
 
-        <string name="status">Estado (encendido/apagado)</string>"
+        <string name="status">Estado (encendido/apagado)</string>
+        <string name="song_info">%1$s por %2$s</string>"
 </resources>

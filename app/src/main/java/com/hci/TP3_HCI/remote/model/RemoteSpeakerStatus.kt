@@ -11,7 +11,6 @@ object RemoteSpeakerStatus {
         return when (status) {
             PLAYING -> SpeakerStatus.PLAYING
             PAUSED -> SpeakerStatus.PAUSED
-            STOPPED -> SpeakerStatus.STOPPED
             else -> SpeakerStatus.STOPPED
         }
     }

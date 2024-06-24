@@ -19,7 +19,6 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.hci.TP3_HCI.R
-import com.hci.TP3_HCI.ui.component.BottomNavigationBar
 
 @Composable
 fun SpeakerDetailScreen(navController: NavHostController) {
@@ -30,7 +29,6 @@ fun SpeakerDetailScreen(navController: NavHostController) {
     val totalTime = 3.12f // tiempo total de la canción en minutos
 
     Scaffold (
-        bottomBar = { BottomNavigationBar() }
     ){ innerPadding ->
         Column(
             modifier = Modifier

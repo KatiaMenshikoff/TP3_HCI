@@ -1,6 +1,6 @@
 package com.hci.TP3_HCI.remote.api
 
-import com.hci.TP3_HCI.BuildConfig
+import com.hci.TP3_HCI.*
 import com.hci.TP3_HCI.remote.model.RemoteDevice
 import com.google.gson.GsonBuilder
 import com.hci.TP3_HCI.api.remote.api.DeviceTypeAdapter

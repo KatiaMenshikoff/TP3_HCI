@@ -34,6 +34,7 @@ class SpeakerViewModel(
         viewModelScope.launch {
             while (true) {
                 updateDevice(deviceId)
+                getPlaylist()
                 delay(100)
             }
         }

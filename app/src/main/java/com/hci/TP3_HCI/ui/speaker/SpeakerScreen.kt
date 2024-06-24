@@ -68,6 +68,7 @@ fun SpeakerScreen(
     LaunchedEffect(deviceId) {
         viewModel.setCurrentDevice(deviceId)
         viewModel.startPeriodicUpdates(deviceId) // Iniciar actualizaciones periódicas
+        viewModel.getPlaylist()
     }
 
 
@@ -141,8 +142,8 @@ fun SpeakerScreen(
                             shape = RoundedCornerShape(12.dp)
                         ),
                     contentAlignment = Alignment.Center
-                ) {
-                    Column(
+                    ) {
+                        Column(
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         Text(
@@ -206,7 +207,9 @@ fun SpeakerScreen(
                         }
                         Spacer(modifier = Modifier.height(4.dp))
                         Row(
-                            modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 16.dp),
                             horizontalArrangement = Arrangement.SpaceBetween,
                             verticalAlignment = Alignment.CenterVertically
                         ) {
@@ -268,7 +271,7 @@ fun SpeakerScreen(
 
             // Genre picker
             if (status != SpeakerStatus.STOPPED) {
-                Text("Genres", fontSize = 18.sp, fontWeight = FontWeight.Bold)
+                Text("Genres", fontSize = 20.sp, fontWeight = FontWeight.Bold)
                 Spacer(modifier = Modifier.height(6.dp))
                 Column {
                     val genre = uiState.currentDevice?.genre
@@ -304,28 +307,47 @@ fun SpeakerScreen(
                 }
                 }
 
-            // Playlist
-            Box(
-                modifier = Modifier.fillMaxSize()
-            ) {
-                Column(
-                    modifier = Modifier.verticalScroll(rememberScrollState())
+            //Playlist
+            if (status != SpeakerStatus.STOPPED){
+                Text("Playlist", fontSize = 20.sp, fontWeight = FontWeight.Bold)
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(175.dp)
+                        .background(
+                            color = colorResource(id = R.color.button),
+                            shape = RoundedCornerShape(12.dp)
+                        ),
+                    contentAlignment = Alignment.Center
                 ) {
-                    uiState.playlist?.let { playlist ->
-                        playlist.forEach { song ->
-                            val songInfo = song as Map<String, String>
-                            Text("Song: ${songInfo["song"]}")
-                            Text("Artist: ${songInfo["artist"]}")
-                            Text("Album: ${songInfo["album"]}")
-                            Text("Duration: ${songInfo["duration"]}")
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ){
+                        Text(
+                            text = "Songs in playlist",
+                            color = colorResource(id = R.color.white),
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                        uiState.playlist?.let { playlist ->
+                            playlist.forEach { song ->
+                                val songInfo = song as Map<String, String>
+                                //TODO traduccion a espaniol de la palabra "by"
+                                Text(
+                                    text = "${songInfo["title"]}" + " by " + "${songInfo["artist"]}",
+                                    color = colorResource(id = R.color.white),
+                                    fontSize = 14.sp,
+                                    maxLines = 1,
+                                    overflow = TextOverflow.Ellipsis,
+                                    modifier = Modifier.widthIn(max = 250.dp)
+                                )
+                            }
+                        } ?: run {
+                            Text("No songs in playlist.")
                         }
-                    } ?: run {
-                        Text("No songs in playlist.")
                     }
                 }
             }
-
-
 
 
         }

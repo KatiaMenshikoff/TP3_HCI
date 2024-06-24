@@ -9,8 +9,8 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        applicationId ="com.hci.TP3_HCI"
-        minSdk = 24
+        applicationId = "com.hci.TP3_HCI"
+        minSdk = 29
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -21,6 +21,10 @@ android {
         }
     }
 
+    buildFeatures{
+        buildConfig = true
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -28,6 +32,13 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            // CAMPO CONFIGURADO PARA CORRER EL ANDROID EN EMULADOR Y LA API EN LA COMPU EN LOCALHOST
+            buildConfigField("String", "API_BASE_URL",
+                "\"http://10.0.2.2:8080/api/\"")
+        }
+        debug {
+            // CAMPO CONFIGURADO PARA CORRER EL ANDROID EN EMULADOR Y LA API EN LA COMPU EN LOCALHOST
+            buildConfigField("String", "API_BASE_URL", "\"http://10.0.2.2:8080/api/\"")
         }
     }
     compileOptions {
@@ -39,7 +50,6 @@ android {
     }
     buildFeatures {
         compose = true
-        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
@@ -105,8 +115,19 @@ dependencies {
     implementation("androidx.compose.material3:material3:1.3.0-beta03")
     implementation(libs.gson)
     implementation(libs.accompanist.permissions)
-
+    //api
+    implementation(libs.retrofit)
+    implementation(libs.okhttp)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.gson)
+    implementation(libs.converter.gson)
+    implementation(libs.retrofit)
     testImplementation(libs.junit)
+
+    //extra
+    implementation(libs.androidx.material.icons.extended)
+
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))

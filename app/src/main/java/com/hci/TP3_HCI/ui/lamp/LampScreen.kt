@@ -69,8 +69,6 @@ fun LampScreen(
                     tint = Color.Gray, modifier = Modifier.size(40.dp))
             }
 
-            Text(stringResource(R.string.options), fontSize = 20.sp, fontWeight = FontWeight.Bold, modifier = Modifier.padding(vertical = 8.dp))
-
             Row(
                 modifier = Modifier
                     .fillMaxWidth()

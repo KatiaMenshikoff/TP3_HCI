@@ -45,7 +45,12 @@
     <string name="unit">Unit</string>
     <string name="dispense_water">DISPENSE WATER</string>
     <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="opened">Opened</string>
     <string name="closed">Closed</string>
+    <string name="dispensed">Dispensed: %1$s out of a total of %2$s</string>
+
+
     <!--Speaker-->
     <string name="play">PLAY</string>
     <string name="stop">STOP</string>
@@ -75,4 +80,5 @@
     <string name="brightness">Brightness</string>
     <string name="my_light">My Light</string>
     <string name="light_status">Light Status (on/off)</string>
+
 </resources>

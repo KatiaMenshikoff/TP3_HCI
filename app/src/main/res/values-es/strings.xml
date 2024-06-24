@@ -43,8 +43,12 @@
         <string name="quantity">Cantidad</string>
         <string name="unit">Unidad</string>
         <string name="dispense_water">DISPENSAR AGUA</string>
-        <string name="open">Abierto</string>
+        <string name="open">Abrir</string>
+        <string name="close">Cerrar</string>
+        <string name="opened">Abierto</string>
         <string name="closed">Cerrado</string>
+        <string name="dispensed">Se ha dispensado: %1$s de un total de %2$s</string>
+
         <!--Speaker-->
         <string name="play">PLAY</string>
         <string name="stop">STOP</string>

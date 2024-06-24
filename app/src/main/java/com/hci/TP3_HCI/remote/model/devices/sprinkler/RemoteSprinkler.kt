@@ -2,7 +2,7 @@ package com.hci.TP3_HCI.remote.model.devices.sprinkler
 
 import com.hci.TP3_HCI.model.Sprinkler
 import com.hci.TP3_HCI.remote.model.RemoteDevice
-import com.hci.TP3_HCI.remote.model.RemoteStatus
+import com.hci.TP3_HCI.remote.model.RemoteSprinklerStatus
 
 class RemoteSprinkler : RemoteDevice<RemoteSprinklerState>() {
 
@@ -10,7 +10,10 @@ class RemoteSprinkler : RemoteDevice<RemoteSprinklerState>() {
         return Sprinkler(
             id = id,
             name = name,
-            status = RemoteStatus.asModel(state.status)
+            status = RemoteSprinklerStatus.asModel(state.status),
+            quantity = state.quantity,
+            unit = state.unit,
+            dispensedQuantity = state.dispensedQuantity
         )
     }
 }

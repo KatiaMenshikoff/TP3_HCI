@@ -36,7 +36,7 @@ class SprinklerViewModel(
         viewModelScope.launch {
             while (true) {
                 updateDevice(deviceId)
-                delay(5000) // Espera 5 segundos antes de la próxima actualización
+                delay(100)
             }
         }
     }
@@ -46,13 +46,18 @@ class SprinklerViewModel(
         _uiState.update { it.copy(currentDevice = device as Sprinkler?) }
     }
 
-    fun turnOn() = runOnViewModelScope(
-        { repository.executeDeviceAction(uiState.value.currentDevice?.id!!, Lamp.TURN_ON_ACTION) },
+    fun open() = runOnViewModelScope(
+        { repository.executeDeviceAction(uiState.value.currentDevice?.id!!, Sprinkler.OPEN_ACTION) },
         { state, _ -> state }
     )
 
-    fun turnOff() = runOnViewModelScope(
-        { repository.executeDeviceAction(uiState.value.currentDevice?.id!!, Lamp.TURN_OFF_ACTION) },
+    fun close() = runOnViewModelScope(
+        { repository.executeDeviceAction(uiState.value.currentDevice?.id!!, Sprinkler.CLOSE_ACTION) },
+        { state, _ -> state }
+    )
+
+    fun dispense(qty: Int, unit: String) = runOnViewModelScope(
+        { repository.executeDeviceAction(uiState.value.currentDevice?.id!!, Sprinkler.DISPENSE_ACTION, arrayOf(qty.toString(), unit)) },
         { state, _ -> state }
     )
 

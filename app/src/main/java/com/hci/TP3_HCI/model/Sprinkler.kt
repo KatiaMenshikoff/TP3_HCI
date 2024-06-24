@@ -7,12 +7,18 @@ import com.hci.TP3_HCI.remote.model.devices.sprinkler.RemoteSprinklerState
 class Sprinkler(
     id: String?,
     name: String,
-    val status: Status
+    val quantity: Float?,
+    val unit: String?,
+    val dispensedQuantity: Float?,
+    val status: SprinklerStatus
 ) : Device(id, name, DeviceType.SPRINKLER) {
 
     override fun asRemoteModel(): RemoteDevice<RemoteSprinklerState> {
         val state = RemoteSprinklerState()
-        state.status = Status.asRemoteModel(status)
+        state.status = SprinklerStatus.asRemoteModel(status)
+        state.quantity = quantity
+        state.unit = unit
+        state.dispensedQuantity = dispensedQuantity
 
         val model = RemoteSprinkler()
         model.id = id

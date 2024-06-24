@@ -1,19 +1,6 @@
 package com.hci.TP3_HCI.ui.sprinkler
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
@@ -26,11 +13,11 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.hci.TP3_HCI.R
+import com.hci.TP3_HCI.model.SprinklerStatus
 import com.hci.TP3_HCI.ui.getViewModelFactory
 
 @Composable
@@ -45,11 +32,9 @@ fun SprinklerScreen(
     }
     val uiState by viewModel.uiState.collectAsState()
 
-
-
     var quantity by remember { mutableStateOf(0) }
     var unit by remember { mutableStateOf("ml") }
-    var showInHome by remember { mutableStateOf(false) }
+    var isOpen by remember { mutableStateOf(false) }
 
     Scaffold { paddingValues ->
         Column(
@@ -75,18 +60,49 @@ fun SprinklerScreen(
                     modifier = Modifier.padding(bottom = 16.dp)
                 )
                 Icon(painter = painterResource(id = R.drawable.icon_sprinkler), contentDescription = "Sprinkler Icon", tint = Color.Gray)
-
             }
 
-
+            // Current status
+            var status: SprinklerStatus? = uiState.currentDevice?.status
+            var statusText: String
+            if(status != null && status == SprinklerStatus.OPENED){
+                statusText = stringResource(R.string.opened)
+            }  else statusText = stringResource(R.string.closed)
             Text(
-                text = stringResource(id = R.string.current_status, "closed"),
+                text = stringResource(id = R.string.current_status, statusText),
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Bold,
                 color = Color.Gray,
                 modifier = Modifier.padding(vertical = 8.dp)
             )
+            if(uiState.currentDevice?.quantity != null){
+                var dispensed = "${uiState.currentDevice?.dispensedQuantity}${uiState.currentDevice?.unit}"
+                var totalToDispense = "${uiState.currentDevice?.quantity}${uiState.currentDevice?.unit}"
+                Text(
+                    text = stringResource(id = R.string.dispensed, dispensed, totalToDispense),
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.Gray,
+                )
+            }
 
+            Spacer(modifier = Modifier.height(16.dp))
+            Button(
+                onClick = {
+                    if (isOpen) {
+                        viewModel.close()
+                    } else {
+                        viewModel.open()
+                    }
+                    isOpen = !isOpen
+                },
+                modifier = Modifier.fillMaxWidth(),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = colorResource(R.color.button)
+                ),
+            ) {
+                Text(text = if (isOpen) stringResource(id = R.string.close) else stringResource(id = R.string.open), fontSize = 20.sp, fontWeight = FontWeight.Bold)
+            }
             // Pump Water Controls
             Spacer(modifier = Modifier.height(16.dp))
 
@@ -145,37 +161,21 @@ fun SprinklerScreen(
                 ) {
                     Text(text = "dcl", fontSize = 20.sp, color = Color.Black)
                 }
-
-        }
+            }
             Spacer(modifier = Modifier.height(16.dp))
             Button(
-                onClick = { /* handle dispense water */ },
-                modifier = Modifier.fillMaxWidth() ,
+                onClick = { viewModel.dispense(quantity, unit) },
+                modifier = Modifier.fillMaxWidth(),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = colorResource(R.color.button)
                 ),
             ) {
                 Text(text = stringResource(id = R.string.dispense_water), fontSize = 20.sp, fontWeight = FontWeight.Bold)
             }
-
-            // Show in Home
-            Spacer(modifier = Modifier.height(32.dp))
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Checkbox(
-                    checked = showInHome,
-                    onCheckedChange = { showInHome = it }
-                )
-                Spacer(modifier = Modifier.width(8.dp))
-                Text(text = stringResource(id = R.string.show_in_home), fontSize = 20.sp, fontWeight = FontWeight.Bold)
-            }
         }
     }
 }
 
-@Preview(showBackground = true)
 @Composable
 fun SprinklerScreenPreview() {
     SprinklerScreen(

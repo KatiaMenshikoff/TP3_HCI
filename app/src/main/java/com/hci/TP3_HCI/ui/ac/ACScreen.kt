@@ -72,13 +72,12 @@ fun ACScreen(
             ) {
                 Text(stringResource(R.string.status), fontSize = 18.sp)
                 Switch(
-                    checked = ACStatus,
+                    checked = uiState.currentDevice?.status == Status.ON,
                     onCheckedChange = {
-                        ACStatus = it
-                        if (it) {
-                            viewModel.turnOn()
-                        } else {
+                        if (uiState.currentDevice?.status == Status.ON) {
                             viewModel.turnOff()
+                        } else {
+                            viewModel.turnOn()
                         }
                     },
                     colors = SwitchDefaults.colors(
@@ -87,6 +86,7 @@ fun ACScreen(
                     )
                 )
             }
+            Spacer(modifier = Modifier.height(16.dp))
 
             // Temperature Controls
             Spacer(modifier = Modifier.height(16.dp))
@@ -140,7 +140,7 @@ fun ACScreen(
                         viewModel.setMode("cool")
                     },
                     colors = ButtonDefaults.textButtonColors(
-                        contentColor = if (selectedMode == "cool") Color.Blue else Color.Gray
+                        contentColor = if (uiState.currentDevice?.mode == "cool") Color.Blue else Color.Gray
                     )
                 ) {
                     Text(
@@ -155,7 +155,7 @@ fun ACScreen(
                         viewModel.setMode("fan")
                     },
                     colors = ButtonDefaults.textButtonColors(
-                        contentColor = if (selectedMode == "fan") Color.Blue else Color.Gray
+                        contentColor = if (uiState.currentDevice?.mode == "fan") Color.Blue else Color.Gray
                     )
                 ) {
                     Text(
@@ -170,7 +170,7 @@ fun ACScreen(
                         viewModel.setMode("heat")
                     },
                     colors = ButtonDefaults.textButtonColors(
-                        contentColor = if (selectedMode == "heat") Color.Blue else Color.Gray
+                        contentColor = if (uiState.currentDevice?.mode == "heat") Color.Blue else Color.Gray
                     )
                 ) {
                     Text(

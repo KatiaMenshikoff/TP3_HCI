@@ -40,7 +40,6 @@ fun LampScreen(
     var lightColor by remember {
         mutableStateOf(predefinedColors.find { it.toHex() == uiState.currentDevice?.color } ?: Color.Red)
     }
-    var lightStatus by remember { mutableStateOf(uiState.currentDevice?.status == Status.ON) }
     var lightIntensity by remember { mutableStateOf(50f) }
 
     Scaffold { innerPadding ->
@@ -78,13 +77,12 @@ fun LampScreen(
             ) {
                 Text(stringResource(R.string.status), fontSize = 18.sp)
                 Switch(
-                    checked = lightStatus,
+                    checked = uiState.currentDevice?.status == Status.ON,
                     onCheckedChange = {
-                        lightStatus = it
-                        if (it) {
-                            viewModel.turnOn()
-                        } else {
+                        if (uiState.currentDevice?.status == Status.ON) {
                             viewModel.turnOff()
+                        } else {
+                            viewModel.turnOn()
                         }
                     },
                     colors = SwitchDefaults.colors(
@@ -99,7 +97,7 @@ fun LampScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(120.dp)
-                    .background(color = lightColor, shape = RoundedCornerShape(12.dp)),
+                    .background(color = predefinedColors.find { it.toHex() == uiState.currentDevice?.color } ?: Color.Red, shape = RoundedCornerShape(12.dp)),
                 contentAlignment = Alignment.Center
             ) {
                 Image(
@@ -120,7 +118,7 @@ fun LampScreen(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 predefinedColors.forEach { color ->
-                    ColorButton(color, lightColor, viewModel::setColor) { lightColor = it }
+                    ColorButton(color, predefinedColors.find { it.toHex() == uiState.currentDevice?.color } ?: Color.Red, viewModel::setColor) { lightColor = it }
                 }
             }
 
@@ -163,7 +161,7 @@ fun ColorButton(color: Color, currentColor: Color, setColor: (String) -> Unit, o
             .background(color = color, shape = RoundedCornerShape(12.dp))
             .border(
                 width = 2.dp,
-                color = if (color == currentColor) colorResource(id = R.color.pinkMenu) else Color.Transparent,
+                color = if (color == currentColor) Color.DarkGray else Color.Transparent,
                 shape = RoundedCornerShape(12.dp)
             )
             .clickable {

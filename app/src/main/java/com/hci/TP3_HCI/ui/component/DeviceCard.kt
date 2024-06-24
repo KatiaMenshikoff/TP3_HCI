@@ -33,7 +33,12 @@ fun DeviceCard(
         DeviceType.SPEAKER to R.string.views_speaker_name,
         DeviceType.SPRINKLER to R.string.views_sprinkler_name
     )
-
+    val devicesIcons = mapOf(
+        DeviceType.LAMP to R.drawable.icon_lamp,
+        DeviceType.AC to R.drawable.icon_ac,
+        DeviceType.SPEAKER to R.drawable.icon_speaker,
+        DeviceType.SPRINKLER to R.drawable.icon_sprinkler
+    )
     Card(
         shape = RoundedCornerShape(12.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
@@ -46,13 +51,12 @@ fun DeviceCard(
             }
     ) {
         Row(
-            verticalAlignment = Alignment.Top,
+            verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp)
         ) {
-
             Column(
                 verticalArrangement = Arrangement.Top,
                 horizontalAlignment = Alignment.Start,
@@ -66,18 +70,25 @@ fun DeviceCard(
                 )
 
                 Spacer(modifier = Modifier.height(4.dp))
-                Row(
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-
-                    Text(
-                        text = stringResource(id = deviceTypeNames[device.type] ?: R.string.unknown),
-                        color = Color.White,
-                        fontSize = 16.sp,
-                        style = MaterialTheme.typography.bodyMedium
-                    )
-                }
+                Text(
+                    text = stringResource(id = deviceTypeNames[device.type] ?: R.string.unknown),
+                    color = Color.White,
+                    fontSize = 16.sp,
+                    style = MaterialTheme.typography.bodyMedium
+                )
             }
+            Spacer(modifier = Modifier.width(8.dp))
+            Icon(
+                painter = painterResource(id = devicesIcons[device.type] ?: R.drawable.icon_device), // Replace with your icon resource
+                contentDescription = null,
+                tint = Color.White,
+                modifier = Modifier.size(24.dp)
+            )
         }
     }
+}
+
+@Composable
+fun DeviceCardPreview() {
+    
 }

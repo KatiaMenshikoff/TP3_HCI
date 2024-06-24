@@ -35,7 +35,7 @@ class LampViewModel(
         viewModelScope.launch {
             while (true) {
                 updateDevice(deviceId)
-                delay(5000) // Espera 5 segundos antes de la próxima actualización
+                delay(100) // Espera 5 segundos antes de la próxima actualización
             }
         }
     }
@@ -57,6 +57,14 @@ class LampViewModel(
 
     fun turnOff() = runOnViewModelScope(
         { repository.executeDeviceAction(uiState.value.currentDevice?.id!!, Lamp.TURN_OFF_ACTION) },
+        { state, _ -> state }
+    )
+    fun setColor(color : String) = runOnViewModelScope(
+        { repository.executeDeviceAction(uiState.value.currentDevice?.id!!, Lamp.SET_COLOR_ACTION, arrayOf(color)) },
+        { state, _ -> state }
+    )
+    fun setBrightness(brightness : Float) = runOnViewModelScope(
+        { repository.executeDeviceAction(uiState.value.currentDevice?.id!!, Lamp.SET_BRIGHTNESS_ACTION, arrayOf(brightness)) },
         { state, _ -> state }
     )
 

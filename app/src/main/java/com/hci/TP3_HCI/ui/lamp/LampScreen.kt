@@ -2,61 +2,49 @@ package com.hci.TP3_HCI.ui.lamp
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.hci.TP3_HCI.R
+import com.hci.TP3_HCI.model.Status
 import com.hci.TP3_HCI.ui.getViewModelFactory
-import com.hci.TP3_HCI.ui.lamp.LampViewModel
+
 @Composable
 fun LampScreen(
     deviceId: String,
     viewModel: LampViewModel = viewModel(factory = getViewModelFactory()),
 ) {
-
     LaunchedEffect(deviceId) {
         viewModel.setCurrentDevice(deviceId)
         viewModel.startPeriodicUpdates(deviceId) // Iniciar actualizaciones periódicas
     }
 
     val uiState by viewModel.uiState.collectAsState()
-    var lightStatus by remember { mutableStateOf(true) }
-    var showInHome by remember { mutableStateOf(true) }
-    var lightColor by remember { mutableStateOf(Color.Red) }
-    var lightIntensity by remember { mutableStateOf(0.5f) }
 
-    Scaffold(
-    ) { innerPadding ->
+    // Predefined list of colors
+    val predefinedColors = listOf(Color.Red, Color.Green, Color.Blue, Color.Yellow, Color.Cyan, Color.Magenta)
+
+    // Initialize lightColor based on current device color
+    var lightColor by remember {
+        mutableStateOf(predefinedColors.find { it.toHex() == uiState.currentDevice?.color } ?: Color.Red)
+    }
+    var lightStatus by remember { mutableStateOf(uiState.currentDevice?.status == Status.ON) }
+    var lightIntensity by remember { mutableStateOf(50f) }
+
+    Scaffold { innerPadding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -94,33 +82,20 @@ fun LampScreen(
                 Text("Light Status (on/off)", fontSize = 18.sp)
                 Switch(
                     checked = lightStatus,
-                    onCheckedChange = { lightStatus = it },
+                    onCheckedChange = {
+                        lightStatus = it
+                        if (it) {
+                            viewModel.turnOn()
+                        } else {
+                            viewModel.turnOff()
+                        }
+                    },
                     colors = SwitchDefaults.colors(
                         checkedThumbColor = colorResource(id = R.color.pinkMenu),
                         uncheckedThumbColor = colorResource(id = R.color.grey)
                     )
                 )
             }
-
-            // Show in home switch
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 8.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Text("Show as shortcut in Home", fontSize = 18.sp)
-                Switch(
-                    checked = showInHome,
-                    onCheckedChange = { showInHome = it },
-                    colors = SwitchDefaults.colors(
-                        checkedThumbColor = colorResource(id = R.color.pinkMenu),
-                        uncheckedThumbColor = colorResource(id = R.color.grey)
-                    )
-                )
-            }
-
             Spacer(modifier = Modifier.height(16.dp))
 
             // Light image with changing background color
@@ -148,12 +123,9 @@ fun LampScreen(
                 horizontalArrangement = Arrangement.SpaceAround,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                ColorButton(Color.Red, lightColor) { lightColor = it }
-                ColorButton(Color.Green, lightColor) { lightColor = it }
-                ColorButton(Color.Blue, lightColor) { lightColor = it }
-                ColorButton(Color.Yellow, lightColor) { lightColor = it }
-                ColorButton(Color.Cyan, lightColor) { lightColor = it }
-                ColorButton(Color.Magenta, lightColor) { lightColor = it }
+                predefinedColors.forEach { color ->
+                    ColorButton(color, lightColor, viewModel::setColor) { lightColor = it }
+                }
             }
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -168,7 +140,11 @@ fun LampScreen(
                 Icon(painter = painterResource(id = R.drawable.icon_minus), contentDescription = "Low brightness", tint = Color.Gray)
                 Slider(
                     value = lightIntensity,
-                    onValueChange = { lightIntensity = it },
+                    onValueChange = {
+                        lightIntensity = it
+                        viewModel.setBrightness(it) // Call setBrightness with the new value
+                    },
+                    valueRange = 0f..100f, // Set the range for the slider
                     colors = SliderDefaults.colors(
                         thumbColor = colorResource(id = R.color.pinkMenu),
                         activeTrackColor = colorResource(id = R.color.button),
@@ -183,7 +159,7 @@ fun LampScreen(
 }
 
 @Composable
-fun ColorButton(color: Color, currentColor: Color, onClick: (Color) -> Unit) {
+fun ColorButton(color: Color, currentColor: Color, setColor: (String) -> Unit, onClick: (Color) -> Unit) {
     Box(
         modifier = Modifier
             .size(40.dp)
@@ -194,6 +170,14 @@ fun ColorButton(color: Color, currentColor: Color, onClick: (Color) -> Unit) {
                 color = if (color == currentColor) colorResource(id = R.color.pinkMenu) else Color.Transparent,
                 shape = RoundedCornerShape(12.dp)
             )
-            .clickable { onClick(color) }
+            .clickable {
+                setColor(color.toHex())
+                onClick(color)
+            }
     )
+}
+
+fun Color.toHex(): String {
+    val intColor = this.toArgb()
+    return String.format("%06X", 0xFFFFFF and intColor)
 }

@@ -15,19 +15,40 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.delay
 
 class SpeakerViewModel(
     private val repository: DeviceRepository
 ) : ViewModel() {
-
     private val _uiState = MutableStateFlow(SpeakerUiState())
     val uiState = _uiState.asStateFlow()
+
+    // TODO CON ESTE INIT SE ACTUALIZA LA LISTA COMPLETA DE DEVICES CADA 10 SEGUNDOS!!
+    init {
+        collectOnViewModelScope(
+            repository.devices
+        ) { state, response -> state.copy(devices = response) }
+    }
 
     fun setCurrentDevice(deviceId: String){
         runOnViewModelScope(
             { repository.getDevice(deviceId) },
             { state, response -> state.copy(currentDevice = response as Speaker?) }
         )
+    }
+
+    fun startPeriodicUpdates(deviceId: String) {
+        viewModelScope.launch {
+            while (true) {
+                updateDevice(deviceId)
+                delay(5000) // Espera 5 segundos antes de la próxima actualización
+            }
+        }
+    }
+
+    private suspend fun updateDevice(deviceId: String) {
+        val device = repository.getDevice(deviceId)
+        _uiState.update { it.copy(currentDevice = device as Speaker?) }
     }
 
     fun turnOn() = runOnViewModelScope(

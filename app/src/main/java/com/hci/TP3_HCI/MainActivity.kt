@@ -1,6 +1,8 @@
 package com.hci.TP3_HCI
 
 import android.annotation.SuppressLint
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -11,6 +13,8 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.res.stringResource
+import androidx.core.app.NotificationCompat
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
@@ -24,9 +28,32 @@ import java.util.jar.Manifest
 
 @OptIn(ExperimentalPermissionsApi::class)
 class MainActivity : ComponentActivity() {
+
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            // Create the NotificationChannel.
+            val name = getString(R.string.channel_name)
+            val descriptionText = getString(R.string.channel_description)
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val mChannel = NotificationChannel("coolhome", name, importance)
+            mChannel.description = descriptionText
+            // Register the channel with the system. You can't change the importance
+            // or other notification behaviors after this.
+            val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(mChannel)
+        }
+
+        var builder = NotificationCompat.Builder(this, "coolhome")
+            .setSmallIcon(R.drawable.icon_device)
+            .setContentTitle("CoolHome app language changed")
+            .setContentText("Language has been set to English")
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+
+
+
         setContent {
             val navController = rememberNavController()
             val navBackStackEntry by navController.currentBackStackEntryAsState()
@@ -43,7 +70,7 @@ class MainActivity : ComponentActivity() {
                         }
                     }
 
-                    Text(text = "Esta aplicación necesita usar las notificaciones, por favor acepta el permiso para poder usarlas")
+                    Text(text = stringResource(R.string.permission_request_notification))
                 }
             }
 

@@ -78,5 +78,12 @@
         <string name="my_light">Mi Lámpara</string>
 
         <string name="status">Estado (encendido/apagado)</string>
-        <string name="song_info">%1$s por %2$s</string>"
+        <string name="song_info">%1$s por %2$s</string>
+        <string name="channel_name">Notificaciones de CoolHome</string>"
+        <string name="channel_description">Canal de notificaciones por defecto para todos los eventos relacionados a CoolHome</string>
+        <string name="language_changed">Se ha cambiado el idioma de CoolHome</string>
+        <string name="language_changed_description">Idioma de la aplicacion establecido a Español.</string>
+        <string name="start_dispense_notification_title">Se comenzo a dispensar agua</string>
+        <string name="start_dispense_notification_text">\"%1$s\" ha comenzado a dispensar %2$s de agua</string>
+        <string name="permission_request_notification">CoolHome necesita tu permiso para mostrarte notificaciones!</string>
 </resources>

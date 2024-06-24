@@ -1,10 +1,11 @@
 package com.example.mobileapp.ui.views
 
+import android.Manifest
 import android.content.Context
+import android.content.pm.PackageManager
 import android.content.res.Configuration
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -13,15 +14,18 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.app.ActivityCompat
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import com.hci.TP3_HCI.R
 import java.util.*
+
 
 @Composable
 fun SettingsScreen(
@@ -114,6 +118,7 @@ fun SettingsScreen(
     }
 }
 
+
 private fun updateLanguage(context: Context, language: String) {
     val locale = Locale(language)
     Locale.setDefault(locale)
@@ -121,8 +126,28 @@ private fun updateLanguage(context: Context, language: String) {
     config.setLocale(locale)
     context.resources.updateConfiguration(config, context.resources.displayMetrics)
 
+    showLanguageChangedNotification(context)
     // Notify the change to UI
     (context as? ComponentActivity)?.recreate()
 }
 
+private fun showLanguageChangedNotification(context: Context) {
+    val channelId = "coolhome"
+    val notificationId = 1
+    val notificationTitle = context.getString(R.string.language_changed)
+    val notificationText = context.getString(R.string.language_changed_description)
 
+    val builder = NotificationCompat.Builder(context, channelId)
+        .setSmallIcon(R.drawable.icon_device)
+        .setContentTitle(notificationTitle)
+        .setContentText(notificationText)
+        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+
+    with(NotificationManagerCompat.from(context)) {
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            // Consider requesting the permission
+            return
+        }
+        notify(notificationId, builder.build())
+    }
+}

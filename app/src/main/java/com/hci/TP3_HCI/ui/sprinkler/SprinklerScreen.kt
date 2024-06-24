@@ -1,5 +1,8 @@
 package com.hci.TP3_HCI.ui.sprinkler
 
+import android.Manifest
+import android.content.Context
+import android.content.pm.PackageManager
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -9,12 +12,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.app.ActivityCompat
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.hci.TP3_HCI.R
 import com.hci.TP3_HCI.model.SprinklerStatus
@@ -25,11 +32,11 @@ fun SprinklerScreen(
     deviceId: String,
     viewModel: SprinklerViewModel = viewModel(factory = getViewModelFactory()),
 ) {
-
     LaunchedEffect(deviceId) {
         viewModel.setCurrentDevice(deviceId)
         viewModel.startPeriodicUpdates(deviceId) // Iniciar actualizaciones periódicas
     }
+    val context = LocalContext.current
     val uiState by viewModel.uiState.collectAsState()
 
     var quantity by remember { mutableStateOf(0) }
@@ -164,7 +171,12 @@ fun SprinklerScreen(
             }
             Spacer(modifier = Modifier.height(16.dp))
             Button(
-                onClick = { viewModel.dispense(quantity, unit) },
+                onClick = {
+                    if(uiState.currentDevice?.quantity == null && quantity > 0){
+                        viewModel.dispense(quantity, unit)
+                        showStartDispenseNotification(context, uiState.currentDevice?.name ?: "", "$quantity $unit")
+                    }
+                },
                 modifier = Modifier.fillMaxWidth(),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = colorResource(R.color.button)
@@ -173,6 +185,27 @@ fun SprinklerScreen(
                 Text(text = stringResource(id = R.string.dispense_water), fontSize = 20.sp, fontWeight = FontWeight.Bold)
             }
         }
+    }
+}
+
+private fun showStartDispenseNotification(context: Context, deviceName: String, quantity: String) {
+    val channelId = "coolhome"
+    val notificationId = 2
+    val notificationTitle = context.getString(R.string.start_dispense_notification_title)
+    val notificationText = context.getString(R.string.start_dispense_notification_text, deviceName, quantity)
+
+    val builder = NotificationCompat.Builder(context, channelId)
+        .setSmallIcon(R.drawable.icon_sprinkler)
+        .setContentTitle(notificationTitle)
+        .setContentText(notificationText)
+        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+
+    with(NotificationManagerCompat.from(context)) {
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            // Consider requesting the permission
+            return
+        }
+        notify(notificationId, builder.build())
     }
 }
 

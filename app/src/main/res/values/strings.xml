@@ -81,4 +81,12 @@
 
     <string name="status">Status (on/off)</string>
     <string name="song_info">%1$s by %2$s</string>
+
+    <string name="channel_name">CoolHome default notifications</string>
+    <string name="channel_description">Default notifications channel for all CoolHome related events</string>
+    <string name="language_changed">CoolHome language has been changed</string>
+    <string name="language_changed_description">App language set to English.</string>
+    <string name="start_dispense_notification_title">Water dispense started</string>
+    <string name="start_dispense_notification_text">\"%1$s\" has started dispensing %2$s of water</string>
+    <string name="permission_request_notification">CoolHome needs permission to show you notifications!</string>
 </resources>

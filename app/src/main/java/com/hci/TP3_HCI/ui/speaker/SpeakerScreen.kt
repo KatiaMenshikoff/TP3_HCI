@@ -89,20 +89,6 @@ fun SpeakerScreen(
                         fontWeight = FontWeight.Bold
                     )
                 }
-                IconButton(onClick = { /* Handle delete device */ }) {
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(4.dp)
-                    ) {
-                        Text("Delete device", color = Color.Red, fontSize = 12.sp)
-                        Icon(
-                            painter = painterResource(id = R.drawable.icon_delete),
-                            contentDescription = "Delete device",
-                            tint = Color.Red,
-                            modifier = Modifier.size(30.dp)
-                        )
-                    }
-                }
             }
 
             Divider()

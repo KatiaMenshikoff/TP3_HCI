@@ -31,21 +31,22 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.hci.TP3_HCI.R
+import com.hci.TP3_HCI.ui.getViewModelFactory
 
 @Composable
 fun SprinklerScreen(
     deviceId: String,
-//    viewModel: SprinklerViewModel = viewModel(factory = getViewModelFactory()),
+    viewModel: SprinklerViewModel = viewModel(factory = getViewModelFactory()),
 ) {
 
     LaunchedEffect(deviceId) {
         viewModel.setCurrentDevice(deviceId)
         viewModel.startPeriodicUpdates(deviceId) // Iniciar actualizaciones periódicas
     }
-
     val uiState by viewModel.uiState.collectAsState()
-//    viewModel.setCurrentDevice(deviceId)
-//    val uiState by viewModel.uiState.collectAsState()
+
+
+
     var quantity by remember { mutableStateOf(0) }
     var unit by remember { mutableStateOf("ml") }
     var showInHome by remember { mutableStateOf(false) }
@@ -169,20 +170,6 @@ fun SprinklerScreen(
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(text = stringResource(id = R.string.show_in_home), fontSize = 20.sp, fontWeight = FontWeight.Bold)
-            }
-
-            // Delete Button
-            Spacer(modifier = Modifier.height(32.dp))
-            Button(
-                onClick = { /* handle delete */ },
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = colorResource(R.color.button)
-                ),
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Icon(painter = painterResource(id = R.drawable.icon_delete), contentDescription = stringResource(id = R.string.delete), tint = Color.White)
-                Spacer(modifier = Modifier.width(8.dp))
-                Text(text = stringResource(id = R.string.delete), color = Color.White, fontSize = 20.sp, fontWeight = FontWeight.Bold)
             }
         }
     }

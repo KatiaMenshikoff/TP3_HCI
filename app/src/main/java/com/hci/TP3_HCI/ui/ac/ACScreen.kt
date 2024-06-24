@@ -28,26 +28,28 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.hci.TP3_HCI.R
+import com.hci.TP3_HCI.ui.getViewModelFactory
 
 @Composable
 fun ACScreen(
     deviceId: String,
-) {
+    viewModel: ACViewModel = viewModel(factory = getViewModelFactory()),
+    ) {
+
+    LaunchedEffect(deviceId) {
+        viewModel.setCurrentDevice(deviceId)
+        viewModel.startPeriodicUpdates(deviceId) // Iniciar actualizaciones periódicas
+    }
+    val uiState by viewModel.uiState.collectAsState()
+
     var temperature by remember { mutableStateOf(24) }
     var fanSpeed by remember { mutableStateOf("auto") }
     var hSwing by remember { mutableStateOf("auto") }
     var vSwing by remember { mutableStateOf("auto") }
     var showInHome by remember { mutableStateOf(false) }
 
-    Scaffold { paddingValues ->
-
-    LaunchedEffect(deviceId) {
-        viewModel.setCurrentDevice(deviceId)
-        viewModel.startPeriodicUpdates(deviceId) // Iniciar actualizaciones periódicas
-    }
-
-    val uiState by viewModel.uiState.collectAsState()
     Scaffold() { paddingValues ->
         Column(
             modifier = Modifier
@@ -56,14 +58,6 @@ fun ACScreen(
                 .background(colorResource(R.color.background))
                 .padding(16.dp)
         ) {
-            // Title
-            Text(
-                text = stringResource(id = R.string.ac_title),
-                style = MaterialTheme.typography.headlineLarge,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(bottom = 16.dp)
-            )
-
             // Device Name and Controls
             Row(
                 modifier = Modifier

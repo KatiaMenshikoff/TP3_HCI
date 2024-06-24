@@ -77,14 +77,6 @@ fun LampScreen(
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(uiState.currentDevice?.name ?: "My Light", fontSize = 24.sp, fontWeight = FontWeight.Bold)
                 }
-                IconButton(onClick = { /* Handle delete light */ }) {
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(4.dp)
-                    ) {
-                        Icon(painter = painterResource(id = R.drawable.icon_delete), contentDescription = "Delete light", tint = Color.Red, modifier = Modifier.size(30.dp))
-                    }
-                }
             }
 
             Divider()

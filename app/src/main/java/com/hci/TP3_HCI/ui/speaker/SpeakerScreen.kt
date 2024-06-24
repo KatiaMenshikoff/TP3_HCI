@@ -167,13 +167,13 @@ fun SpeakerScreen(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    uiState.currentDevice?.song?.title ?: "NO DATA",
+                    uiState.currentDevice?.song?.title ?: "Not playing",
                     color = Color.White,
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold
                 )
                 Text(
-                    uiState.currentDevice?.song?.artist ?: "NO DATA",
+                    uiState.currentDevice?.song?.artist ?: "Not playing",
                     color = Color.White,
                     fontSize = 18.sp
                 )
@@ -211,13 +211,13 @@ fun SpeakerScreen(
                 ) {
                     Text(
                         text = "Progress:   " + (uiState.currentDevice?.song?.progress
-                            ?: "NO DATA"),
+                            ?: "Not playing"),
                         color = Color.White,
                         fontSize = 14.sp
                     )
                     Text(
                         text = "Duration:   " + (uiState.currentDevice?.song?.duration
-                            ?: "NO DATA"),
+                            ?: "Not playing"),
                         color = Color.White,
                         fontSize = 14.sp
                     )

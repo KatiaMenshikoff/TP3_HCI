@@ -18,11 +18,9 @@ import com.hci.TP3_HCI.ui.sprinkler.SprinklerScreen
 fun AppNavGraph(navController: NavHostController) {
     NavHost(
         navController = navController,
-        startDestination = AppDestinations.HOME.route
+        startDestination = AppDestinations.DEVICES.route
     ) {
-        composable(route = AppDestinations.HOME.route) {
-            HomeScreen()
-        }
+
         composable(route = AppDestinations.DEVICES.route) {
             DevicesScreen(
                 onNavigateToLamp = {

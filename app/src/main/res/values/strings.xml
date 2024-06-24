@@ -1,12 +1,11 @@
 <resources>
     <string name="app_name">CoolHome</string>
-    <string name="views_home_name">Home</string>
     <string name="views_devices_name">Devices</string>
     <string name="views_settings_name">Settings</string>
     <string name="views_lamp_name">Lamp</string>
     <string name="views_speaker_name">Speaker</string>
     <string name="views_sprinkler_name">Sprinkler</string>
-    <string name="views_ac_name">AC</string>
+    <string name="views_ac_name">Air Conditioner</string>
     <string name="select_language">Select Language</string>
     <string name="language_english">English</string>
     <string name="language_spanish">Español</string>

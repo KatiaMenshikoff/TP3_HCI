@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -12,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -20,12 +22,10 @@ import com.hci.TP3_HCI.R
 import com.hci.TP3_HCI.model.Device
 import com.hci.TP3_HCI.model.DeviceType
 
-
 @Composable
 fun DeviceCard(
     device: Device,
-    onSelectDevice: () -> Unit,
-    onNavigateToDevice: () -> Unit,
+    onClick: () -> Unit,
 ) {
     val deviceTypeNames = mapOf(
         DeviceType.LAMP to R.string.views_lamp_name,
@@ -42,8 +42,7 @@ fun DeviceCard(
             .padding(16.dp)
             .height(100.dp)
             .clickable {
-                onSelectDevice()
-                onNavigateToDevice()
+                onClick()
             }
     ) {
         Row(
@@ -53,6 +52,7 @@ fun DeviceCard(
                 .fillMaxWidth()
                 .padding(16.dp)
         ) {
+
             Column(
                 verticalArrangement = Arrangement.Top,
                 horizontalAlignment = Alignment.Start,
@@ -64,14 +64,19 @@ fun DeviceCard(
                     fontSize = 19.sp,
                     style = MaterialTheme.typography.titleMedium
                 )
-                Spacer(modifier = Modifier.height(4.dp))
-                Text(
-                    text = stringResource(id = deviceTypeNames[device.type] ?: R.string.unknown),
-                    color = Color.White,
-                    fontSize = 16.sp,
-                    style = MaterialTheme.typography.bodyMedium
-                )
 
+                Spacer(modifier = Modifier.height(4.dp))
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+
+                    Text(
+                        text = stringResource(id = deviceTypeNames[device.type] ?: R.string.unknown),
+                        color = Color.White,
+                        fontSize = 16.sp,
+                        style = MaterialTheme.typography.bodyMedium
+                    )
+                }
             }
         }
     }

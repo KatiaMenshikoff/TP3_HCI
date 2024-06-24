@@ -18,7 +18,6 @@ fun AppBottomBar(
     onNavigateToRoute: (String) -> Unit
 ) {
     val icons = mapOf(
-        AppDestinations.HOME to ImageVector.vectorResource(id = R.drawable.icon_home),
         AppDestinations.DEVICES to ImageVector.vectorResource(id = R.drawable.icon_device),
         AppDestinations.SETTINGS to ImageVector.vectorResource(id = R.drawable.icon_settings),
     )

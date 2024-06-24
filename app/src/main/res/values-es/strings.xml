@@ -42,8 +42,6 @@
         <string name="quantity">Cantidad</string>
         <string name="unit">Unidad</string>
         <string name="dispense_water">DISPENSAR AGUA</string>
-        <string name="open">Abrir</string>
-        <string name="close">Cerrar</string>
 
 
 </resources>

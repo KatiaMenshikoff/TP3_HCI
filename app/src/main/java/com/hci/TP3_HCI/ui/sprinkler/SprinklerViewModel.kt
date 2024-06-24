@@ -4,14 +4,17 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hci.TP3_HCI.DataSourceException
 import com.hci.TP3_HCI.model.Error
+import com.hci.TP3_HCI.model.Lamp
+import com.hci.TP3_HCI.model.Speaker
 import com.hci.TP3_HCI.model.Sprinkler
-import com.hci.TP3_HCI.model.SprinklerStatus
 import com.hci.TP3_HCI.repository.DeviceRepository
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
@@ -33,7 +36,7 @@ class SprinklerViewModel(
         viewModelScope.launch {
             while (true) {
                 updateDevice(deviceId)
-                delay(5000) // Wait for 5 seconds before the next update
+                delay(5000) // Espera 5 segundos antes de la próxima actualización
             }
         }
     }
@@ -43,36 +46,29 @@ class SprinklerViewModel(
         _uiState.update { it.copy(currentDevice = device as Sprinkler?) }
     }
 
-    fun dispense(quantity: Int, unit: String) = runOnViewModelScope(
-        { repository.executeDeviceAction(uiState.value.currentDevice?.id!!, Sprinkler.DISPENSE_ACTION, arrayOf(quantity, unit)) },
+    fun turnOn() = runOnViewModelScope(
+        { repository.executeDeviceAction(uiState.value.currentDevice?.id!!, Lamp.TURN_ON_ACTION) },
         { state, _ -> state }
     )
 
-    fun open() = runOnViewModelScope(
-        { repository.executeDeviceAction(uiState.value.currentDevice?.id!!, Sprinkler.OPEN_ACTION) },
-        { state, _ ->
-            val currentDevice = state.currentDevice
-            if (currentDevice != null) {
-//                currentDevice.status = SprinklerStatus.ON
-            }
-            state
-        }
+    fun turnOff() = runOnViewModelScope(
+        { repository.executeDeviceAction(uiState.value.currentDevice?.id!!, Lamp.TURN_OFF_ACTION) },
+        { state, _ -> state }
     )
 
-    fun close() = runOnViewModelScope(
-        { repository.executeDeviceAction(uiState.value.currentDevice?.id!!, Sprinkler.CLOSE_ACTION) },
-        { state, _ ->
-            val currentDevice = state.currentDevice
-            if (currentDevice != null) {
-//                currentDevice.status = SprinklerStatus.OFF
-            }
-            state
-        }
-    )
-
-    private fun <T> runOnViewModelScope(
-        block: suspend () -> T,
+    private fun <T> collectOnViewModelScope(
+        flow: Flow<T>,
         updateState: (SprinklerUiState, T) -> SprinklerUiState
+    ) = viewModelScope.launch {
+        flow
+            .distinctUntilChanged()
+            .catch { e -> _uiState.update { it.copy(error = handleError(e)) } }
+            .collect { response -> _uiState.update { updateState(it, response) } }
+    }
+
+    private fun <R> runOnViewModelScope(
+        block: suspend () -> R,
+        updateState: (SprinklerUiState, R) -> SprinklerUiState
     ): Job = viewModelScope.launch {
         _uiState.update { it.copy(loading = true, error = null) }
         runCatching {

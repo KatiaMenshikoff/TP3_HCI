@@ -1,4 +1,4 @@
-package com.hci.TP3_HCI.remote.model.devices
+package com.hci.TP3_HCI.remote.model.devices.ac
 
 import com.google.gson.annotations.SerializedName
 

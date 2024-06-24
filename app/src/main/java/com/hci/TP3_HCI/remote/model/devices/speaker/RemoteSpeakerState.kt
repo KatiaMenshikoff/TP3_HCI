@@ -1,4 +1,4 @@
-package com.hci.TP3_HCI.remote.model.devices
+package com.hci.TP3_HCI.remote.model.devices.speaker
 
 import com.google.gson.annotations.SerializedName
 
@@ -11,4 +11,7 @@ class RemoteSpeakerState {
 
     @SerializedName("genre")
     lateinit var genre: String
+
+    @SerializedName("song")
+    lateinit var song: RemoteSpeakerSong
 }

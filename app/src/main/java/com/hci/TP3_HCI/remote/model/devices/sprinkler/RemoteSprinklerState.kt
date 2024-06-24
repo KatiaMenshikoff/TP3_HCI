@@ -1,4 +1,4 @@
-package com.hci.TP3_HCI.remote.model.devices
+package com.hci.TP3_HCI.remote.model.devices.sprinkler
 
 import com.google.gson.annotations.SerializedName
 

@@ -1,4 +1,4 @@
-package com.hci.TP3_HCI.remote.model.devices
+package com.hci.TP3_HCI.remote.model.devices.sprinkler
 
 import com.hci.TP3_HCI.model.Sprinkler
 import com.hci.TP3_HCI.remote.model.RemoteDevice

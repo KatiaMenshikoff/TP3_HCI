@@ -1,4 +1,4 @@
-package com.hci.TP3_HCI.remote.model.devices
+package com.hci.TP3_HCI.remote.model.devices.speaker
 
 import com.hci.TP3_HCI.model.Speaker
 import com.hci.TP3_HCI.remote.model.RemoteDevice
@@ -12,7 +12,8 @@ class RemoteSpeaker : RemoteDevice<RemoteSpeakerState>() {
             name = name,
             status = RemoteStatus.asModel(state.status),
             volume = state.volume,
-            genre = state.genre
+            genre = state.genre,
+            song = state.song.asModel()
         )
     }
 }

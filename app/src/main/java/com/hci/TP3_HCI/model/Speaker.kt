@@ -1,15 +1,16 @@
 package com.hci.TP3_HCI.model
 
 import com.hci.TP3_HCI.remote.model.RemoteDevice
-import com.hci.TP3_HCI.remote.model.devices.RemoteSpeaker
-import com.hci.TP3_HCI.remote.model.devices.RemoteSpeakerState
+import com.hci.TP3_HCI.remote.model.devices.speaker.RemoteSpeaker
+import com.hci.TP3_HCI.remote.model.devices.speaker.RemoteSpeakerState
 
 class Speaker(
     id: String?,
     name: String,
     val status: Status,
     val volume: Int,
-    val genre: String
+    val genre: String,
+    val song: SpeakerSong,
 ) : Device(id, name, DeviceType.SPEAKER) {
 
     override fun asRemoteModel(): RemoteDevice<RemoteSpeakerState> {
@@ -17,6 +18,7 @@ class Speaker(
         state.status = Status.asRemoteModel(status)
         state.volume = volume
         state.genre = genre
+        state.song = song.asRemoteModel()
 
         val model = RemoteSpeaker()
         model.id = id

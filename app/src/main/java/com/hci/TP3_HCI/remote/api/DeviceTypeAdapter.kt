@@ -2,16 +2,16 @@ package com.hci.TP3_HCI.api.remote.api
 
 import com.hci.TP3_HCI.remote.model.RemoteDevice
 import com.hci.TP3_HCI.remote.model.RemoteDeviceType
-import com.hci.TP3_HCI.remote.model.devices.RemoteLamp
+import com.hci.TP3_HCI.remote.model.devices.lamp.RemoteLamp
 import com.google.gson.Gson
 import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer
 import com.google.gson.JsonElement
 import com.google.gson.JsonParseException
 import com.google.gson.reflect.TypeToken
-import com.hci.TP3_HCI.remote.model.devices.RemoteAC
-import com.hci.TP3_HCI.remote.model.devices.RemoteSpeaker
-import com.hci.TP3_HCI.remote.model.devices.RemoteSprinkler
+import com.hci.TP3_HCI.remote.model.devices.ac.RemoteAC
+import com.hci.TP3_HCI.remote.model.devices.speaker.RemoteSpeaker
+import com.hci.TP3_HCI.remote.model.devices.sprinkler.RemoteSprinkler
 import java.lang.reflect.Type
 
 class DeviceTypeAdapter : JsonDeserializer<RemoteDevice<*>?> {

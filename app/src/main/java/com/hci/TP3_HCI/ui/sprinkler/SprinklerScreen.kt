@@ -11,6 +11,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -28,7 +29,12 @@ fun SprinklerScreen(
     deviceId: String,
     viewModel: SprinklerViewModel = viewModel(factory = getViewModelFactory()),
 ) {
-    viewModel.setCurrentDevice(deviceId)
+
+    LaunchedEffect(deviceId) {
+        viewModel.setCurrentDevice(deviceId)
+        viewModel.startPeriodicUpdates(deviceId) // Iniciar actualizaciones periódicas
+    }
+
     val uiState by viewModel.uiState.collectAsState()
     Scaffold() { paddingValues ->
         Column(

@@ -8,7 +8,6 @@ data class SpeakerUiState(
     val loading: Boolean = false,
     val error: Error? = null,
     val currentDevice: Speaker? = null,
-    val devices: List<Device> = emptyList()
 )
 
 val SpeakerUiState.canExecuteAction: Boolean get() = currentDevice != null && !loading

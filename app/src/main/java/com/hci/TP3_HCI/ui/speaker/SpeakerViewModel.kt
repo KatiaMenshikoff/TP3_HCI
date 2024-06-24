@@ -23,20 +23,13 @@ class SpeakerViewModel(
     private val _uiState = MutableStateFlow(SpeakerUiState())
     val uiState = _uiState.asStateFlow()
 
-    // TODO CON ESTE INIT SE ACTUALIZA LA LISTA COMPLETA DE DEVICES CADA 10 SEGUNDOS!!
-    init {
-        collectOnViewModelScope(
-            repository.devices
-        ) { state, response -> state.copy(devices = response) }
-    }
-
     fun setCurrentDevice(deviceId: String){
         runOnViewModelScope(
             { repository.getDevice(deviceId) },
             { state, response -> state.copy(currentDevice = response as Speaker?) }
         )
     }
-
+    
     fun startPeriodicUpdates(deviceId: String) {
         viewModelScope.launch {
             while (true) {

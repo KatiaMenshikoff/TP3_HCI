@@ -29,12 +29,12 @@ class SpeakerViewModel(
             { state, response -> state.copy(currentDevice = response as Speaker?) }
         )
     }
-    
+
     fun startPeriodicUpdates(deviceId: String) {
         viewModelScope.launch {
             while (true) {
                 updateDevice(deviceId)
-                delay(5000) // Espera 5 segundos antes de la próxima actualización
+                delay(1000) // Espera 5 segundos antes de la próxima actualización
             }
         }
     }
@@ -43,6 +43,31 @@ class SpeakerViewModel(
         val device = repository.getDevice(deviceId)
         _uiState.update { it.copy(currentDevice = device as Speaker?) }
     }
+
+    fun setGenre(newGenre: String) = runOnViewModelScope(
+        { repository.executeDeviceAction(uiState.value.currentDevice?.id!!, "setGenre", arrayOf(newGenre)) },
+        { state, _ -> state }
+    )
+
+    fun setVolume(volume: Float) = runOnViewModelScope(
+        { repository.executeDeviceAction(uiState.value.currentDevice?.id!!, "setVolume", arrayOf(volume)) },
+        { state, _ -> state }
+    )
+
+    fun play() = runOnViewModelScope(
+        { repository.executeDeviceAction(uiState.value.currentDevice?.id!!, "play") },
+        { state, _ -> state }
+    )
+
+    fun pause() = runOnViewModelScope(
+        { repository.executeDeviceAction(uiState.value.currentDevice?.id!!, "pause") },
+        { state, _ -> state }
+    )
+
+    fun getPlaylist() = runOnViewModelScope(
+        { repository.executeDeviceAction(uiState.value.currentDevice?.id!!, "getPlaylist") },
+        { state, response -> state.copy(playlist = response) }
+    )
 
     fun turnOn() = runOnViewModelScope(
         { repository.executeDeviceAction(uiState.value.currentDevice?.id!!, Lamp.TURN_ON_ACTION) },

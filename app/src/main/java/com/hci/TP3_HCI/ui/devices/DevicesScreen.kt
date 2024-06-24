@@ -40,7 +40,7 @@ fun DevicesScreen(
 
     LazyVerticalGrid(
         columns = GridCells.Adaptive(minSize = 196.dp),
-        modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp)
+        modifier = Modifier.padding(top = 16.dp, start = 16.dp, bottom = 70.dp, end = 16.dp)
     ) {
         items(
             count = uiState.devices.size,

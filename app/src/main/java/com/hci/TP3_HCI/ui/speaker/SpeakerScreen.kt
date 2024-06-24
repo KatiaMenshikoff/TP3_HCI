@@ -105,7 +105,7 @@ fun SpeakerScreen(
             var genre = uiState.currentDevice?.genre ?: stringResource(R.string.no_data)
             var status = uiState.currentDevice?.status ?: stringResource(R.string.no_data)
             var playback =
-                if (genre == null || status == SpeakerStatus.STOPPED) stringResource(R.string.not_playing) else ( stringResource(R.string.now_playing)  + genre)
+                if (genre == null || status == SpeakerStatus.STOPPED) stringResource(R.string.not_playing) else ( stringResource(R.string.now_playing) +" " + genre)
 
             // Playback
             Row(

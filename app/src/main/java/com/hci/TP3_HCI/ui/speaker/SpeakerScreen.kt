@@ -259,13 +259,13 @@ fun SpeakerScreen(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceAround
                 ) {
-                    Button(onClick = { }) {
+                    Button(onClick = { viewModel.setGenre("rock") }) {
                         Text("Rock")
                     }
-                    Button(onClick = { }) {
-                        Text("Jazz")
+                    Button(onClick = { viewModel.setGenre("dance") }) {
+                        Text("Dance")
                     }
-                    Button(onClick = { }) {
+                    Button(onClick = { viewModel.setGenre("pop") }) {
                         Text("Pop")
                     }
                 }
@@ -274,13 +274,13 @@ fun SpeakerScreen(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceAround
                 ) {
-                    Button(onClick = { }) {
+                    Button(onClick = { viewModel.setGenre("latina") }) {
                         Text("Latina")
                     }
-                    Button(onClick = { }) {
-                        Text("Classic")
+                    Button(onClick = { viewModel.setGenre("classical") }) {
+                        Text("Classical")
                     }
-                    Button(onClick = { }) {
+                    Button(onClick = { viewModel.setGenre("country") }) {
                         Text("Country")
                     }
                 }

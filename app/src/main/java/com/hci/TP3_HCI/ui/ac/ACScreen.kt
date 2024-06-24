@@ -206,14 +206,14 @@ fun ACScreen(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(text = stringResource(id = R.string.v_swing), fontWeight = FontWeight.Bold)
-                    IconButton(onClick = { val newSwing = viewModel.getVerticalPrevious(uiState.currentDevice?.fanSpeed ?: "auto")
+                    IconButton(onClick = { val newSwing = viewModel.getVerticalPrevious(uiState.currentDevice?.verticalSwing ?: "auto")
                                         viewModel.setVerticalSwing(newSwing) }) {
                         Icon(painter = painterResource(id = R.drawable.icon_minus), contentDescription = stringResource(id = R.string.decrease))
                     }
-                    Spacer(modifier = Modifier.width(8.dp))
+                    //Spacer(modifier = Modifier.width(8.dp))
                     Text(text = "${uiState.currentDevice?.verticalSwing?.toString() ?: "-"}", fontSize = 20.sp)
-                    Spacer(modifier = Modifier.width(8.dp))
-                    IconButton(onClick = { val newSwing = viewModel.getVerticalNext(uiState.currentDevice?.fanSpeed ?: "auto")
+                    //Spacer(modifier = Modifier.width(8.dp))
+                    IconButton(onClick = { val newSwing = viewModel.getVerticalNext(uiState.currentDevice?.verticalSwing ?: "auto")
                                         viewModel.setVerticalSwing(newSwing) }) {
                         Icon(painter = painterResource(id = R.drawable.icon_more), contentDescription = stringResource(id = R.string.increase))
                     }

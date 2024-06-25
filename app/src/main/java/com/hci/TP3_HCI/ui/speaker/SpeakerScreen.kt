@@ -31,6 +31,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -50,7 +51,8 @@ fun SpeakerScreen(
 ) {
 
     val uiState by viewModel.uiState.collectAsState()
-
+    val configuration = LocalConfiguration.current
+    val isLandscape = configuration.orientation == android.content.res.Configuration.ORIENTATION_LANDSCAPE
     var userVolume by remember{mutableStateOf(0f)}
 
     LaunchedEffect(deviceId) {
@@ -63,8 +65,7 @@ fun SpeakerScreen(
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
-            .background(colorResource(R.color.background))
-            .padding(16.dp, 16.dp, 16.dp, bottom = 80.dp)
+            .padding(16.dp, 16.dp, 16.dp,  bottom = if(isLandscape) 0.dp else 80.dp)
     ) {
         item {
 
